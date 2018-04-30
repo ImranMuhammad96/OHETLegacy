@@ -200,6 +200,7 @@
     <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
+    <Compile Include="Models\models\Spellcaster.cs" />
     <Compile Include="Models\models\SS.cs" />
     <Compile Include="Models\models\User.cs" />
     <Compile Include="Models\models\Weapon.cs" />
