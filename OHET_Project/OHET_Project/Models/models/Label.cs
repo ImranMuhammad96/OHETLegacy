@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,5 +9,17 @@ namespace OHET_Project.Models.models
 {
     public class Label
     {
+        [Key]
+        public int IDLabel { get; set; }
+
+        [Required]
+        public string name { get; set; }
+
+        public string description { get; set; }
+
+        [Required]
+        public bool isActive { get; set; }
+
+        public ICollection<HL> HL { get; set; }
     }
 }
