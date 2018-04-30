@@ -20,9 +20,7 @@ namespace OHET_Project.Models.models
         public string question { get; set; }
 
         public string description { get; set; }
-
-        public ICollection<Poll> Polls { get; set; }
+           
         public ICollection<Answer> Answers { get; set; }
-        public ICollection<Content> Contents { get; set; }
     }
 }
