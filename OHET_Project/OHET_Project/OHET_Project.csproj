@@ -182,6 +182,7 @@
     <Compile Include="Models\models\Content.cs" />
     <Compile Include="Models\models\EI.cs" />
     <Compile Include="Models\models\Equipment.cs" />
+    <Compile Include="Models\models\HA.cs" />
     <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\User.cs" />
