@@ -185,6 +185,7 @@
     <Compile Include="Models\models\Equipment.cs" />
     <Compile Include="Models\models\HA.cs" />
     <Compile Include="Models\models\Hero.cs" />
+    <Compile Include="Models\models\Item.cs" />
     <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
