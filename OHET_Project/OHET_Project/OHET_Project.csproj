@@ -180,6 +180,7 @@
     <Compile Include="Models\models\Adventure.cs" />
     <Compile Include="Models\models\Answer.cs" />
     <Compile Include="Models\models\Content.cs" />
+    <Compile Include="Models\models\EI.cs" />
     <Compile Include="Models\models\Equipment.cs" />
     <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\Rule.cs" />
