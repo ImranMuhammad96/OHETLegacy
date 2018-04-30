@@ -177,6 +177,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\models\Answer.cs" />
     <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
