@@ -7,8 +7,14 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Hero
+    public partial class Hero
     {
+
+        public Hero()
+        {
+            this.attributes = new HashSet<Attribute>();
+        }
+
         [Key]
         public int IDHero { get; set; }
 
@@ -33,7 +39,7 @@ namespace OHET_Project.Models.models
         public int? IDContent { get; set; }
 
         public ICollection<Equipment> Equipment { get; set; }
-        public ICollection<HA> HA { get; set; }
+        public ICollection<Attribute> attributes { get; set; }
         public ICollection<HL> HL { get; set; }
         public ICollection<HC> HC { get; set; }
     }

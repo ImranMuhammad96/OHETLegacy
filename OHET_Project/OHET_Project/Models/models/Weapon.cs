@@ -7,10 +7,10 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Weapon
+    public partial class Weapon
     {
 
-        public Class()
+        public Weapon()
         {
             this.classes = new HashSet<Class>();
         }

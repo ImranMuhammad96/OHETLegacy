@@ -6,8 +6,14 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Attribute
+    public partial class Attribute
     {
+
+        public Attribute()
+        {
+            this.heroes = new HashSet<Hero>();
+        }
+
         [Key]
         public int IDAttribute { get; set; }
 
@@ -17,6 +23,6 @@ namespace OHET_Project.Models.models
         [Required]
         public int level { get; set; }
 
-        public ICollection<HA> HA { get; set; }
+        public ICollection<Hero> heroes { get; set; }
     }
 }

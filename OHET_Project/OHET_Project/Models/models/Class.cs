@@ -7,7 +7,7 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Class
+    public partial class Class
     {
 
         public Class()
