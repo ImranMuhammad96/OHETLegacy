@@ -175,7 +175,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\models\CA.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\models\Ability.cs" />
@@ -186,7 +185,6 @@
     <Compile Include="Models\models\Class.cs" />
     <Compile Include="Models\models\Concept.cs" />
     <Compile Include="Models\models\Content.cs" />
-    <Compile Include="Models\models\CW.cs" />
     <Compile Include="Models\models\EI.cs" />
     <Compile Include="Models\models\Equipment.cs" />
     <Compile Include="Models\models\Fistcaster.cs" />
