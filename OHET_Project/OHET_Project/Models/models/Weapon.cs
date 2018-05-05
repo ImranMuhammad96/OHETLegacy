@@ -9,6 +9,12 @@ namespace OHET_Project.Models.models
 {
     public class Weapon
     {
+
+        public Class()
+        {
+            this.classes = new HashSet<Class>();
+        }
+
         [Key]
         [ForeignKey("IDItem")]
         public Item Item { get; set; }
@@ -17,6 +23,6 @@ namespace OHET_Project.Models.models
         [Required]
         public string type { get; set; }
 
-        public ICollection<CW> CW { get; set; }
+        public ICollection<Class> classes { get; set; }
     }
 }

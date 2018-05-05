@@ -13,6 +13,7 @@ namespace OHET_Project.Models.models
         public Class()
         {
             this.armors = new HashSet<Armor>();
+            this.weapons = new HashSet<Weapon>();
         }
 
         [Key]
@@ -30,6 +31,6 @@ namespace OHET_Project.Models.models
         public ICollection<Armor> Armor { get; set; }
         public ICollection<Ability> Ability { get; set; }
         public ICollection<Armor> armors { get; set; }
-        public ICollection<CW> CW { get; set; }
+        public ICollection<Weapon> weapons { get; set; }
     }
 }
