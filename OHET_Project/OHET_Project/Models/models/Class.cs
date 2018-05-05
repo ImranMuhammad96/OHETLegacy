@@ -9,12 +9,17 @@ namespace OHET_Project.Models.models
 {
     public class Class
     {
+
+        public Class()
+        {
+            this.armors = new HashSet<Armor>();
+        }
+
         [Key]
         public int IDClass { get; set; }
 
         [Required]
         public string name { get; set; }
-
         public string description { get; set; }
 
         [ForeignKey("IDContent")]
@@ -24,7 +29,7 @@ namespace OHET_Project.Models.models
         public ICollection<HC> HC { get; set; }
         public ICollection<Armor> Armor { get; set; }
         public ICollection<Ability> Ability { get; set; }
-        public ICollection<CA> CA { get; set; }
+        public ICollection<Armor> armors { get; set; }
         public ICollection<CW> CW { get; set; }
     }
 }
