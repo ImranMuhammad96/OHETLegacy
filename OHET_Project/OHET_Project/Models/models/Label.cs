@@ -9,6 +9,11 @@ namespace OHET_Project.Models.models
 {
     public class Label
     {
+        public Label()
+        {
+            this.heroes = new HashSet<Hero>();
+        }
+
         [Key]
         public int IDLabel { get; set; }
 
@@ -20,6 +25,6 @@ namespace OHET_Project.Models.models
         [Required]
         public bool isActive { get; set; }
 
-        public ICollection<HL> HL { get; set; }
+        public virtual ICollection<Hero> heroes { get; set; }
     }
 }

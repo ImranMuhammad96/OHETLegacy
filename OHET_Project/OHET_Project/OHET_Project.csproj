@@ -188,7 +188,6 @@
     <Compile Include="Models\models\Equipment.cs" />
     <Compile Include="Models\models\Fistcaster.cs" />
     <Compile Include="Models\models\Hero.cs" />
-    <Compile Include="Models\models\HL.cs" />
     <Compile Include="Models\models\Item.cs" />
     <Compile Include="Models\models\Label.cs" />
     <Compile Include="Models\models\Monster.cs" />
