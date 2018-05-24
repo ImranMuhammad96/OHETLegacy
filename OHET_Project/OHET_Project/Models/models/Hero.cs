@@ -13,6 +13,7 @@ namespace OHET_Project.Models.models
         public Hero()
         {
             this.attributes = new HashSet<Attribute>();
+            this.classes = new HashSet<Class>();
         }
 
         [Key]
@@ -39,8 +40,8 @@ namespace OHET_Project.Models.models
         public int? IDContent { get; set; }
 
         public ICollection<Equipment> Equipment { get; set; }
-        public ICollection<Attribute> attributes { get; set; }
+        public virtual ICollection<Attribute> attributes { get; set; }
         public ICollection<HL> HL { get; set; }
-        public ICollection<HC> HC { get; set; }
+        public virtual ICollection<Class> classes { get; set; }
     }
 }

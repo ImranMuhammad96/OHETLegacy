@@ -14,6 +14,7 @@ namespace OHET_Project.Models.models
         {
             this.armors = new HashSet<Armor>();
             this.weapons = new HashSet<Weapon>();
+            this.heroes = new HashSet<Hero>();
         }
 
         [Key]
@@ -27,10 +28,10 @@ namespace OHET_Project.Models.models
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public ICollection<HC> HC { get; set; }
+        public virtual ICollection<Hero> heroes { get; set; }
         public ICollection<Armor> Armor { get; set; }
         public ICollection<Ability> Ability { get; set; }
-        public ICollection<Armor> armors { get; set; }
-        public ICollection<Weapon> weapons { get; set; }
+        public virtual ICollection<Armor> armors { get; set; }
+        public virtual ICollection<Weapon> weapons { get; set; }
     }
 }
