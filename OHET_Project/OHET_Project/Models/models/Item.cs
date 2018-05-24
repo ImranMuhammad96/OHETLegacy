@@ -9,6 +9,12 @@ namespace OHET_Project.Models.models
 {
     public class Item
     {
+
+        public Item()
+        {
+            this.equipments = new HashSet<Equipment>();
+        }
+
         [Key]
         public int IDItem { get; set; }
 
@@ -25,6 +31,6 @@ namespace OHET_Project.Models.models
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public ICollection<EI> EI { get; set; }
+        public virtual ICollection<Equipment> equipments { get; set; }
     }
 }
