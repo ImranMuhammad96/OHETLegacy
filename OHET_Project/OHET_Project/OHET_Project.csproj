@@ -185,10 +185,8 @@
     <Compile Include="Models\models\Class.cs" />
     <Compile Include="Models\models\Concept.cs" />
     <Compile Include="Models\models\Content.cs" />
-    <Compile Include="Models\models\EI.cs" />
     <Compile Include="Models\models\Equipment.cs" />
     <Compile Include="Models\models\Fistcaster.cs" />
-    <Compile Include="Models\models\HC.cs" />
     <Compile Include="Models\models\Hero.cs" />
     <Compile Include="Models\models\HL.cs" />
     <Compile Include="Models\models\Item.cs" />
