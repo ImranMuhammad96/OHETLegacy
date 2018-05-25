@@ -9,6 +9,12 @@ namespace OHET_Project.Models.models
 {
     public class Spell
     {
+
+        public Spell()
+        {
+            this.spellcasters = new HashSet<Spellcaster>();
+        }
+
         [Key]
         public int IDSpell { get; set; }
 
@@ -23,6 +29,6 @@ namespace OHET_Project.Models.models
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public ICollection<SS> SS { get; set; }
+        public virtual ICollection<Spellcaster> spellcasters { get; set; }
     }
 }

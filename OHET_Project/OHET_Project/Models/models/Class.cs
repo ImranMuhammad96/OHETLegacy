@@ -28,9 +28,9 @@ namespace OHET_Project.Models.models
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public virtual ICollection<Hero> heroes { get; set; }
         public ICollection<Armor> Armor { get; set; }
         public ICollection<Ability> Ability { get; set; }
+        public virtual ICollection<Hero> heroes { get; set; }
         public virtual ICollection<Armor> armors { get; set; }
         public virtual ICollection<Weapon> weapons { get; set; }
     }
