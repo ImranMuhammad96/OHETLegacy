@@ -53,7 +53,7 @@ namespace OHET_Project.Models
         public DbSet<Rule> Rules { get; set; }
         public DbSet<Spell> Spells { get; set; }
         public DbSet<Spellcaster> Spellcasters { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> UsersOHET { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
     }
 }
