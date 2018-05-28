@@ -24,7 +24,9 @@ namespace OHET_Project.DAL
         public DbSet<Class> Classes { get; set; }
         public DbSet<Concept> Concepts { get; set; }
         public DbSet<Content> Contents { get; set; }
-        
-
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Fistcaster> Fistcasters { get; set; }
+        public DbSet<Hero> Heroes { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }
