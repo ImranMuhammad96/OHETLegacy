@@ -33,5 +33,9 @@ namespace OHET_Project.DAL
         public DbSet<Other> Others { get; set; }
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Rule> Rules { get; set; }
+        public DbSet<Spell> Spells { get; set; }
+        public DbSet<Spellcaster> Spellcasters { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Weapon> Weapons { get; set; }
     }
 }
