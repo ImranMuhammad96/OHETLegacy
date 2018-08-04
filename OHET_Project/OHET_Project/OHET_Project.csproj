@@ -179,7 +179,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\models\Ability.cs" />
     <Compile Include="Models\models\Adventure.cs" />
-    <Compile Include="Models\models\Answer.cs" />
     <Compile Include="Models\models\Armor.cs" />
     <Compile Include="Models\models\Attribute.cs" />
     <Compile Include="Models\models\Class.cs" />
