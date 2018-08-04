@@ -16,8 +16,8 @@ namespace OHET_Project.Models.models
 
         public string description { get; set; }
 
-        public ICollection<Hero> Hero { get; set; }
-        public ICollection<Monster> Monster { get; set; }
-        public ICollection<Spell> Spell { get; set; }
+        public virtual ICollection<Hero> heroes { get; set; }
+        public virtual ICollection<Monster> monsters { get; set; }
+        public virtual ICollection<Spell> spells { get; set; }
     }
 }
