@@ -7,15 +7,16 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public partial class Class
+    public class Class
     {
-
+        /*
         public Class()
         {
             this.armors = new HashSet<Armor>();
             this.weapons = new HashSet<Weapon>();
             this.heroes = new HashSet<Hero>();
         }
+        */
 
         [Key]
         public int IDClass { get; set; }
@@ -28,9 +29,8 @@ namespace OHET_Project.Models.models
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public ICollection<Armor> Armor { get; set; }
-        public ICollection<Ability> Ability { get; set; }
         public virtual ICollection<Hero> heroes { get; set; }
+        public virtual ICollection<Ability> abilities { get; set; }
         public virtual ICollection<Armor> armors { get; set; }
         public virtual ICollection<Weapon> weapons { get; set; }
     }
