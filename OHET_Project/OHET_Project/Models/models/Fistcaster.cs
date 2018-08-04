@@ -7,11 +7,8 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Fistcaster
+    public class Fistcaster : Class
     {
-        [Key]
-        [ForeignKey("IDClass")]
-        public Class Class { get; set; }
-        public int? IDClass { get; set; }
+
     }
 }
