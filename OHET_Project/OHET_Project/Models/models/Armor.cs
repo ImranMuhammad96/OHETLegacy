@@ -7,26 +7,21 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public partial class Armor
+    public class Armor : Item
     {
-
+        /*
         public Armor()
         {
             this.classes = new HashSet<Class>();
         }
+        */
 
-        [Key]
-        [ForeignKey("IDItem")]
-        public Item Item { get; set; }
-        public int? IDItem { get; set; }
+        [Required]
+        public int dr { get; set; }
 
         [ForeignKey("IDClass")]
         public Class Class { get; set; }
         public int? IDClass { get; set; }
-
-        [Required]
-        public int armorClass { get; set; }
-
 
         public virtual ICollection<Class> classes { get; set; }
     }
