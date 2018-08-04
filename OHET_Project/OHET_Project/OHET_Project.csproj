@@ -191,7 +191,6 @@
     <Compile Include="Models\models\Label.cs" />
     <Compile Include="Models\models\Monster.cs" />
     <Compile Include="Models\models\Other.cs" />
-    <Compile Include="Models\models\Poll.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
     <Compile Include="Models\models\Spellcaster.cs" />
