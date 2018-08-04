@@ -10,7 +10,7 @@ namespace OHET_Project.Models.models
     public class Ability
     {
         [Key]
-        public int IDPoll { get; set; }
+        public int IDAbility { get; set; }
 
         [Required]
         public string name { get; set; }
