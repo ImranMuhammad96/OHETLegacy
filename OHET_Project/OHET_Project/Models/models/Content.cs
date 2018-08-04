@@ -12,22 +12,22 @@ namespace OHET_Project.Models.models
         [Key]
         public int IDContent { get; set; }
 
-        [ForeignKey("IDUser")]
-        public User User { get; set; }
-        public int? IDUser { get; set; }
-
         [Required]
         public bool isOfficial { get; set; }
 
         [Required]
         public bool isPublic { get; set; }
 
-        public ICollection<Monster> Monsters { get; set; }
-        public ICollection<Class> Classes { get; set; }
-        public ICollection<Hero> Heros { get; set; }
-        public ICollection<Spell> Spells { get; set; }
-        public ICollection<Item> Items { get; set; }
-        public ICollection<Rule> Rules { get; set; }
-        public ICollection<Adventure> Adventures { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
+
+        public ICollection<Monster> monsters { get; set; }
+        public ICollection<Class> classes { get; set; }
+        public ICollection<Hero> heroes { get; set; }
+        public ICollection<Spell> spells { get; set; }
+        public ICollection<Item> items { get; set; }
+        public ICollection<Rule> rules { get; set; }
+        public ICollection<Adventure> adventures { get; set; }
+        public ICollection<ApplicationUser> applicationUsers { get; set; }
     }
 }
