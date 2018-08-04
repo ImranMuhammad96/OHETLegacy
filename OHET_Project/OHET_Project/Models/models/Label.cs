@@ -9,10 +9,12 @@ namespace OHET_Project.Models.models
 {
     public class Label
     {
+        /*
         public Label()
         {
             this.heroes = new HashSet<Hero>();
         }
+        */
 
         [Key]
         public int IDLabel { get; set; }
