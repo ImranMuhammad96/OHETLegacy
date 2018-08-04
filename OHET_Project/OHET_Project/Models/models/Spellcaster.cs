@@ -7,18 +7,14 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Spellcaster
+    public class Spellcaster : Class
     {
-
+        /*
         public Spellcaster()
         {
             this.spells = new HashSet<Spell>();
         }
-
-        [Key]
-        [ForeignKey("IDClass")]
-        public Class Class { get; set; }
-        public int? IDClass { get; set; }
+        */
 
         public virtual ICollection<Spell> spells { get; set; }
     }
