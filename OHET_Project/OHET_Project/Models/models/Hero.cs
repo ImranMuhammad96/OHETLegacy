@@ -7,15 +7,16 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public partial class Hero
+    public class Hero
     {
-
+        /*
         public Hero()
         {
             this.attributes = new HashSet<Attribute>();
             this.classes = new HashSet<Class>();
             this.labels = new HashSet<Label>();
         }
+        */
 
         [Key]
         public int IDHero { get; set; }
@@ -24,7 +25,7 @@ namespace OHET_Project.Models.models
         public string name { get; set; }
 
         [Required]
-        public int armorClassSum { get; set; }
+        public int totalDR { get; set; }
 
         [Required]
         public int gold { get; set; }
@@ -32,15 +33,17 @@ namespace OHET_Project.Models.models
         [Required]
         public int exp { get; set; }
 
+        [Required]
         [ForeignKey("IDConcept")]
         public Concept Concept { get; set; }
         public int? IDConcept { get; set; }
 
+        [Required]
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public ICollection<Equipment> Equipment { get; set; }
+        public virtual ICollection<Equipment> equipments { get; set; }
         public virtual ICollection<Label> labels { get; set; }
         public virtual ICollection<Attribute> attributes { get; set; }
         public virtual ICollection<Class> classes { get; set; }
