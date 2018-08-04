@@ -19,10 +19,6 @@ namespace OHET_Project.Models.models
         [Required]
         public int dr { get; set; }
 
-        [ForeignKey("IDClass")]
-        public Class Class { get; set; }
-        public int? IDClass { get; set; }
-
         public virtual ICollection<Class> classes { get; set; }
     }
 }
