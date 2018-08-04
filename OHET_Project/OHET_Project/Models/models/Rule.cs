@@ -18,6 +18,7 @@ namespace OHET_Project.Models.models
         [Required]
         public string description { get; set; }
 
+        [Required]
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }
