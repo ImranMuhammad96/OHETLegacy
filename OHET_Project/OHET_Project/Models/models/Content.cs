@@ -18,6 +18,7 @@ namespace OHET_Project.Models.models
         [Required]
         public bool isPublic { get; set; }
 
+        [Required]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
 

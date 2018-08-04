@@ -19,6 +19,7 @@ namespace OHET_Project.Models.models
         [Key]
         public int IDEquipment { get; set; }
 
+        [Required]
         [ForeignKey("IDHero")]
         public Hero Hero { get; set; }
         public int? IDHero { get; set; }
