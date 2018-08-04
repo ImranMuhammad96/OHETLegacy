@@ -7,11 +7,8 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public class Other
+    public class Other : Item
     {
-        [Key]
-        [ForeignKey("IDItem")]
-        public Item Item { get; set; }
-        public int? IDItem { get; set; }
+
     }
 }
