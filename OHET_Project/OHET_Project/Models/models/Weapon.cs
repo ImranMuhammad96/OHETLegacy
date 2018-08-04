@@ -7,18 +7,14 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
-    public partial class Weapon
+    public class Weapon : Item
     {
-
+        /*
         public Weapon()
         {
             this.classes = new HashSet<Class>();
         }
-
-        [Key]
-        [ForeignKey("IDItem")]
-        public Item Item { get; set; }
-        public int? IDItem { get; set; }
+        */
 
         [Required]
         public string type { get; set; }
