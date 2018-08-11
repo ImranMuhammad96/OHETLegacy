@@ -18,12 +18,9 @@ namespace OHET_Project.Models
             return userIdentity;
         }
     }
-
+    /*
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
-
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -56,4 +53,5 @@ namespace OHET_Project.Models
         public DbSet<User> UsersOHET { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
     }
+    */
 }

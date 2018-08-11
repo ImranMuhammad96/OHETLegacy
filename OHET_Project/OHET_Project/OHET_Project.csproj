@@ -195,6 +195,7 @@
     <Compile Include="Models\models\Spell.cs" />
     <Compile Include="Models\models\Spellcaster.cs" />
     <Compile Include="Models\models\Weapon.cs" />
+    <Compile Include="Persistence\DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
