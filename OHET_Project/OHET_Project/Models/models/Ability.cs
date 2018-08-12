@@ -21,7 +21,6 @@ namespace OHET_Project.Models.models
         [Required]
         public int conceptLvl { get; set; }
 
-        [Required]
         [ForeignKey("IDClass")]
         public Class Class { get; set; }
         public int? IDClass { get; set; }

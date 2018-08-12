@@ -9,14 +9,13 @@ namespace OHET_Project.Models.models
 {
     public class Hero
     {
-        /*
         public Hero()
         {
+            this.labels = new HashSet<Label>();
             this.attributes = new HashSet<Attribute>();
             this.classes = new HashSet<Class>();
-            this.labels = new HashSet<Label>();
         }
-        */
+        
 
         [Key]
         public int IDHero { get; set; }
@@ -33,12 +32,10 @@ namespace OHET_Project.Models.models
         [Required]
         public int exp { get; set; }
 
-        [Required]
         [ForeignKey("IDConcept")]
         public Concept Concept { get; set; }
         public int? IDConcept { get; set; }
 
-        [Required]
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }

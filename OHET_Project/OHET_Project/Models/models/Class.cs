@@ -9,15 +9,13 @@ namespace OHET_Project.Models.models
 {
     public class Class
     {
-        /*
         public Class()
         {
+            this.heroes = new HashSet<Hero>();
             this.armors = new HashSet<Armor>();
             this.weapons = new HashSet<Weapon>();
-            this.heroes = new HashSet<Hero>();
         }
-        */
-
+        
         [Key]
         public int IDClass { get; set; }
 

@@ -9,13 +9,6 @@ namespace OHET_Project.Models.models
 {
     public class Spellcaster : Class
     {
-        /*
-        public Spellcaster()
-        {
-            this.spells = new HashSet<Spell>();
-        }
-        */
-
         public virtual ICollection<Spell> spells { get; set; }
     }
 }

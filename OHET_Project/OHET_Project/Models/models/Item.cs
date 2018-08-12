@@ -9,13 +9,11 @@ namespace OHET_Project.Models.models
 {
     public class Item
     {
-        /*
         public Item()
         {
             this.equipments = new HashSet<Equipment>();
         }
-        */
-
+        
         [Key]
         public int IDItem { get; set; }
 
@@ -28,7 +26,6 @@ namespace OHET_Project.Models.models
         [Required]
         public string description { get; set; }
 
-        [Required]
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }

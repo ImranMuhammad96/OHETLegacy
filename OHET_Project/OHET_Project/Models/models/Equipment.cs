@@ -9,17 +9,14 @@ namespace OHET_Project.Models.models
 {
     public class Equipment
     {
-        /*
         public Equipment()
         {
             this.items = new HashSet<Item>();
         }
-        */
 
         [Key]
         public int IDEquipment { get; set; }
 
-        [Required]
         [ForeignKey("IDHero")]
         public Hero Hero { get; set; }
         public int? IDHero { get; set; }

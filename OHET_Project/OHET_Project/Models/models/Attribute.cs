@@ -8,12 +8,11 @@ namespace OHET_Project.Models.models
 {
     public class Attribute
     {
-        /*
         public Attribute()
         {
             this.heroes = new HashSet<Hero>();
         }
-        */
+        
 
         [Key]
         public int IDAttribute { get; set; }

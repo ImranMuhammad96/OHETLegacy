@@ -9,13 +9,11 @@ namespace OHET_Project.Models.models
 {
     public class Weapon : Item
     {
-        /*
         public Weapon()
         {
             this.classes = new HashSet<Class>();
         }
-        */
-
+        
         [Required]
         public string type { get; set; }
 
