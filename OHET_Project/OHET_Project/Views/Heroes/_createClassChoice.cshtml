@@ -1,0 +1,7 @@
+﻿@model IEnumerable<OHET_Project.Models.models.Class>
+
+@foreach (var item in Model)
+{
+    <h4>@Html.DisplayFor(modelItem => item.name)</h4>
+    <p>@Html.DisplayFor(modelItem => item.description)</p>
+}

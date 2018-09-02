@@ -1,0 +1,66 @@
+﻿@model OHET_Project.Models.models.Hero
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Concept.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concept.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content.ApplicationUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content.ApplicationUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalDR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalDR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDHero }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

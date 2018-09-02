@@ -7,13 +7,13 @@ namespace OHET_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialD : IMigrationMetadata
+    public sealed partial class IniNew01 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialD));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(IniNew01));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808121725137_InitialD"; }
+            get { return "201809021445163_IniNew01"; }
         }
         
         string IMigrationMetadata.Source
