@@ -1,44 +1,93 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
+<!--
+    Hielo by TEMPLATED
+    templated.co templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
 <head>
+    <title>Hallowed Tower</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/Content/HieloTemplate/main.css" />
+    @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">OHET Legacy<span> by Marcin & Imran</span></a></div>
+        <a href="#menu">Menu</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="battle_arena.html">Home</a></li>
+            <li><a href="battle_arena.html">Heroes</a></li>
+            <li><a href="battle_arena.html">Content</a></li>
+            <li><a href="battle_arena.html">Spells</a></li>
+            <li><a href="battle_arena.html">Monsters</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section class="banner full">
+        <article>
+            <img src="~/Images/slide01.jpg" alt="" />
+            <div class="inner">
+                <header>
+                    <p>Your Destiny</p>
+                    <h2>OHET Legacy</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="~/Images/slide02.jpg" alt="" />
+            <div class="inner">
+                <header>
+                    <p>Lorem ipsum dolor sit amet nullam feugiat</p>
+                    <h2>Magna etiam</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="~/Images/slide03.png" alt="" />
+            <div class="inner">
+                <header>
+                    <p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
+                    <h2>Etiam feugiat</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="~/Images/slide05.jpg" alt="" />
+            <div class="inner">
+                <header>
+                    <p>Ipsum dolor sed magna veroeros lorem ipsum</p>
+                    <h2>Lorem adipiscing</h2>
+                </header>
+            </div>
+        </article>
+    </section>
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="copyright">
+            All Content is &copy;Copyright of Marcin Krupa aka Ririsu <br>
+            Pokémon And All Respective Names are Trademark & &copy; of Nintendo 1996-2017 <br>
+            Layout Created by Helio edited by Ririsu
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/Scripts/HieloJS/jquery.min.js"></script>
+    <script src="~/Scripts/HieloJS/jquery.scrollex.min.js"></script>
+    <script src="~/Scripts/HieloJS/skel.min.js"></script>
+    <script src="~/Scripts/HieloJS/util.js"></script>
+    <script src="~/Scripts/HieloJS/main.js"></script>
+
 </body>
 </html>

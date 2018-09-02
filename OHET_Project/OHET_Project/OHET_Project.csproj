@@ -208,23 +208,46 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HieloTemplate\font-awesome.min.css" />
+    <Content Include="Content\HieloTemplate\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\HieloFonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\pic01.jpg" />
+    <Content Include="Images\pic02.jpg" />
+    <Content Include="Images\pic03.jpg" />
+    <Content Include="Images\pic04.jpg" />
+    <Content Include="Images\slide01.jpg" />
+    <Content Include="Images\slide02.jpg" />
+    <Content Include="Images\slide03.jpg" />
+    <Content Include="Images\slide04.jpg" />
+    <Content Include="Images\slide05.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\HieloFonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\HieloFonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\HieloFonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\HieloFonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\HieloFonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\HieloJS\jquery.min.js" />
+    <Content Include="Scripts\HieloJS\jquery.scrollex.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\HieloJS\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\HieloJS\skel.min.js" />
+    <Content Include="Scripts\HieloJS\util.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Toolbox\migrationCommands.txt" />
     <Content Include="Web.config" />
@@ -237,7 +260,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -267,6 +290,7 @@
     <Content Include="Views\Heroes\Edit.cshtml" />
     <Content Include="Views\Heroes\Index.cshtml" />
     <Content Include="Views\Heroes\_createClassChoice.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

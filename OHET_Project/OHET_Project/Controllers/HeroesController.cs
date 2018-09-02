@@ -45,11 +45,19 @@ namespace OHET_Project.Controllers
             return View();
         }
 
+        // GET:
         public ActionResult _createClassChoice()
         {
             List<Class> classes = db.classes.ToList();
 
             return PartialView("_createClassChoice", classes);
+        }
+
+        public ActionResult _createClassChoiceResult(string classID)
+        {
+            ViewBag.classID = classID;
+
+            return View("Create");
         }
 
         // POST: Heroes/Create
