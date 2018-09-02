@@ -27,6 +27,15 @@
             }
         </div>
     }
+    <!-- KONCEPT -->
+    @if (ViewBag.classID != null && ViewBag.heroName != null && ViewBag.conceptDescription == null)
+    {
+        <div class="inner">
+            @{
+                Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
+            }
+        </div>
+    }
 </section>
 
 

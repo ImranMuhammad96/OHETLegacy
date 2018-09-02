@@ -1,0 +1,14 @@
+﻿@model OHET_Project.Models.models.Concept
+
+@using (Html.BeginForm("_createPersonalDataResult", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.conceptDescription }))
+{
+    <div class="12u$">
+        <textarea type="text" name="conceptName" id="conceptName" value="" placeholder="Koncepcja Twego bohatera" rows="2"></textarea>
+    </div>
+
+    <br />
+
+    <footer class="align-center">
+        <button type="submit" class="button alt">Dalej!</button>
+    </footer>
+}

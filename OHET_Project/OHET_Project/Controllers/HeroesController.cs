@@ -76,6 +76,55 @@ namespace OHET_Project.Controllers
             return View("Create");
         }
 
+        // GET
+        public ActionResult _createConceptData(string classID, string heroName)
+        {          
+            return PartialView();
+        }
+
+        // ?POST:
+        public ActionResult _createConceptData(string classID, string heroName, string conceptDescription)
+        {
+            ViewBag.classID = classID;
+            ViewBag.heroName = heroName;
+            ViewBag.conceptDescription = conceptDescription;
+
+            SaveNewHero(heroName);
+            SaveNewConcept(conceptDescription);
+
+            return View("Index");
+        }
+
+        public void SaveNewHero(string _heroName)
+        {
+            Hero hero = new Hero
+            {
+                name = _heroName,
+                gold = 500,
+                exp = 0,
+                totalDR = 0     
+            };
+
+            db.heroes.Add(hero);
+            db.SaveChanges();
+
+            //return hero.IDHero;
+        }
+
+        public void SaveNewConcept(string _conceptDescription)
+        { 
+            Concept concept = new Concept
+            {
+                level = 7,
+                description = _conceptDescription
+            };
+
+            db.concepts.Add(concept);
+            db.SaveChanges();
+
+            //return concept.IDConcept;
+        }
+
         // POST: Heroes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
