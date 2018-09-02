@@ -19,22 +19,31 @@
         Html.RenderAction("_createClassChoice", "Heroes");
     }
     <!-- IMIĘ I OPIS -->
-    @if (ViewBag.classID != null && ViewBag.heroName == null)
+    @if (ViewBag.classID != null)
     {
-        <div class="inner">
-            @{
-                Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
-            }
-        </div>
+        if (ViewBag.heroName == null)
+        {
+            <div class="inner">
+                @{
+                    Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
+                }
+            </div>
+        }
     }
     <!-- KONCEPT -->
-    @if (ViewBag.classID != null && ViewBag.heroName != null && ViewBag.conceptDescription == null)
+    @if (ViewBag.classID != null)
     {
-        <div class="inner">
-            @{
-                Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
+        if (ViewBag.heroName != null)
+        {
+            if (ViewBag.conceptDescription == null)
+            {
+                <div class="inner">
+                    @{
+                        Html.RenderAction("_createConceptData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName });
+                    }
+                </div>
             }
-        </div>
+        }
     }
 </section>
 

@@ -64,6 +64,8 @@ namespace OHET_Project.Controllers
         // GET
         public ActionResult _createPersonalData(string classID)
         {
+            ViewBag.classID = classID;
+
             return PartialView();
         }
 
@@ -78,12 +80,15 @@ namespace OHET_Project.Controllers
 
         // GET
         public ActionResult _createConceptData(string classID, string heroName)
-        {          
+        {
+            ViewBag.classID = classID;
+            ViewBag.heroName = heroName;
+
             return PartialView();
         }
 
         // ?POST:
-        public ActionResult _createConceptData(string classID, string heroName, string conceptDescription)
+        public ActionResult _createConceptDataResult(string classID, string heroName, string conceptDescription)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
@@ -92,7 +97,7 @@ namespace OHET_Project.Controllers
             SaveNewHero(heroName);
             SaveNewConcept(conceptDescription);
 
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public void SaveNewHero(string _heroName)
