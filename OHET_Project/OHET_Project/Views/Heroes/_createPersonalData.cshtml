@@ -1,0 +1,28 @@
+﻿@model OHET_Project.Models.models.Hero
+
+<!-- NAME -->
+@using (Html.BeginForm("_createPersonalDataResult", "Heroes", new { classID = ViewBag.classID }))
+{
+    <div class="6u 12u$(xsmall)">
+        <input type="text" name="heroNAme" id="heroName" value="" placeholder="Name" />
+    </div>
+    <br />
+    <div class="12u$">
+        <textarea placeholder="Opowiedz nam swoją historię" rows="12"></textarea>
+    </div>
+    <br />
+    <div class="12u$">
+        <textarea placeholder="Jak wyglądasz, bohaterze?" rows="6"></textarea>
+    </div>
+    <br />
+    <div class="12u$">
+        <textarea placeholder="Opisz jaki jesteś - swój charakter" rows="6"></textarea>
+    </div>
+
+    <br />
+
+    <footer class="align-center">
+        <button type="submit" class="button alt">Dalej!</button>
+    </footer>
+}
+

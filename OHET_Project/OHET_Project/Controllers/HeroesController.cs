@@ -53,9 +53,25 @@ namespace OHET_Project.Controllers
             return PartialView("_createClassChoice", classes);
         }
 
+        // ?POST:
         public ActionResult _createClassChoiceResult(string classID)
         {
             ViewBag.classID = classID;
+
+            return View("Create");
+        }
+
+        // GET
+        public ActionResult _createPersonalData(string classID)
+        {
+            return PartialView();
+        }
+
+        // ?POST:
+        public ActionResult _createPersonalDataResult(string classID, string heroName)
+        {
+            ViewBag.classID = classID;
+            ViewBag.heroName = heroName;
 
             return View("Create");
         }

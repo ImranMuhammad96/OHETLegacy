@@ -4,44 +4,29 @@
     ViewBag.Title = "Create";
 }
 
-@*Pop up window*@
-@*<input class=" btn btn-default" type="button" value="classChoice" onclick="classChoice()">
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" role="document">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose Your Class</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="modal-body">
-                        @{
-                            Html.RenderAction("_createClassChoice", "Heroes");
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-@*/Pop Up Window*@
-
-
 <section id="three" class="wrapper style2">
-<!-- KLASA -->
-@if (ViewBag.classID == null)
-{
-    <!-- TYTUŁ -->
-    <div class="inner">
-        <header class="align-center">
-            <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-            <h2>Krok Pierwszy - Określ swoją klasę</h2>
-        </header>
-    </div>
-
-    <!-- BODY -->
-    Html.RenderAction("_createClassChoice", "Heroes");
-}
+    <!-- KLASA -->
+    @if (ViewBag.classID == null)
+    {
+        <!-- TYTUŁ -->
+        <div class="inner">
+            <header class="align-center">
+                <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+                <h2>Krok Pierwszy - Określ swoją klasę</h2>
+            </header>
+        </div>
+        <!-- BODY -->
+        Html.RenderAction("_createClassChoice", "Heroes");
+    }
+    <!-- IMIĘ I OPIS -->
+    @if (ViewBag.classID != null && ViewBag.heroName == null)
+    {
+        <div class="inner">
+            @{
+                Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
+            }
+        </div>
+    }
 </section>
 
 
