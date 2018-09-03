@@ -24,6 +24,14 @@
         if (ViewBag.heroName == null)
         {
             <div class="inner">
+                <!-- TYTUŁ -->
+                <div class="inner">
+                    <header class="align-center">
+                        <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+                        <h2>Krok Drugi - Opowiedz nam o sobie</h2>
+                    </header>
+                </div>
+                <!-- BODY -->
                 @{
                     Html.RenderAction("_createPersonalData", "Heroes", new { classID = ViewBag.classID });
                 }
@@ -37,6 +45,14 @@
         {
             if (ViewBag.conceptDescription == null)
             {
+                <!-- TYTUŁ -->
+                <div class="inner">
+                    <header class="align-center">
+                        <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+                        <h2>Krok Trzeci - Określ swą koncepcję</h2>
+                    </header>
+                </div>
+                <!-- BODY -->
                 <div class="inner">
                     @{
                         Html.RenderAction("_createConceptData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName });
