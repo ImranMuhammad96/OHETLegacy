@@ -209,6 +209,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\character_sheet.css" />
     <Content Include="Content\HieloTemplate\font-awesome.min.css" />
     <Content Include="Content\HieloTemplate\main.css" />
     <Content Include="favicon.ico" />
@@ -234,6 +235,7 @@
     <Content Include="fonts\HieloFonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\HieloFonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\character-sheet-scripts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
