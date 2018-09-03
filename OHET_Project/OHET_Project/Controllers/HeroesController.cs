@@ -94,13 +94,13 @@ namespace OHET_Project.Controllers
             ViewBag.heroName = heroName;
             ViewBag.conceptDescription = conceptDescription;
 
-            SaveNewHero(heroName);
+            int heroID = SaveNewHero(heroName);
             SaveNewConcept(conceptDescription);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
 
-        public void SaveNewHero(string _heroName)
+        public int SaveNewHero(string _heroName)
         {
             Hero hero = new Hero
             {
@@ -113,7 +113,7 @@ namespace OHET_Project.Controllers
             db.heroes.Add(hero);
             db.SaveChanges();
 
-            //return hero.IDHero;
+            return hero.IDHero;
         }
 
         public void SaveNewConcept(string _conceptDescription)

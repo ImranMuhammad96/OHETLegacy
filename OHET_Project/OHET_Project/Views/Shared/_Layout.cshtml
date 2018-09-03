@@ -23,8 +23,8 @@
     <!-- Nav -->
     <nav id="menu">
         <ul class="links">
-            <li><a href="battle_arena.html">Home</a></li>
-            <li><a href="battle_arena.html">Heroes</a></li>
+            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Stwórz Postać", "Create", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
             <li><a href="battle_arena.html">Content</a></li>
             <li><a href="battle_arena.html">Spells</a></li>
             <li><a href="battle_arena.html">Monsters</a></li>
