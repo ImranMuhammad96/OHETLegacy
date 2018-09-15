@@ -301,6 +301,7 @@
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Heroes\_createConceptData.cshtml" />
+    <Content Include="Views\Heroes\_createItemChoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

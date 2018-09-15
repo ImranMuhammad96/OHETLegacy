@@ -78,6 +78,17 @@ namespace OHET_Project.Controllers
             return View("Create");
         }
 
+
+        public ActionResult _createItemChoice(string classID, string heroName)
+        {
+            ViewBag.classId = classID;
+            ViewBag.heroName = heroName;
+
+            var startingItems = db.items.Where(p => p.isStarting == true).ToList();
+
+            return PartialView(startingItems);
+        }
+
         // GET
         public ActionResult _createConceptData(string classID, string heroName)
         {
@@ -99,6 +110,7 @@ namespace OHET_Project.Controllers
 
             return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
+
 
         public int SaveNewHero(string _heroName)
         {
