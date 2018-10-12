@@ -11,12 +11,9 @@ namespace OHET_Project.Models.models
     {
         public Hero()
         {
-            this.labels = new HashSet<Label>();
-            this.attributes = new HashSet<Attribute>();
             this.classes = new HashSet<Class>();
         }
         
-
         [Key]
         public int IDHero { get; set; }
 
@@ -24,25 +21,39 @@ namespace OHET_Project.Models.models
         public string name { get; set; }
 
         [Required]
-        public int totalDR { get; set; }
+        public int conceptLvl { get; set; }
 
         [Required]
+        public string description { get; set; }
+
+        [Required]
+        public AttributeLvl StrAttribute { get; set; }
+
+        [Required]
+        public AttributeLvl DexAttribute { get; set; }
+
+        [Required]
+        public AttributeLvl ConAttribute { get; set; }
+
+        [Required]
+        public AttributeLvl IntAttribute { get; set; }
+
+        [Required]
+        public AttributeLvl WisAttribute { get; set; }
+
+        [Required]
+        public AttributeLvl ChaAttribute { get; set; }
+
+        public List<String> equipment { get; set; }
+
         public int gold { get; set; }
 
-        [Required]
         public int exp { get; set; }
-
-        [ForeignKey("IDConcept")]
-        public Concept Concept { get; set; }
-        public int? IDConcept { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }
 
-        public virtual ICollection<Equipment> equipments { get; set; }
-        public virtual ICollection<Label> labels { get; set; }
-        public virtual ICollection<Attribute> attributes { get; set; }
         public virtual ICollection<Class> classes { get; set; }
     }
 }

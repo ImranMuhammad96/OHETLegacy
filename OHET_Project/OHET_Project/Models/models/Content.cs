@@ -26,7 +26,6 @@ namespace OHET_Project.Models.models
         public ICollection<Class> classes { get; set; }
         public ICollection<Hero> heroes { get; set; }
         public ICollection<Spell> spells { get; set; }
-        public ICollection<Item> items { get; set; }
         public ICollection<Rule> rules { get; set; }
         public ICollection<Adventure> adventures { get; set; }
         public ICollection<ApplicationUser> applicationUsers { get; set; }

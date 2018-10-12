@@ -18,9 +18,8 @@ namespace OHET_Project.Models.models
         [Required]
         public string description { get; set; }
 
-        [ForeignKey("IDConcept")]
-        public Concept Concept { get; set; }
-        public int? IDConcept { get; set; }
+        [Required]
+        public int conceptLvl { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }

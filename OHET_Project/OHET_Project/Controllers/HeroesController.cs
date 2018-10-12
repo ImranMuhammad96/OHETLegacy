@@ -18,7 +18,8 @@ namespace OHET_Project.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            var heroes = db.heroes.Include(h => h.Concept).Include(h => h.Content);
+            //var heroes = db.heroes.Include(h => h.Concept).Include(h => h.Content);
+            var heroes = db.heroes.Include(h => h.Content);
             return View(heroes.ToList());
         }
 
@@ -40,7 +41,7 @@ namespace OHET_Project.Controllers
         // GET: Heroes/Create
         public ActionResult Create()
         {
-            ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description");
+            //ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description");
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
             return View();
         }
@@ -106,8 +107,7 @@ namespace OHET_Project.Controllers
             {
                 name = _heroName,
                 gold = 500,
-                exp = 0,
-                totalDR = 0     
+                exp = 0
             };
 
             db.heroes.Add(hero);
@@ -117,7 +117,8 @@ namespace OHET_Project.Controllers
         }
 
         public void SaveNewConcept(string _conceptDescription)
-        { 
+        {
+            /*
             Concept concept = new Concept
             {
                 level = 7,
@@ -126,7 +127,7 @@ namespace OHET_Project.Controllers
 
             db.concepts.Add(concept);
             db.SaveChanges();
-
+            */
             //return concept.IDConcept;
         }
 
@@ -144,7 +145,7 @@ namespace OHET_Project.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description", hero.IDConcept);
+            //ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description", hero.IDConcept);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", hero.IDContent);
             return View(hero);
         }

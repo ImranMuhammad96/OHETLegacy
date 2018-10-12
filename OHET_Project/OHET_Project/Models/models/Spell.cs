@@ -13,11 +13,13 @@ namespace OHET_Project.Models.models
         public int IDSpell { get; set; }
 
         [Required]
+        public string name { get; set; }
+
+        [Required]
         public string description { get; set; }
 
-        [ForeignKey("IDConcept")]
-        public Concept Concept { get; set; }
-        public int? IDConcept { get; set; }
+        [Required]
+        public int conceptLvl { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
