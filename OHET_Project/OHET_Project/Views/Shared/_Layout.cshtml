@@ -25,10 +25,12 @@
         @Html.Partial("_LoginPartial")
         <ul class="links">
             <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Stwórz Postać", "Create", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
-			<li><a href="battle_arena.html">Content</a></li>
-            <li><a href="battle_arena.html">Spells</a></li>
-            <li><a href="battle_arena.html">Monsters</a></li>
+            <li>@Html.ActionLink("My characters", "Index", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Create Character", "Create", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Rules", "Index", "Rules", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Adventures", "Index", "Adventures", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Spells", "Index", "Spells", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Monsters", "Index", "Monsters", new { area = "" }, new { @class = "navbar-brand" })</li>
         </ul>
     </nav>
 

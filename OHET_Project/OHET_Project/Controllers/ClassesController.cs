@@ -18,7 +18,7 @@ namespace OHET_Project.Controllers
         // GET: Classes
         public ActionResult Index()
         {
-            var classes = db.classes.Include(@ => @.Content);
+            var classes = db.classes.Include(c => c.Content);
             return View(classes.ToList());
         }
 
