@@ -13,9 +13,6 @@ namespace OHET_Project.Models.models
         public int IDAbility { get; set; }
 
         [Required]
-        public string name { get; set; }
-
-        [Required]
         public string description { get; set; }
 
         [Required]

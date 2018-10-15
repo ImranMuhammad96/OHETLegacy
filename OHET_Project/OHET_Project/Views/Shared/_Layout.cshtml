@@ -22,6 +22,7 @@
 
     <!-- Nav -->
     <nav id="menu">
+        @Html.Partial("_LoginPartial")
         <ul class="links">
             <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
             <li>@Html.ActionLink("Stwórz Postać", "Create", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>

@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201810121858426_InitialD.Designer.cs">
       <DependentUpon>201810121858426_InitialD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810151545030_QuickFix.cs" />
+    <Compile Include="Migrations\201810151545030_QuickFix.Designer.cs">
+      <DependentUpon>201810151545030_QuickFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -308,6 +312,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810121858426_InitialD.resx">
       <DependentUpon>201810121858426_InitialD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810151545030_QuickFix.resx">
+      <DependentUpon>201810151545030_QuickFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
