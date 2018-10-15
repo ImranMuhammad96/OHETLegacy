@@ -13,7 +13,7 @@ namespace OHET_Project.Controllers
 {
     public class RulesController : Controller
     {
-        private DbContext db = new DbContext();
+        private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Rules
         public ActionResult Index()
@@ -29,7 +29,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDRule,title,description,IDContent")] Rule rule)
+        public ActionResult Create([Bind(Include = "IDRule,title,description,IDContent")] Models.models.Rule rule)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDRule,title,description,IDContent")] Rule rule)
+        public ActionResult Edit([Bind(Include = "IDRule,title,description,IDContent")] Models.models.Rule rule)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -115,7 +115,7 @@ namespace OHET_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Find(id);
             db.rules.Remove(rule);
             db.SaveChanges();
             return RedirectToAction("Index");

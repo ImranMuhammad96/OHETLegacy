@@ -13,7 +13,7 @@ namespace OHET_Project.Controllers
 {
     public class AdventuresController : Controller
     {
-        private DbContext db = new DbContext();
+        private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Adventures
         public ActionResult Index()
