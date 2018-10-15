@@ -169,9 +169,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdventuresController.cs" />
+    <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MonstersController.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
+    <Compile Include="Controllers\SpellsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -297,6 +302,31 @@
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Heroes\_createConceptData.cshtml" />
+    <Content Include="Views\Classes\Create.cshtml" />
+    <Content Include="Views\Classes\Delete.cshtml" />
+    <Content Include="Views\Classes\Details.cshtml" />
+    <Content Include="Views\Classes\Edit.cshtml" />
+    <Content Include="Views\Classes\Index.cshtml" />
+    <Content Include="Views\Rules\Create.cshtml" />
+    <Content Include="Views\Rules\Delete.cshtml" />
+    <Content Include="Views\Rules\Details.cshtml" />
+    <Content Include="Views\Rules\Edit.cshtml" />
+    <Content Include="Views\Rules\Index.cshtml" />
+    <Content Include="Views\Adventures\Create.cshtml" />
+    <Content Include="Views\Adventures\Delete.cshtml" />
+    <Content Include="Views\Adventures\Details.cshtml" />
+    <Content Include="Views\Adventures\Edit.cshtml" />
+    <Content Include="Views\Adventures\Index.cshtml" />
+    <Content Include="Views\Spells\Create.cshtml" />
+    <Content Include="Views\Spells\Delete.cshtml" />
+    <Content Include="Views\Spells\Details.cshtml" />
+    <Content Include="Views\Spells\Edit.cshtml" />
+    <Content Include="Views\Spells\Index.cshtml" />
+    <Content Include="Views\Monsters\Create.cshtml" />
+    <Content Include="Views\Monsters\Delete.cshtml" />
+    <Content Include="Views\Monsters\Details.cshtml" />
+    <Content Include="Views\Monsters\Edit.cshtml" />
+    <Content Include="Views\Monsters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
