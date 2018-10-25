@@ -180,13 +180,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810121858426_InitialD.cs" />
-    <Compile Include="Migrations\201810121858426_InitialD.Designer.cs">
-      <DependentUpon>201810121858426_InitialD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810151545030_QuickFix.cs" />
-    <Compile Include="Migrations\201810151545030_QuickFix.Designer.cs">
-      <DependentUpon>201810151545030_QuickFix.cs</DependentUpon>
+    <Compile Include="Migrations\201810171253265_Ini.cs" />
+    <Compile Include="Migrations\201810171253265_Ini.Designer.cs">
+      <DependentUpon>201810171253265_Ini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -255,7 +251,9 @@
     <Content Include="Scripts\HieloJS\util.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Toolbox\migrationCommands.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -341,11 +339,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810121858426_InitialD.resx">
-      <DependentUpon>201810121858426_InitialD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810151545030_QuickFix.resx">
-      <DependentUpon>201810151545030_QuickFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810171253265_Ini.resx">
+      <DependentUpon>201810171253265_Ini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

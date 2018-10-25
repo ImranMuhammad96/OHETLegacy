@@ -7,13 +7,13 @@ namespace OHET_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class QuickFix : IMigrationMetadata
+    public sealed partial class Ini : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(QuickFix));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Ini));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810151545030_QuickFix"; }
+            get { return "201810171253265_Ini"; }
         }
         
         string IMigrationMetadata.Source

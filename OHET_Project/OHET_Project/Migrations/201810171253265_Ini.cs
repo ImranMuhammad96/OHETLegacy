@@ -3,7 +3,7 @@ namespace OHET_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialD : DbMigration
+    public partial class Ini : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,6 @@ namespace OHET_Project.Migrations
                 c => new
                     {
                         IDAbility = c.Int(nullable: false, identity: true),
-                        name = c.String(nullable: false),
                         description = c.String(nullable: false),
                         conceptLvl = c.Int(nullable: false),
                         IDClass = c.Int(),
