@@ -215,11 +215,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\bg.jpg" />
+    <Content Include="Images\cover.png" />
     <Content Include="Images\OHET.png" />
+    <Content Include="Images\OHET_finale_ENG.png" />
+    <Content Include="Images\outstanding_heroes.png" />
     <Content Include="Images\pic01.jpg" />
     <Content Include="Images\pic02.jpg" />
     <Content Include="Images\pic03.jpg" />
     <Content Include="Images\pic04.jpg" />
+    <Content Include="Images\sample.jpg" />
     <Content Include="Images\slide01.jpg" />
     <Content Include="Images\slide02.jpg" />
     <Content Include="Images\slide03.jpg" />
