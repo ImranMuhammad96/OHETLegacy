@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 
+<link href="~/Content/table.css" rel="stylesheet" type="text/css" />
+
 <h2>Index</h2>
 
 <p>
@@ -55,3 +57,12 @@
 }
 
 </table>
+
+@*
+@Styles_()
+
+@helper Styles_()
+{
+    <link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
+}
+*@

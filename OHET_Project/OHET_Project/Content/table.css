@@ -1,0 +1,34 @@
+﻿@charset "UTF-8";
+
+.fixed_headers {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+    .fixed_headers th { text-decoration: underline; }
+
+        .fixed_headers th, .fixed_headers td {
+            padding: 5px;
+            text-align: left;
+        }
+
+    .fixed_headers thead {
+        background-color: #333;
+        color: #FDFDFD;
+    }
+
+        .fixed_headers thead tr {
+            display: block;
+            position: relative;
+        }
+
+    .fixed_headers tbody {
+        display: block;
+        overflow: auto;
+        width: 100%;
+        height: 300px;
+    }
+
+    .fixed_headers tbody tr:nth-child(even) {
+        background-color: #DDD;
+    }

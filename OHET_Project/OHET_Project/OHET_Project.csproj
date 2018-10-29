@@ -209,6 +209,7 @@
     <Content Include="Content\character_sheet.css" />
     <Content Include="Content\HieloTemplate\font-awesome.min.css" />
     <Content Include="Content\HieloTemplate\main.css" />
+    <Content Include="Content\table.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\HieloFonts\fontawesome-webfont.svg" />
@@ -299,11 +300,6 @@
     <Content Include="Views\Heroes\_createClassChoice.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Heroes\_createPersonalData.cshtml" />
-    <Content Include="Views\Items\Create.cshtml" />
-    <Content Include="Views\Items\Delete.cshtml" />
-    <Content Include="Views\Items\Details.cshtml" />
-    <Content Include="Views\Items\Edit.cshtml" />
-    <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Heroes\_createConceptData.cshtml" />
     <Content Include="Views\Classes\Create.cshtml" />
     <Content Include="Views\Classes\Delete.cshtml" />
