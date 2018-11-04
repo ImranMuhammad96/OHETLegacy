@@ -3,7 +3,7 @@ namespace OHET_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Ini : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -41,11 +41,8 @@ namespace OHET_Project.Migrations
                         IDContent = c.Int(nullable: false, identity: true),
                         isOfficial = c.Boolean(nullable: false),
                         isPublic = c.Boolean(nullable: false),
-                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.IDContent)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
-                .Index(t => t.ApplicationUserId);
+                .PrimaryKey(t => t.IDContent);
             
             CreateTable(
                 "dbo.Adventures",
@@ -59,67 +56,6 @@ namespace OHET_Project.Migrations
                 .PrimaryKey(t => t.IDAdventure)
                 .ForeignKey("dbo.Contents", t => t.IDContent)
                 .Index(t => t.IDContent);
-            
-            CreateTable(
-                "dbo.AspNetUsers",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                        Content_IDContent = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Contents", t => t.Content_IDContent)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.Content_IDContent);
-            
-            CreateTable(
-                "dbo.AspNetUserClaims",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.Heroes",
@@ -198,6 +134,64 @@ namespace OHET_Project.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.CH",
                 c => new
                     {
@@ -214,6 +208,9 @@ namespace OHET_Project.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Spells", "IDContent", "dbo.Contents");
             DropForeignKey("dbo.Spells", "IDClass", "dbo.Classes");
@@ -223,41 +220,34 @@ namespace OHET_Project.Migrations
             DropForeignKey("dbo.CH", "ClassRefId", "dbo.Classes");
             DropForeignKey("dbo.CH", "HeroRefId", "dbo.Heroes");
             DropForeignKey("dbo.Classes", "IDContent", "dbo.Contents");
-            DropForeignKey("dbo.AspNetUsers", "Content_IDContent", "dbo.Contents");
-            DropForeignKey("dbo.Contents", "ApplicationUserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Adventures", "IDContent", "dbo.Contents");
             DropForeignKey("dbo.Abilities", "IDClass", "dbo.Classes");
             DropIndex("dbo.CH", new[] { "ClassRefId" });
             DropIndex("dbo.CH", new[] { "HeroRefId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Spells", new[] { "IDClass" });
             DropIndex("dbo.Spells", new[] { "IDContent" });
             DropIndex("dbo.Rules", new[] { "IDContent" });
             DropIndex("dbo.Monsters", new[] { "IDContent" });
             DropIndex("dbo.Heroes", new[] { "IDContent" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", new[] { "Content_IDContent" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Adventures", new[] { "IDContent" });
-            DropIndex("dbo.Contents", new[] { "ApplicationUserId" });
             DropIndex("dbo.Classes", new[] { "IDContent" });
             DropIndex("dbo.Abilities", new[] { "IDClass" });
             DropTable("dbo.CH");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Spells");
             DropTable("dbo.Rules");
             DropTable("dbo.Monsters");
             DropTable("dbo.Heroes");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Adventures");
             DropTable("dbo.Contents");
             DropTable("dbo.Classes");

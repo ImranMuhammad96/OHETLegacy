@@ -18,7 +18,6 @@ namespace OHET_Project.Models.models
         [Required]
         public bool isPublic { get; set; }
 
-        [Required]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
 
@@ -28,6 +27,6 @@ namespace OHET_Project.Models.models
         public ICollection<Spell> spells { get; set; }
         public ICollection<Rule> rules { get; set; }
         public ICollection<Adventure> adventures { get; set; }
-        public ICollection<ApplicationUser> applicationUsers { get; set; }
+        //public ICollection<ApplicationUser> applicationUsers { get; set; }
     }
 }
