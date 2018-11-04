@@ -32,25 +32,43 @@
     @foreach (var item in Model) {
         if (item.IDClass == i)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.conceptLvl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDSpell }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IDSpell }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDSpell })
-            </td>
-        </tr>
+            if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.ApplicationUserId == "")
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.conceptLvl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                
+                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDSpell })
+                    </td>
+                }
+                
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDSpell })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDSpell }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDSpell })
+                    </td>
+                }
+            </tr>
+            }
         }
     }
-    
     </table>
 }
 @*

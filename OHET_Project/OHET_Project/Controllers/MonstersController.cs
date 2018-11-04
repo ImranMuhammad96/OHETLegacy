@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
@@ -18,6 +19,8 @@ namespace OHET_Project.Controllers
         // GET: Monsters
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
+
             var monsters = db.monsters.Include(m => m.Content);
             return View(monsters.ToList());
         }

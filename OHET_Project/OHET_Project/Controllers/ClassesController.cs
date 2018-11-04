@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
@@ -18,6 +19,8 @@ namespace OHET_Project.Controllers
         // GET: Classes
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
+
             var classes = db.classes.Include(c => c.Content);
             return View(classes.ToList());
         }
