@@ -1,0 +1,62 @@
+﻿@model OHET_Project.Models.models.Hero
+@using OHET_Project.Models.models
+
+@using (Html.BeginForm("_createAttributesDataResult", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName, description = ViewBag.description }))
+{
+
+<div class="12u$">
+    <div class="select-wrapper">
+        <select name="StrAttribute" id="StrAttribute">
+            <option value="@AttributeLvl.Low">-- Strenght -- </option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+    <div class="select-wrapper">
+        <select name="DexAttribute" id="DexAttribute">
+            <option value="@AttributeLvl.Low">-- Dexterity --</option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+    <div class="select-wrapper">
+        <select name="ConAttribute" id="ConAttribute">
+            <option value="@AttributeLvl.Low">-- Constitution --</option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+    <div class="select-wrapper">
+        <select name="IntAttribute" id="IntAttribute">
+            <option value="@AttributeLvl.Low">-- Intelligence --</option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+    <div class="select-wrapper">
+        <select name="WisAttribute" id="WisAttribute">
+            <option value="@AttributeLvl.Low">-- Wisdom --</option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+    <div class="select-wrapper">
+        <select name="ChaAttribute" id="ChaAttribute">
+            <option value="@AttributeLvl.Low">-- Charisma --</option>
+            <option value="@AttributeLvl.Low">Low</option>
+            <option value="@AttributeLvl.Average">Avarage</option>
+            <option value="@AttributeLvl.High">High</option>
+        </select>
+    </div><br />
+</div>
+
+
+    <footer class="align-center">
+        <button type="submit" class="button alt">Zakończ!</button>
+    </footer>
+    }

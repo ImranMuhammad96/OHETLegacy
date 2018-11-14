@@ -18,7 +18,7 @@
         <!-- BODY -->
         Html.RenderAction("_createClassChoice", "Heroes");
     }
-    <!-- IMIĘ I OPIS -->
+    <!-- IMIĘ, KONCEPCJA I OPIS  -->
     @if (ViewBag.classID != null)
     {
         if (ViewBag.heroName == null)
@@ -38,7 +38,7 @@
             </div>
         }
     }
-    <!-- KONCEPT -->
+    <!-- ATRYBUTY -->
     @if (ViewBag.classID != null)
     {
         if (ViewBag.heroName != null)
@@ -49,13 +49,13 @@
                 <div class="inner">
                     <header class="align-center">
                         <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-                        <h2>Krok Trzeci - Określ swą koncepcję</h2>
+                        <h2>Krok Trzeci - Statystyki Twojego Bohatera</h2>
                     </header>
                 </div>
                 <!-- BODY -->
                 <div class="inner">
                     @{
-                        Html.RenderAction("_createConceptData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName });
+                        Html.RenderAction("_createAttributesData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName, description = ViewBag.description });
                     }
                 </div>
             }
