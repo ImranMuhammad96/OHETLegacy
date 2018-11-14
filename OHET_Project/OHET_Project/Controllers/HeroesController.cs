@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -180,6 +181,7 @@ namespace OHET_Project.Controllers
             return RedirectToAction("Index");
         }
 
+        [DebuggerStepThrough]
         private int CountWords(string str)
         {
             var text = str.Trim();

@@ -7,6 +7,7 @@ using System.Web;
 
 namespace OHET_Project.Models.models
 {
+    [DebuggerStepThrough]
     public class Fistcaster : Class
     {
 
