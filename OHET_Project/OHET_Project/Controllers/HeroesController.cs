@@ -71,41 +71,62 @@ namespace OHET_Project.Controllers
         }
 
         // ?POST:
-        public ActionResult _createPersonalDataResult(string classID, string heroName)
+        public ActionResult _createPersonalDataResult(string classID, string heroName, string description)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
+            ViewBag.description = description;
 
             return View("Create");
         }
 
         // GET
-        public ActionResult _createConceptData(string classID, string heroName)
+        public ActionResult _createAttributesData(string classID, string heroName, string description)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
+            ViewBag.description = description;
 
             return PartialView();
         }
 
         // ?POST:
-        public ActionResult _createConceptDataResult(string classID, string heroName, string conceptDescription)
+        public ActionResult _createAttributesDataResult(string classID, string heroName, string description,
+            AttributeLvl StrAttribute, AttributeLvl DexAttribute, AttributeLvl ConAttribute, AttributeLvl IntAttribute, 
+            AttributeLvl WisAttribute, AttributeLvl ChaAttribute)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
-            ViewBag.conceptDescription = conceptDescription;
+            ViewBag.description = description;
 
-            int heroID = SaveNewHero(heroName);
-            SaveNewConcept(conceptDescription);
+            ViewBag.StrAttribute = StrAttribute;
+            ViewBag.DexAttribute = DexAttribute;
+            ViewBag.ConAttribute = ConAttribute;
+            ViewBag.IntAttribute = IntAttribute;
+            ViewBag.WisAttribute = WisAttribute;
+            ViewBag.ChaAttribute = ChaAttribute;
+
+            int heroID = SaveNewHero(heroName, description, StrAttribute, DexAttribute, 
+                ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
 
             return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
 
-        public int SaveNewHero(string _heroName)
+        public int SaveNewHero(string _heroName, string _description, 
+            AttributeLvl _StrAttribute, AttributeLvl _DexAttribute, AttributeLvl _ConAttribute, 
+            AttributeLvl _IntAttribute, AttributeLvl _WisAttribute, AttributeLvl _ChaAttribute)
         {
             Hero hero = new Hero
             {
                 name = _heroName,
+                conceptLvl = CountWords(_description),
+                description = _description,
+                StrAttribute = _StrAttribute,
+                DexAttribute = _DexAttribute,
+                ConAttribute = _ConAttribute,
+                IntAttribute = _IntAttribute,
+                WisAttribute = _WisAttribute,
+                ChaAttribute = _ChaAttribute,
                 gold = 500,
                 exp = 0
             };
@@ -116,24 +137,7 @@ namespace OHET_Project.Controllers
             return hero.IDHero;
         }
 
-        public void SaveNewConcept(string _conceptDescription)
-        {
-            /*
-            Concept concept = new Concept
-            {
-                level = 7,
-                description = _conceptDescription
-            };
-
-            db.concepts.Add(concept);
-            db.SaveChanges();
-            */
-            //return concept.IDConcept;
-        }
-
         // POST: Heroes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IDHero,name,totalDR,gold,exp,IDConcept,IDContent")] Hero hero)
@@ -174,6 +178,25 @@ namespace OHET_Project.Controllers
             db.heroes.Remove(hero);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private int CountWords(string str)
+        {
+            var text = str.Trim();
+            int wordCount = 0, index = 0;
+
+            while (index < text.Length)
+            {
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+
+                wordCount++;
+
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+
+            return wordCount;
         }
 
         protected override void Dispose(bool disposing)

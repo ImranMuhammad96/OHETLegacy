@@ -180,13 +180,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811041647502_Init.cs" />
-    <Compile Include="Migrations\201811041647502_Init.Designer.cs">
-      <DependentUpon>201811041647502_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811041649300_Init2.cs" />
-    <Compile Include="Migrations\201811041649300_Init2.Designer.cs">
-      <DependentUpon>201811041649300_Init2.cs</DependentUpon>
+    <Compile Include="Migrations\201811141054440_Ini.cs" />
+    <Compile Include="Migrations\201811141054440_Ini.Designer.cs">
+      <DependentUpon>201811141054440_Ini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,7 +300,7 @@
     <Content Include="Views\Heroes\_createClassChoice.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Heroes\_createPersonalData.cshtml" />
-    <Content Include="Views\Heroes\_createConceptData.cshtml" />
+    <Content Include="Views\Heroes\_createAttributesData.cshtml" />
     <Content Include="Views\Classes\Create.cshtml" />
     <Content Include="Views\Classes\Delete.cshtml" />
     <Content Include="Views\Classes\Details.cshtml" />
@@ -343,11 +339,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811041647502_Init.resx">
-      <DependentUpon>201811041647502_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811041649300_Init2.resx">
-      <DependentUpon>201811041649300_Init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811141054440_Ini.resx">
+      <DependentUpon>201811141054440_Ini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
