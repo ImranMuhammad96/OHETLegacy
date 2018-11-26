@@ -1,0 +1,42 @@
+﻿@model OHET_Project.Models.models.Content
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isOfficial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isOfficial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDContent }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

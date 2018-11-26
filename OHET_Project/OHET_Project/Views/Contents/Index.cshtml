@@ -1,0 +1,45 @@
+﻿@model IEnumerable<OHET_Project.Models.models.Content>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isOfficial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isOfficial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPublic)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDContent }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDContent }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDContent })
+        </td>
+    </tr>
+}
+
+</table>
