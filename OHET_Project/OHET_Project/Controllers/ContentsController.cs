@@ -18,15 +18,19 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Contents
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
+            //ViewBag.fav = db.favcons.ToList();
 
             var contents = db.contents.Include(c => c.ApplicationUser);
             return View(contents.ToList());
         }
 
         // GET: Contents/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +45,22 @@ namespace OHET_Project.Controllers
             return View(content);
         }
 
+        [Authorize]
+        public ActionResult Publish()
+        {
+            ViewBag.contentPublic = true;
+            return View("Index");
+        }
+
+        [Authorize]
+        public ActionResult Unpublish()
+        {
+            ViewBag.contentPublic = false;
+            return View("Index");
+        }
+
         // GET: Contents/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
@@ -67,6 +86,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Contents/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +120,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Contents/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

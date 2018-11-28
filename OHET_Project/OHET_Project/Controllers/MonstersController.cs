@@ -41,7 +41,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Monsters/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
@@ -67,7 +67,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Monsters/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,7 +101,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Monsters/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

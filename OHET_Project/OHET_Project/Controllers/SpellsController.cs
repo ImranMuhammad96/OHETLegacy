@@ -41,7 +41,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
@@ -69,7 +69,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,7 +105,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

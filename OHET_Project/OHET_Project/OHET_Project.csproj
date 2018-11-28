@@ -185,6 +185,14 @@
     <Compile Include="Migrations\201811261703209_Init.Designer.cs">
       <DependentUpon>201811261703209_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811262037215_Init2.cs" />
+    <Compile Include="Migrations\201811262037215_Init2.Designer.cs">
+      <DependentUpon>201811262037215_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811281734172_FavCon.cs" />
+    <Compile Include="Migrations\201811281734172_FavCon.Designer.cs">
+      <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -194,6 +202,7 @@
     <Compile Include="Models\models\AttributeLvl.cs" />
     <Compile Include="Models\models\Class.cs" />
     <Compile Include="Models\models\Content.cs" />
+    <Compile Include="Models\models\FavCon.cs" />
     <Compile Include="Models\models\Fistcaster.cs" />
     <Compile Include="Models\models\Hero.cs" />
     <Compile Include="Models\models\Monster.cs" />
@@ -347,6 +356,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811261703209_Init.resx">
       <DependentUpon>201811261703209_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811262037215_Init2.resx">
+      <DependentUpon>201811262037215_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811281734172_FavCon.resx">
+      <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

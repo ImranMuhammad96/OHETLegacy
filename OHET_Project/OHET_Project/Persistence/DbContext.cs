@@ -25,6 +25,7 @@ namespace OHET_Project.Persistence
         public DbSet<Adventure> adventures { get; set; }
         public DbSet<Class> classes { get; set; }
         public DbSet<Content> contents { get; set; }
+        public DbSet<FavCon> favcons { get; set; }
         public DbSet<Fistcaster> fistcasters { get; set; }
         public DbSet<Hero> heroes { get; set; }
         public DbSet<Monster> monsters { get; set; }

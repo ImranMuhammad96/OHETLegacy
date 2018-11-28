@@ -6,40 +6,89 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isOfficial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPublic)
+            My Content
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
+    if (@item.ApplicationUser.Id == @ViewBag.UserId)
+    {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+            @ViewBag.UserName's Content
         </td>
+        @if (@item.isPublic == true)
+        {
+            <td>
+                @Html.ActionLink("Publish", "Publish") |
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Unpublish", "Unpublish") |
+            </td>
+        }
         <td>
-            @Html.DisplayFor(modelItem => item.isOfficial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPublic)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDContent }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDContent }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDContent })
+            @Html.ActionLink("Details", "Details", new { id=item.IDContent })
         </td>
     </tr>
+    }
 }
+</table>
 
+<table class="table">
+    <tr>
+        <th>
+            Favourite Contents
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        @*IF IsFavourite == true*@
+        if (1==0)
+        {
+        <tr>
+            <td>
+                @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
+            </td>
+            <td>
+                @Html.ActionLink("Add to favourite", "")
+                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
+            </td>
+        </tr>
+        }
+    }
+</table>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Public Contents
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        @*IF IsFavourite == false*@
+        if (@item.isPublic == true && @item.isOfficial == false)
+        {
+        <tr>
+            <td>
+                @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
+            </td>
+            <td>
+                @Html.ActionLink("Add to favourite", "")
+                @Html.ActionLink("Details", "Details", new { id=item.IDContent })
+            </td>
+        </tr>
+        }
+    }
 </table>

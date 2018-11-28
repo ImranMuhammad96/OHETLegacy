@@ -20,8 +20,8 @@ namespace OHET_Project.Models.models
         [Required]
         public bool isPublic { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual string ApplicationUserId { get; set; }
 
         public ICollection<Monster> monsters { get; set; }
         public ICollection<Class> classes { get; set; }
