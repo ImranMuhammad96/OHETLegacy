@@ -171,13 +171,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdventuresController.cs" />
     <Compile Include="Controllers\ClassesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonstersController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\SpellsController.cs" />
+    <Compile Include="Controllers\SubpostsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +197,14 @@
     <Compile Include="Migrations\201811281734172_FavCon.Designer.cs">
       <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811301709288_FavCon2.cs" />
+    <Compile Include="Migrations\201811301709288_FavCon2.Designer.cs">
+      <DependentUpon>201811301709288_FavCon2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812011306591_Item.cs" />
+    <Compile Include="Migrations\201812011306591_Item.Designer.cs">
+      <DependentUpon>201812011306591_Item.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -201,14 +213,18 @@
     <Compile Include="Models\models\Adventure.cs" />
     <Compile Include="Models\models\AttributeLvl.cs" />
     <Compile Include="Models\models\Class.cs" />
+    <Compile Include="Models\models\Comment.cs" />
     <Compile Include="Models\models\Content.cs" />
     <Compile Include="Models\models\FavCon.cs" />
     <Compile Include="Models\models\Fistcaster.cs" />
     <Compile Include="Models\models\Hero.cs" />
+    <Compile Include="Models\models\Item.cs" />
     <Compile Include="Models\models\Monster.cs" />
+    <Compile Include="Models\models\Post.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
     <Compile Include="Models\models\Spellcaster.cs" />
+    <Compile Include="Models\models\Subpost.cs" />
     <Compile Include="Persistence\DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -341,6 +357,26 @@
     <Content Include="Views\Contents\Details.cshtml" />
     <Content Include="Views\Contents\Edit.cshtml" />
     <Content Include="Views\Contents\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Subposts\Create.cshtml" />
+    <Content Include="Views\Subposts\Delete.cshtml" />
+    <Content Include="Views\Subposts\Details.cshtml" />
+    <Content Include="Views\Subposts\Edit.cshtml" />
+    <Content Include="Views\Subposts\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,6 +398,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811281734172_FavCon.resx">
       <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811301709288_FavCon2.resx">
+      <DependentUpon>201811301709288_FavCon2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812011306591_Item.resx">
+      <DependentUpon>201812011306591_Item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

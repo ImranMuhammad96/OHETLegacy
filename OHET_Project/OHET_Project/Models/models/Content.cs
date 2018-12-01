@@ -29,6 +29,7 @@ namespace OHET_Project.Models.models
         public ICollection<Spell> spells { get; set; }
         public ICollection<Rule> rules { get; set; }
         public ICollection<Adventure> adventures { get; set; }
+        public ICollection<FavCon> favcons { get; set; }
         //public ICollection<ApplicationUser> applicationUsers { get; set; }
     }
 }

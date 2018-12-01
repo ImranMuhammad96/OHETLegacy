@@ -8,140 +8,115 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OHET_Project.Controllers
 {
-    public class ContentsController : Controller
+    public class SubpostsController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
 
-        // GET: Contents
-        [Authorize]
+        // GET: Subposts
         public ActionResult Index()
         {
-            ViewBag.userId = User.Identity.GetUserId();
-            ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
-            //ViewBag.fav = db.favcons.ToList();
-
-            var contents = db.contents.Include(c => c.ApplicationUser).Include(d => d.favcons);
-            return View(contents.ToList());
+            var subposts = db.subposts.Include(s => s.Post);
+            return View(subposts.ToList());
         }
 
-        // GET: Contents/Details/5
-        [Authorize]
+        // GET: Subposts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Content content = db.contents.Find(id);
-            if (content == null)
+            Subpost subpost = db.subposts.Find(id);
+            if (subpost == null)
             {
                 return HttpNotFound();
             }
-            return View(content);
+            return View(subpost);
         }
 
-        [Authorize]
-        public ActionResult Publish()
-        {
-            ViewBag.contentPublic = true;
-            return View("Index");
-        }
-
-        [Authorize]
-        public ActionResult Unpublish()
-        {
-            ViewBag.contentPublic = false;
-            return View("Index");
-        }
-
-        // GET: Contents/Create
-        [Authorize]
+        // GET: Subposts/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
+            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
             return View();
         }
 
-        // POST: Contents/Create
+        // POST: Subposts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDContent,isOfficial,isPublic,ApplicationUserId")] Content content)
+        public ActionResult Create([Bind(Include = "IDSubpost,Title,Description,OrderNr,IDPost")] Subpost subpost)
         {
             if (ModelState.IsValid)
             {
-                db.contents.Add(content);
+                db.subposts.Add(subpost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", content.ApplicationUserId);
-            return View(content);
+            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", subpost.IDPost);
+            return View(subpost);
         }
 
-        // GET: Contents/Edit/5
-        [Authorize]
+        // GET: Subposts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Content content = db.contents.Find(id);
-            if (content == null)
+            Subpost subpost = db.subposts.Find(id);
+            if (subpost == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", content.ApplicationUserId);
-            return View(content);
+            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", subpost.IDPost);
+            return View(subpost);
         }
 
-        // POST: Contents/Edit/5
+        // POST: Subposts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDContent,isOfficial,isPublic,ApplicationUserId")] Content content)
+        public ActionResult Edit([Bind(Include = "IDSubpost,Title,Description,OrderNr,IDPost")] Subpost subpost)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(content).State = EntityState.Modified;
+                db.Entry(subpost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", content.ApplicationUserId);
-            return View(content);
+            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", subpost.IDPost);
+            return View(subpost);
         }
 
-        // GET: Contents/Delete/5
-        [Authorize]
+        // GET: Subposts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Content content = db.contents.Find(id);
-            if (content == null)
+            Subpost subpost = db.subposts.Find(id);
+            if (subpost == null)
             {
                 return HttpNotFound();
             }
-            return View(content);
+            return View(subpost);
         }
 
-        // POST: Contents/Delete/5
+        // POST: Subposts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Content content = db.contents.Find(id);
-            db.contents.Remove(content);
+            Subpost subpost = db.subposts.Find(id);
+            db.subposts.Remove(subpost);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
