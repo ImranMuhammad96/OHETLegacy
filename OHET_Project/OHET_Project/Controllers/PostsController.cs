@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
@@ -18,6 +19,8 @@ namespace OHET_Project.Controllers
         // GET: Posts
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
+
             var posts = db.posts.Include(p => p.ApplicationUser);
             return View(posts.ToList());
         }
@@ -49,11 +52,21 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDPost,Title,Description,Date,ApplicationUserId")] Post post)
+        public ActionResult Create(Post post)
         {
             if (ModelState.IsValid)
             {
-                db.posts.Add(post);
+                var p = new Post
+                {
+                    IDPost = post.IDPost,
+                    Title = post.Title,
+                    Description = post.Description,
+                    Date = DateTime.Now,
+                    ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
+                    ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id
+                };
+
+                db.posts.Add(p);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

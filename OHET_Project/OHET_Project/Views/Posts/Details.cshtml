@@ -10,40 +10,44 @@
     <h4>Post</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Email)
+            @Html.DisplayFor(model => model.ApplicationUser.Email) |
+            @Html.DisplayFor(model => model.Date)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
     </dl>
 </div>
+
+@foreach (var item in Model.subposts)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}
+
+@foreach (var item in Model.comments)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description) |
+            @Html.DisplayFor(modelItem => item.ApplicationUser.Email) |
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+    </tr>
+}
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |
     @Html.ActionLink("Back to List", "Index")

@@ -25,5 +25,7 @@ namespace OHET_Project.Models.models
         public virtual string ApplicationUserId { get; set; }
 
         public ICollection<Comment> comments { get; set; }
+        public ICollection<Subpost> subposts { get; set; }
+
     }
 }
