@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
@@ -18,6 +19,8 @@ namespace OHET_Project.Controllers
         // GET: Comments
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
+
             var comments = db.comments.Include(c => c.ApplicationUser).Include(c => c.Post);
             return View(comments.ToList());
         }
@@ -50,11 +53,22 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDComment,Description,Date,ApplicationUserId,IDPost")] Comment comment)
+        public ActionResult Create(Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.comments.Add(comment);
+                var c = new Comment
+                {
+                    IDComment = comment.IDComment,
+                    Description = comment.Description,
+                    Date = DateTime.Now,
+                    ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
+                    ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id,
+                    Post = db.posts.First(u => u.IDPost == comment.IDPost),
+                    IDPost = db.posts.First(u => u.IDPost == comment.IDPost).IDPost
+                };
+
+                db.comments.Add(c);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

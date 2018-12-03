@@ -37,18 +37,40 @@
     </tr>
 }
 
-@foreach (var item in Model.comments)
-{
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description) |
-            @Html.DisplayFor(modelItem => item.ApplicationUser.Email) |
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
+        <th>
+            Comments
+        </th>
+        <th></th>
     </tr>
-}
+    @foreach (var item in Model.comments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description) |
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Email) |
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            @if (Model.ApplicationUserId == ViewBag.userId)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Comments",new { id = @item.IDComment }, new {}) |
+                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = @item.IDComment }, new {})
+                </td>
+            }
+        </tr>
+    }
+    @Html.ActionLink("Create New", "Create", "Comments")
+</table>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    @if (Model.ApplicationUserId == ViewBag.userId)
+    {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.IDPost })
+        </td>
+    }
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
