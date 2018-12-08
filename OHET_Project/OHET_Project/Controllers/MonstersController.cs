@@ -53,11 +53,21 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDMonster,name,description,conceptLvl,IDContent")] Monster monster)
+        public ActionResult Create(Monster monster)
         {
             if (ModelState.IsValid)
             {
-                db.monsters.Add(monster);
+                var m = new Monster
+                {
+                    IDMonster = monster.IDMonster,
+                    name = monster.name,
+                    description = monster.description,
+                    conceptLvl = monster.conceptLvl,
+                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
+                };
+
+                db.monsters.Add(m);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
