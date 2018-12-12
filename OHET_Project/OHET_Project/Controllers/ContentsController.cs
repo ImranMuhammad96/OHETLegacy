@@ -48,15 +48,15 @@ namespace OHET_Project.Controllers
         [Authorize]
         public ActionResult Publish()
         {
-            ViewBag.contentPublic = true;
-            return View("Index");
+            //ViewBag.contentPublic = true;
+            return RedirectToAction("Index");
         }
 
         [Authorize]
         public ActionResult Unpublish()
         {
-            ViewBag.contentPublic = false;
-            return View("Index");
+            //ViewBag.contentPublic = false;
+            return RedirectToAction("Index");
         }
 
         // GET: Contents/Create

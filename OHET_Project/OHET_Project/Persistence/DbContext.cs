@@ -53,6 +53,5 @@ namespace OHET_Project.Persistence
                 });
 
         }
-        
     }
 }
