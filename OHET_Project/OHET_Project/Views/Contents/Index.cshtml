@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OHET_Project.Models.models.Content>
+﻿@model OHET_Project.Models.ViewModel.ContentViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
         </th>
         <th></th>
     </tr>
-@foreach (var item in Model)
+@foreach (var item in Model.Contents)
 {
     if (@item.ApplicationUser.Id == @ViewBag.UserId)
     {
@@ -48,7 +48,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Contents)
     {
         @*IF IsFavourite == true*@
         if (1==0)
@@ -75,7 +75,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Contents)
     {
         @*IF IsFavourite == false*@
         if (@item.isPublic == true && @item.isOfficial == false)

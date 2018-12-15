@@ -10,6 +10,7 @@ using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OHET_Project.Models.ViewModel;
 
 namespace OHET_Project.Controllers
 {
@@ -21,12 +22,17 @@ namespace OHET_Project.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.userId = User.Identity.GetUserId();
-            ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
-            //ViewBag.fav = db.favcons.ToList();
+            //ViewBag.userId = User.Identity.GetUserId();
+            //ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
+            //var contents = db.contents.Include(c => c.ApplicationUser).Include(d => d.favcons);
+            ////ViewBag.fav = db.favcons.ToList();
 
-            var contents = db.contents.Include(c => c.ApplicationUser).Include(d => d.favcons);
-            return View(contents.ToList());
+            ContentViewModel contentModel = new ContentViewModel();
+
+            contentModel.Contents = db.contents.ToList();
+            contentModel.FavCons = db.favcons.ToList();
+
+            return View(contentModel);
         }
 
         // GET: Contents/Details/5
