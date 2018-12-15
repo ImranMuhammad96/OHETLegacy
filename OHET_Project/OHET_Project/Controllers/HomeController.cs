@@ -1,4 +1,4 @@
-﻿using OHET_Project.BBL;
+﻿using OHET_Project.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +11,6 @@ namespace OHET_Project.Controllers
     {
         public ActionResult Index()
         {
-
-            FacebookData fbData = new FacebookData();
-            fbData.GetFbPosts();
-
             return View();
         }
 

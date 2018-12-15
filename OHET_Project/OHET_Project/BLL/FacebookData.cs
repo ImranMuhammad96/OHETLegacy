@@ -11,11 +11,10 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace OHET_Project.BBL
+namespace OHET_Project.BLL
 {
     public class FacebookData
     {
-
         private WebClient client = new WebClient();
         private string oauthUrl;
         private string accessToken;
@@ -43,7 +42,7 @@ namespace OHET_Project.BBL
         { 
             var fbClient = new FacebookClient(accessToken);
             var version = fbClient.Version;
-
+            
             var parameters = new Dictionary<string, object>();
             parameters["fields"] = "id,message,picture";
 
