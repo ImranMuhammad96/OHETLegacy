@@ -47,7 +47,7 @@ namespace OHET_Project.BBL
             var parameters = new Dictionary<string, object>();
             parameters["fields"] = "id,message,picture";
 
-            dynamic result = fbClient.Get(kuglarzPage + "/posts" + parameters);
+            dynamic result = fbClient.Get(kuglarzPage + "/posts", parameters);
 
             List<Post> postsList = new List<Post>();
             int count = result.data.Count;
