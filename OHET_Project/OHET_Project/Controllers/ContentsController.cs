@@ -22,10 +22,10 @@ namespace OHET_Project.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //ViewBag.userId = User.Identity.GetUserId();
-            //ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.userName = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@'));
             //var contents = db.contents.Include(c => c.ApplicationUser).Include(d => d.favcons);
-            ////ViewBag.fav = db.favcons.ToList();
+            //ViewBag.fav = db.favcons.ToList();
 
             ContentViewModel contentModel = new ContentViewModel();
 
@@ -52,16 +52,69 @@ namespace OHET_Project.Controllers
         }
 
         [Authorize]
-        public ActionResult Publish()
+        public ActionResult PublishOrUnpublish(int? id)
         {
             //ViewBag.contentPublic = true;
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Content content = db.contents.Find(id);
+            if (content == null)
+            {
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                content.isPublic = !content.isPublic;
+                db.Entry(content).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", content.ApplicationUserId);
+            return View(content);
         }
 
         [Authorize]
-        public ActionResult Unpublish()
+        public ActionResult AddFav(int? id)
         {
-            //ViewBag.contentPublic = false;
+            if (ModelState.IsValid)
+            {
+                var fc = new FavCon
+                {
+                    ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
+                    ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id,
+                    //Content = content,
+                    //IDContent = content.IDContent
+                    Content = db.contents.Find(id),
+                    IDContent = id
+                };
+
+                db.favcons.Add(fc);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", content.ApplicationUserId);
+            //return View(content);
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult DeleteFav(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            FavCon favcon = db.favcons.Find(id);
+            if (favcon == null)
+            {
+                return HttpNotFound();
+            }
+            db.favcons.Remove(favcon);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

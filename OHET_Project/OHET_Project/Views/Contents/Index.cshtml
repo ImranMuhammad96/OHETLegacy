@@ -24,17 +24,17 @@
         @if (@item.isPublic == true)
         {
             <td>
-                @Html.ActionLink("Publish", "Publish") |
+                @Html.ActionLink("Unpublish", "PublishOrUnpublish", new { id = item.IDContent })
             </td>
         }
         else
         {
             <td>
-                @Html.ActionLink("Unpublish", "Unpublish") |
+                @Html.ActionLink("Publish", "PublishOrUnpublish", new { id = item.IDContent })
             </td>
         }
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.IDContent })
+            @Html.ActionLink("Details", "Details", new { id = item.IDContent })
         </td>
     </tr>
     }
@@ -48,17 +48,16 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model.Contents)
+    @foreach (var item in Model.FavCons)
     {
-        @*IF IsFavourite == true*@
-        if (1==0)
+        if (ViewBag.userId == item.ApplicationUserId)
         {
         <tr>
             <td>
-                @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
+                @item.Content.ApplicationUser.UserName.Substring(0, @item.Content.ApplicationUser.UserName.IndexOf('@'))'s Content
             </td>
             <td>
-                @Html.ActionLink("Add to favourite", "")
+                @Html.ActionLink("Delete from favourite", "DeleteFav", new { id = item.IDFavCon })
                 @Html.ActionLink("Details", "Details", new { id = item.IDContent })
             </td>
         </tr>
@@ -77,16 +76,15 @@
     </tr>
     @foreach (var item in Model.Contents)
     {
-        @*IF IsFavourite == false*@
-        if (@item.isPublic == true && @item.isOfficial == false)
+        if (ViewBag.userId != item.ApplicationUserId && @item.isPublic == true && @item.isOfficial == false)
         {
         <tr>
             <td>
                 @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
             </td>
             <td>
-                @Html.ActionLink("Add to favourite", "")
-                @Html.ActionLink("Details", "Details", new { id=item.IDContent })
+                @Html.ActionLink("Add to favourite", "AddFav", new { id = item.IDContent })
+                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
             </td>
         </tr>
         }
