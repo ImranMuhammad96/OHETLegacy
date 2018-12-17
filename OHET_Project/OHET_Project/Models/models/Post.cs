@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace OHET_Project.Models.models
     [DebuggerStepThrough]
     public class Post
     {
+        public Post()
+        {
+            this.comments = new Collection<Comment>();
+            this.subposts = new Collection<Subpost>();
+        }
+
         [Key]
         public int IDPost { get; set; }
 

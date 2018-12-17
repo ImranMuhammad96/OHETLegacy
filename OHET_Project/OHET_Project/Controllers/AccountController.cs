@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OHET_Project.Models;
+using OHET_Project.Models.models;
 
 namespace OHET_Project.Controllers
 {
@@ -17,6 +18,8 @@ namespace OHET_Project.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private Persistence.DbContext db = new Persistence.DbContext();
 
         public AccountController()
         {
@@ -162,6 +165,17 @@ namespace OHET_Project.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    var c = new Content
+                    {
+                        isOfficial = false,
+                        isPublic = false,
+                        ApplicationUser = db.Users.First(u => u.UserName == user.UserName),
+                        ApplicationUserId = db.Users.First(u => u.UserName == user.UserName).Id
+                    };
+
+                    db.contents.Add(c);
+                    db.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
                 }

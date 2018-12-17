@@ -5,7 +5,7 @@
 }
 
 <h2>Details</h2>
-
+@*
 <div>
     <h4>Content</h4>
     <hr />
@@ -40,3 +40,245 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.IDContent }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+*@
+
+<h2>Classes</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Classes", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+<table class="table">
+    @foreach (var item in Model.classes)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDClass })
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDClass })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDClass }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDClass })
+                    </td>
+                }
+            </tr>
+    }
+</table>
+
+<h2>Rules</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Rules", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+<table class="table">
+    @foreach (var item in Model.rules)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDRule })
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDRule })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDRule }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDRule })
+                    </td>
+                }
+            </tr>
+    }
+
+</table>
+
+<h2>Adventures</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Adventures", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+<table class="table">
+    @foreach (var item in Model.adventures)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDAdventure })
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDAdventure })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDAdventure }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDAdventure })
+                    </td>
+                }
+            </tr>
+    }
+</table>
+
+<h2>Items</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Items", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+<table class="table">
+    @foreach (var item in Model.items)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                @if (@item.Notes.Substring(0, @item.Notes.IndexOf('.')) == @item.Notes.Substring(0, @item.Notes.Length - 1))
+                {
+                    <td>
+                        @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDItem })
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDItem })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDItem }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDItem })
+                    </td>
+                }
+            </tr>
+    }
+</table>
+
+<h2>Spells</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Spells", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+@foreach (var i in Model.spells.Select(c => c.Class.IDClass).Distinct().ToArray())
+{
+    <h2>@Html.DisplayName(Model.spells.Where(a => a.Class.IDClass == i).Select(aa => aa.Class.name).FirstOrDefault())</h2>
+    <table class="table">
+        @foreach (var item in Model.spells)
+        {
+            if (item.IDClass == i)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.conceptLvl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+
+                        @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                        {
+                            <td>
+                                @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDSpell })
+                            </td>
+                        }
+
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.IDSpell })
+                        </td>
+                        @if (!User.Identity.Name.IsEmpty())
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.IDSpell }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.IDSpell })
+                            </td>
+                        }
+                    </tr>
+            }
+        }
+    </table>
+}
+
+<h2>Monsters</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "Monsters", new { area = "" }, new { @class = "navbar-brand" })
+</p>
+<table class="table">
+    @foreach (var item in Model.monsters)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.conceptLvl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDMonster })
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDMonster })
+                </td>
+                @if (!User.Identity.Name.IsEmpty())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDMonster }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDMonster })
+                    </td>
+                }
+            </tr>
+    }
+</table>

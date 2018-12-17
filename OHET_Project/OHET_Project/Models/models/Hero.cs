@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
@@ -13,7 +14,8 @@ namespace OHET_Project.Models.models
     {
         public Hero()
         {
-            this.classes = new HashSet<Class>();
+            //this.classes = new HashSet<Class>();
+            this.classes = new Collection<Class>();
         }
         
         [Key]

@@ -10,7 +10,6 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-
 @foreach (var item in Model) {
     if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
     {
@@ -46,5 +45,4 @@
     </tr>
     }
 }
-
 </table>
