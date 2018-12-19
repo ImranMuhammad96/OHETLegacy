@@ -1,0 +1,81 @@
+﻿@model OHET_Project.Models.models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Email) |
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+
+@foreach (var item in Model.subposts)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Comments
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.comments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            @if (item.ApplicationUserId == ViewBag.userId)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Comments",new { id = @item.IDComment }, new {}) |
+                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = @item.IDComment }, new {})
+                </td>
+            }
+        </tr>
+    }
+    
+    @Html.ActionLink("Create New", "Create", "Comments")
+</table>
+
+    @if (Model.ApplicationUserId == ViewBag.userId)
+    {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.IDPost })
+        </td>
+    }
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<OHET_Project.Models.models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            Comments
+        </th>
+        <th>
+            Read time
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @item.comments.Count
+        </td>
+        <td>
+            @{ 
+                int t = @item.Description.Split(' ').Count() / 200;
+            }
+            @t min
+        </td>
+        @if (@item.ApplicationUserId == ViewBag.userId)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDPost }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDPost })
+            </td>
+        }
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.IDPost })
+        </td>
+    </tr>
+}
+
+</table>

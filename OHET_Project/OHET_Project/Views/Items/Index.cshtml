@@ -1,0 +1,48 @@
+﻿@model IEnumerable<OHET_Project.Models.models.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+@foreach (var item in Model) {
+    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        @if (@item.Notes.Substring(0, @item.Notes.IndexOf('.')) == @item.Notes.Substring(0, @item.Notes.Length - 1))
+        {
+            <td>
+                @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1)
+            </td>
+        }
+        else
+        {
+            <td>
+                @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDItem })
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.IDItem })
+        </td>
+        @if (@item.Content.ApplicationUserId == ViewBag.userId)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDItem }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDItem })
+            </td>
+        }
+    </tr>
+    }
+}
+</table>

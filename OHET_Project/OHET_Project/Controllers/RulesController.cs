@@ -41,7 +41,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Rules/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
@@ -53,11 +53,20 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDRule,title,description,IDContent")] Models.models.Rule rule)
+        public ActionResult Create(Models.models.Rule rule)
         {
             if (ModelState.IsValid)
             {
-                db.rules.Add(rule);
+                var r = new Models.models.Rule
+                {
+                    IDRule = rule.IDRule,
+                    title = rule.title,
+                    description = rule.description,
+                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
+                };
+
+                db.rules.Add(r);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +76,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Rules/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,7 +110,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Rules/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
