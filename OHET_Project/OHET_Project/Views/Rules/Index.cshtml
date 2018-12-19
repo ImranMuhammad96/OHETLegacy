@@ -43,7 +43,7 @@
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.IDRule })
         </td>
-        @if ((@item.Content.ApplicationUserId == ViewBag.userId))
+        @if (@item.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
         {
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IDRule }) |
