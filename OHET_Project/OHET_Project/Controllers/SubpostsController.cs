@@ -41,6 +41,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Subposts/Create
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Create()
         {
             ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
@@ -66,6 +67,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Subposts/Edit/5
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +101,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Subposts/Delete/5
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

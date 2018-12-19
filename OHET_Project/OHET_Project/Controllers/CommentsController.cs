@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
+using System.Web.SessionState;
 
 namespace OHET_Project.Controllers
 {
@@ -41,6 +42,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Comments/Create
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
@@ -57,20 +59,20 @@ namespace OHET_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+                int v=1;
                 var c = new Comment
                 {
-                    IDComment = comment.IDComment,
                     Description = comment.Description,
                     Date = DateTime.Now,
                     ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
                     ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id,
-                    Post = db.posts.First(u => u.IDPost == comment.IDPost),
-                    IDPost = db.posts.First(u => u.IDPost == comment.IDPost).IDPost
+                    Post = db.posts.First(u => u.IDPost == v),
+                    IDPost = db.posts.First(u => u.IDPost == v).IDPost
                 };
 
                 db.comments.Add(c);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = v });
             }
 
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", comment.ApplicationUserId);
@@ -79,6 +81,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,6 +117,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

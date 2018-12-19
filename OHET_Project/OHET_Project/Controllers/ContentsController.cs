@@ -14,12 +14,12 @@ using OHET_Project.Models.ViewModel;
 
 namespace OHET_Project.Controllers
 {
+    [Authorize]
     public class ContentsController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Contents
-        [Authorize]
         public ActionResult Index()
         {
             ViewBag.userId = User.Identity.GetUserId();
@@ -36,7 +36,6 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Contents/Details/5
-        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,7 +58,7 @@ namespace OHET_Project.Controllers
             return View(content);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult PublishOrUnpublish(int? id)
         {
             //ViewBag.contentPublic = true;

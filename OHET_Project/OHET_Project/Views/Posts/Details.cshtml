@@ -48,11 +48,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Description) |
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Email) |
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
-            @if (Model.ApplicationUserId == ViewBag.userId)
+            @if (item.ApplicationUserId == ViewBag.userId)
             {
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Comments",new { id = @item.IDComment }, new {}) |
@@ -61,6 +65,7 @@
             }
         </tr>
     }
+    
     @Html.ActionLink("Create New", "Create", "Comments")
 </table>
 

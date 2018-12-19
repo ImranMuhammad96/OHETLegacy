@@ -58,7 +58,7 @@
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.IDSpell })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (@item.Content.ApplicationUserId == ViewBag.userId)
                 {
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.IDSpell }) |

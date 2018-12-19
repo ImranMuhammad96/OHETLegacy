@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
+using System.Web.SessionState;
 
 namespace OHET_Project.Controllers
 {
@@ -20,14 +21,19 @@ namespace OHET_Project.Controllers
         public ActionResult Index()
         {
             ViewBag.userId = User.Identity.GetUserId();
-
-            var posts = db.posts.Include(p => p.ApplicationUser);
-            return View(posts.ToList());
+            var posts = db.posts.Include(p => p.ApplicationUser).ToList();
+            foreach(var post in posts)
+            {
+                post.comments = db.comments.Where(Id => Id.IDPost == post.IDPost).ToList();
+                post.subposts = db.subposts.Where(Id => Id.IDPost == post.IDPost).ToList();
+            }
+            return View(posts);
         }
 
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.userId = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,10 +43,13 @@ namespace OHET_Project.Controllers
             {
                 return HttpNotFound();
             }
+            post.comments = db.comments.Where(Id => Id.IDPost == post.IDPost).ToList();
+            post.subposts = db.subposts.Where(Id => Id.IDPost == post.IDPost).ToList();
             return View(post);
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Create()
         {
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
@@ -76,6 +85,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,6 +119,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Admin, Editor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
