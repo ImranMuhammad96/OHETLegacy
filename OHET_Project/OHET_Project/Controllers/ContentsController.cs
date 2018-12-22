@@ -52,7 +52,7 @@ namespace OHET_Project.Controllers
             content.rules = db.rules.Where(Id => Id.IDContent == content.IDContent).ToList();
             content.adventures = db.adventures.Where(Id => Id.IDContent == content.IDContent).ToList();
             content.items = db.items.Where(Id => Id.IDContent == content.IDContent).ToList();
-            content.spells = db.spells.Where(Id => Id.IDContent == content.IDContent).ToList();
+            content.spells = db.spells.Where(Id => Id.IDContent == content.IDContent).Include(s => s.Class).Include(s => s.Content).ToList();
             content.monsters = db.monsters.Where(Id => Id.IDContent == content.IDContent).ToList();
 
             return View(content);

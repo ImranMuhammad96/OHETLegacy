@@ -66,7 +66,7 @@ namespace OHET_Project.Controllers
                     conceptLvl = spell.conceptLvl,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent,
-                    Class = spell.Class,
+                    Class = db.classes.First(u => u.IDClass == spell.IDClass),
                     IDClass = spell.IDClass
                 };
 

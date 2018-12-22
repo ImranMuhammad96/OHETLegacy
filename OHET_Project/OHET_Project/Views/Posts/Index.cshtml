@@ -49,7 +49,7 @@
             }
             @t min
         </td>
-        @if (@item.ApplicationUserId == ViewBag.userId)
+        @if (@item.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
         {
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IDPost }) |
