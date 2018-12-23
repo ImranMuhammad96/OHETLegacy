@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ApplicationUsersController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
@@ -38,7 +39,7 @@ namespace OHET_Project.Controllers
             return View(applicationUser);
         }
 
-        public ActionResult Ban(string id)
+        public ActionResult Ban(ApplicationUser user)
         {
             //db.Users.SingleOrDefault(u => u.Id == id).Roles.SingleOrDefault().RoleId = "3";
 
@@ -48,13 +49,66 @@ namespace OHET_Project.Controllers
 
             //db.Roles.SingleOrDefault(r => r.Users.FirstOrDefault(u => u.UserId == id).UserId == id).Id = "3";
             //db.SaveChanges();
-            return RedirectToAction("Index");
+
+            if (ModelState.IsValid)
+            {
+                // THIS LINE IS IMPORTANT
+                var oldUser = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
+                var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+
+                if (oldRoleName != "Banned")
+                {
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, oldRoleName);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "Banned");
+                }
+                db.Entry(user).State = EntityState.Modified;
+
+                return RedirectToAction("Index");
+            }
+            return View(user);
         }
 
-        public ActionResult Unban(string id)
+        public ActionResult Unban(ApplicationUser user)
         {
-            ViewBag.ban = false;
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                // THIS LINE IS IMPORTANT
+                var oldUser = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
+                var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+
+                if (oldRoleName != "User")
+                {
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, oldRoleName);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "User");
+                }
+                db.Entry(user).State = EntityState.Modified;
+
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+
+        public virtual ActionResult ChangeRole(ApplicationUser user, string role)
+        {
+            if (ModelState.IsValid)
+            {
+                // THIS LINE IS IMPORTANT
+                var oldUser = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
+                var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+
+                if (oldRoleName != role)
+                {
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, oldRoleName);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, role);
+                }
+                db.Entry(user).State = EntityState.Modified;
+
+                return RedirectToAction("Index");
+            }
+            return View(user);
         }
 
         // GET: ApplicationUsers/Create

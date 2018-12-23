@@ -21,12 +21,14 @@
         @if (@item.Roles.SingleOrDefault().RoleId == "3")
         {
             <td>
+                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
                 @Html.ActionLink("Unban", "Unban", new { id = item.Id })
             </td>
         }
         else
         {
             <td>
+                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
                 @Html.ActionLink("Ban", "Ban", new { id = item.Id })
             </td>
         }
