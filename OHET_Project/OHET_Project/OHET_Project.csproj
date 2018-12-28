@@ -168,6 +168,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AbilitiesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdventuresController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
@@ -209,6 +210,10 @@
     <Compile Include="Migrations\201812031443322_Item2.cs" />
     <Compile Include="Migrations\201812031443322_Item2.Designer.cs">
       <DependentUpon>201812031443322_Item2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812261441567_ClassFix.cs" />
+    <Compile Include="Migrations\201812261441567_ClassFix.Designer.cs">
+      <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -388,6 +393,12 @@
     <Content Include="Views\ApplicationUsers\Details.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />
     <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\ChangeRole.cshtml" />
+    <Content Include="Views\Abilities\Create.cshtml" />
+    <Content Include="Views\Abilities\Delete.cshtml" />
+    <Content Include="Views\Abilities\Details.cshtml" />
+    <Content Include="Views\Abilities\Edit.cshtml" />
+    <Content Include="Views\Abilities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -418,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812031443322_Item2.resx">
       <DependentUpon>201812031443322_Item2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812261441567_ClassFix.resx">
+      <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

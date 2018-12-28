@@ -59,7 +59,7 @@
             @if (item.ApplicationUserId == ViewBag.userId || item.Post.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Comments",new { id = @item.IDComment }, new {}) |
+                    @Html.ActionLink("Edit", "Edit", "Comments", new { id = @item.IDComment }, new {}) |
                     @Html.ActionLink("Delete", "Delete", "Comments", new { id = @item.IDComment }, new {})
                 </td>
             }
@@ -69,7 +69,7 @@
     @Html.ActionLink("Create New", "Create", "Comments")
 </table>
 
-    @if (Model.ApplicationUserId == ViewBag.userId)
+    @if (Model.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
     {
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |

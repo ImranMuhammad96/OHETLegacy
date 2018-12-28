@@ -27,6 +27,8 @@ namespace OHET_Project.Models.models
 
         public string description { get; set; }
 
+        public bool isSpellcaster { get; set; }
+
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }

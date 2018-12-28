@@ -41,15 +41,6 @@ namespace OHET_Project.Controllers
 
         public ActionResult Ban(ApplicationUser user)
         {
-            //db.Users.SingleOrDefault(u => u.Id == id).Roles.SingleOrDefault().RoleId = "3";
-
-            //Contact contact = dbContext.Contacts.Single(c => c.Id == 12345);
-            //ContactType contactType = dbContext.ContactType.Single(c => c.Id == 3);
-            //contact.ContactType = contactType;
-
-            //db.Roles.SingleOrDefault(r => r.Users.FirstOrDefault(u => u.UserId == id).UserId == id).Id = "3";
-            //db.SaveChanges();
-
             if (ModelState.IsValid)
             {
                 // THIS LINE IS IMPORTANT
@@ -90,6 +81,23 @@ namespace OHET_Project.Controllers
             return View(user);
         }
 
+        public ActionResult ChangeRole(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            ViewBag.Roles = new SelectList(db.Roles, "Name", "Name");
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public virtual ActionResult ChangeRole(ApplicationUser user, string role)
         {
             if (ModelState.IsValid)

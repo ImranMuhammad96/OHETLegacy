@@ -8,77 +8,72 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
-using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
-    public class ClassesController : Controller
+    public class AbilitiesController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
 
-        // GET: Classes
+        // GET: Abilities
         public ActionResult Index()
         {
-            ViewBag.userId = User.Identity.GetUserId();
-
-            var classes = db.classes.Include(c => c.Content);
-            return View(classes.ToList());
+            var abilities = db.abilities.Include(a => a.Class);
+            return View(abilities.ToList());
         }
 
-        // GET: Classes/Details/5
+        // GET: Abilities/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            var userId = User.Identity.GetUserId();
-            @class.Content = db.contents.Where(Id => Id.ApplicationUserId == userId).SingleOrDefault();
-            ViewBag.userId = userId;
-            if (@class == null)
+            Ability ability = db.abilities.Find(id);
+            if (ability == null)
             {
                 return HttpNotFound();
             }
-            return View(@class);
+            return View(ability);
         }
 
-        // GET: Classes/Create
+        // GET: Abilities/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
+            ViewBag.IDclass = id;
             return View();
         }
 
-        // POST: Classes/Create
+        // POST: Abilities/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Class @class)
+        public ActionResult Create(Ability ability)
         {
             if (ModelState.IsValid)
             {
-                var c = new Class
+                var a = new Ability
                 {
-                    IDClass = @class.IDClass,
-                    name = @class.name,
-                    description = @class.description,
-                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
-                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
+                    IDAbility = ability.IDAbility,
+                    description = ability.description,
+                    conceptLvl = ability.conceptLvl,
+                    Class = db.classes.First(u => u.IDClass == ability.IDClass),
+                    IDClass = ability.IDClass
                 };
 
-                db.classes.Add(c);
+                db.abilities.Add(a);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", ability.IDClass);
+            return View(ability);
         }
 
-        // GET: Classes/Edit/5
+        // GET: Abilities/Edit/5
         [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Edit(int? id)
         {
@@ -86,33 +81,33 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            if (@class == null)
+            Ability ability = db.abilities.Find(id);
+            if (ability == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", ability.IDClass);
+            return View(ability);
         }
 
-        // POST: Classes/Edit/5
+        // POST: Abilities/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDClass,name,description,IDContent")] Class @class)
+        public ActionResult Edit([Bind(Include = "IDAbility,description,conceptLvl,IDClass")] Ability ability)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@class).State = EntityState.Modified;
+                db.Entry(ability).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", ability.IDClass);
+            return View(ability);
         }
 
-        // GET: Classes/Delete/5
+        // GET: Abilities/Delete/5
         [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Delete(int? id)
         {
@@ -120,21 +115,21 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            if (@class == null)
+            Ability ability = db.abilities.Find(id);
+            if (ability == null)
             {
                 return HttpNotFound();
             }
-            return View(@class);
+            return View(ability);
         }
 
-        // POST: Classes/Delete/5
+        // POST: Abilities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Class @class = db.classes.Find(id);
-            db.classes.Remove(@class);
+            Ability ability = db.abilities.Find(id);
+            db.abilities.Remove(ability);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
