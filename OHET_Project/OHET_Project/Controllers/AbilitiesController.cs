@@ -42,7 +42,7 @@ namespace OHET_Project.Controllers
         public ActionResult Create(int? id)
         {
             //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
-            ViewBag.IDclass = id;
+            ViewBag.IDClass = id;
             return View();
         }
 
@@ -51,7 +51,7 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Ability ability)
+        public ActionResult Create(Ability ability, int? id)
         {
             if (ModelState.IsValid)
             {
@@ -60,13 +60,13 @@ namespace OHET_Project.Controllers
                     IDAbility = ability.IDAbility,
                     description = ability.description,
                     conceptLvl = ability.conceptLvl,
-                    Class = db.classes.First(u => u.IDClass == ability.IDClass),
-                    IDClass = ability.IDClass
+                    Class = db.classes.First(u => u.IDClass == id),
+                    IDClass = id
                 };
 
                 db.abilities.Add(a);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Classes", new { id = id });
             }
 
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", ability.IDClass);
@@ -101,7 +101,7 @@ namespace OHET_Project.Controllers
             {
                 db.Entry(ability).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Classes", new { id = ability.IDClass });
             }
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", ability.IDClass);
             return View(ability);
@@ -131,7 +131,7 @@ namespace OHET_Project.Controllers
             Ability ability = db.abilities.Find(id);
             db.abilities.Remove(ability);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Classes", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

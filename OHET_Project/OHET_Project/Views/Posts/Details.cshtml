@@ -37,6 +37,10 @@
     </tr>
 }
 
+<p>
+    @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.IDPost }, new { })
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -65,8 +69,6 @@
             }
         </tr>
     }
-    
-    @Html.ActionLink("Create New", "Create", "Comments")
 </table>
 
     @if (Model.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
