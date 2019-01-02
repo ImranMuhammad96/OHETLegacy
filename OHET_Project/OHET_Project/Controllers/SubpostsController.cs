@@ -42,9 +42,10 @@ namespace OHET_Project.Controllers
 
         // GET: Subposts/Create
         [Authorize(Roles = "Admin, Editor")]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
+            //ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
+            ViewBag.IDPost = id;
             return View();
         }
 
@@ -53,13 +54,27 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDSubpost,Title,Description,OrderNr,IDPost")] Subpost subpost)
+        public ActionResult Create(Subpost subpost, int? id)
         {
             if (ModelState.IsValid)
             {
-                db.subposts.Add(subpost);
+                var v = 1;
+                if (db.subposts.Any())
+                {
+                    v = db.subposts.OrderByDescending(u => u.OrderNr).FirstOrDefault().OrderNr + 1;
+                }
+                var s = new Subpost
+                {
+                    Title = subpost.Title,
+                    Description = subpost.Description,
+                    OrderNr = v,
+                    Post = db.posts.First(u => u.IDPost == id),
+                    IDPost = id
+                };
+
+                db.subposts.Add(s);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = id });
             }
 
             ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", subpost.IDPost);
@@ -94,7 +109,7 @@ namespace OHET_Project.Controllers
             {
                 db.Entry(subpost).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = subpost.IDPost });
             }
             ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", subpost.IDPost);
             return View(subpost);
@@ -124,7 +139,7 @@ namespace OHET_Project.Controllers
             Subpost subpost = db.subposts.Find(id);
             db.subposts.Remove(subpost);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Posts", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

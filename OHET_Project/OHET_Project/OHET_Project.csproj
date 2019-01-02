@@ -215,6 +215,14 @@
     <Compile Include="Migrations\201812261441567_ClassFix.Designer.cs">
       <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812291412026_PostFix.cs" />
+    <Compile Include="Migrations\201812291412026_PostFix.Designer.cs">
+      <DependentUpon>201812291412026_PostFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812311319087_CascadeOnDelete.cs" />
+    <Compile Include="Migrations\201812311319087_CascadeOnDelete.Designer.cs">
+      <DependentUpon>201812311319087_CascadeOnDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -432,6 +440,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812261441567_ClassFix.resx">
       <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812291412026_PostFix.resx">
+      <DependentUpon>201812291412026_PostFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812311319087_CascadeOnDelete.resx">
+      <DependentUpon>201812311319087_CascadeOnDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

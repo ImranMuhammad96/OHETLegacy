@@ -44,8 +44,9 @@ namespace OHET_Project.Controllers
         [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
-            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
+            //ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name");
             return View();
         }
 

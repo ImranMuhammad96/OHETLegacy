@@ -28,6 +28,9 @@ namespace OHET_Project.Models.models
         [Required]
         public DateTime Date { get; set; }
 
+        [Required]
+        public bool isPublic { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual string ApplicationUserId { get; set; }
 

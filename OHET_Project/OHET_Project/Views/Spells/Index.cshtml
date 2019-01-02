@@ -12,7 +12,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@foreach (var i in Model.Select(c => c.Class.IDClass).Distinct().ToArray()) {
+@foreach (var i in Model.Where(x => x.Content.isOfficial==true || x.Content.ApplicationUserId==ViewBag.userId).Select(c => c.Class.IDClass).Distinct().ToArray()) {
     <h2>@Html.DisplayName(Model.Where(a => a.Class.IDClass == i).Select(aa => aa.Class.name).FirstOrDefault())</h2>
     <table class="table">
         @*
@@ -29,7 +29,7 @@
             <th></th>
         </tr>
         *@
-    @foreach (var item in Model) {
+    @foreach (var item in Model.OrderBy(x => x.conceptLvl)) {
         if (item.IDClass == i)
         {
             if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)

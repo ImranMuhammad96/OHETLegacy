@@ -52,6 +52,15 @@ namespace OHET_Project.Persistence
                     cs.ToTable("CH");
                 });
 
+            modelBuilder.Entity<Subpost>()
+            .HasRequired(p => p.Post)
+            .WithMany(p => p.subposts)
+            .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Comment>()
+            .HasRequired(p => p.Post)
+            .WithMany(p => p.comments)
+            .WillCascadeOnDelete(true);
         }
     }
 }
