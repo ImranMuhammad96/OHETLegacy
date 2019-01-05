@@ -12,6 +12,15 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" class="btn btn-default"/>
+        @Html.ActionLink("Clear", "Index")
+    </p>
+}
+
 @foreach (var i in Model.Where(x => x.Content.isOfficial==true || x.Content.ApplicationUserId==ViewBag.userId).Select(c => c.Class.IDClass).Distinct().ToArray()) {
     <h2>@Html.DisplayName(Model.Where(a => a.Class.IDClass == i).Select(aa => aa.Class.name).FirstOrDefault())</h2>
     <table class="table">

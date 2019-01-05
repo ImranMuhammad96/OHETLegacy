@@ -53,8 +53,8 @@
             @if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Comments", new { id = @item.IDSubpost }, new { }) |
-                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = @item.IDSubpost }, new { })
+                    @Html.ActionLink("Edit", "Edit", "Subposts", new { id = @item.IDSubpost }, new { }) |
+                    @Html.ActionLink("Delete", "Delete", "Subposts", new { id = @item.IDSubpost }, new { })
                 </td>
             }
         </tr>

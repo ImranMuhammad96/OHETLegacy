@@ -136,10 +136,16 @@ namespace OHET_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            int? x = db.subposts.Find(id).IDPost;
+            for (int i = db.subposts.OrderByDescending(u => u.OrderNr).FirstOrDefault().OrderNr; i>db.subposts.Find(id).OrderNr; i--)
+            {
+                db.subposts.Where(o => o.OrderNr == i && o.IDPost == x).SingleOrDefault().OrderNr--;
+                db.Entry(db.subposts.Find(db.subposts.Where(o => o.OrderNr == i).SingleOrDefault().IDSubpost)).State = EntityState.Modified;
+            }
             Subpost subpost = db.subposts.Find(id);
             db.subposts.Remove(subpost);
             db.SaveChanges();
-            return RedirectToAction("Details", "Posts", new { id = id });
+            return RedirectToAction("Details", "Posts", new { id = x });
         }
 
         protected override void Dispose(bool disposing)
