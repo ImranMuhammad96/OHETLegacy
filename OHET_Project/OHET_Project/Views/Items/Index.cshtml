@@ -20,7 +20,7 @@
 }
 
 <table class="table">
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(x => x.Name)) {
     if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
     {
     <tr>

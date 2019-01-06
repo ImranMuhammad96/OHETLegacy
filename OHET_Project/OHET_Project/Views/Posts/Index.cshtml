@@ -29,7 +29,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderByDescending(x => x.Date)) {
     if (item.ApplicationUserId == ViewBag.userId || item.isPublic)
     {
     <tr>
