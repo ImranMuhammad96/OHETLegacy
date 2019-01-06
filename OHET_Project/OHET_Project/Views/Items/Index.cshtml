@@ -9,6 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Clear", "Index")
+    </p>
+}
+
 <table class="table">
 @foreach (var item in Model) {
     if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
