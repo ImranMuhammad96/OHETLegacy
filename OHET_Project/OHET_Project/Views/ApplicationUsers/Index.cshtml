@@ -1,0 +1,39 @@
+﻿@model IEnumerable<OHET_Project.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+@foreach (var item in Model) {
+    if (@item.Roles.SingleOrDefault().RoleId != "2")
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        @if (@item.Roles.SingleOrDefault().RoleId == "3")
+        {
+            <td>
+                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
+                @Html.ActionLink("Unban", "Unban", new { id = item.Id })
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
+                @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+            </td>
+        }
+    </tr>
+    }
+}
+
+</table>

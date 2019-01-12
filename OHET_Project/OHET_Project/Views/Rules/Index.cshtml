@@ -22,7 +22,7 @@
     </tr>
     *@
 @foreach (var item in Model) {
-    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.ApplicationUserId == "")
+    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
     {
     <tr>
         <td>
@@ -43,7 +43,7 @@
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.IDRule })
         </td>
-        @if (!User.Identity.Name.IsEmpty())
+        @if (@item.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
         {
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IDRule }) |

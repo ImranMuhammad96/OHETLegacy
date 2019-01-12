@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
@@ -13,7 +14,9 @@ namespace OHET_Project.Models.models
     {
         public Class()
         {
-            this.heroes = new HashSet<Hero>();
+            //this.heroes = new HashSet<Hero>();
+            this.heroes = new Collection<Hero>();
+            this.abilities = new Collection<Ability>();
         }
         
         [Key]
@@ -23,6 +26,8 @@ namespace OHET_Project.Models.models
         public string name { get; set; }
 
         public string description { get; set; }
+
+        public bool isSpellcaster { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
