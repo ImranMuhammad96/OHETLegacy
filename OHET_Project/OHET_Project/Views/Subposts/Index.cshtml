@@ -1,0 +1,51 @@
+﻿@model IEnumerable<OHET_Project.Models.models.Subpost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Post.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderNr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDSubpost }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDSubpost }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDSubpost })
+        </td>
+    </tr>
+}
+
+</table>

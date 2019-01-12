@@ -17,11 +17,16 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Spells
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
 
             var spells = db.spells.Include(s => s.Class).Include(s => s.Content);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                spells = spells.Where(x => x.name.Contains(searchString));
+            }
+
             return View(spells.ToList());
         }
 
@@ -41,11 +46,12 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
-            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
+            //ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name");
             return View();
         }
 
@@ -54,11 +60,23 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDSpell,name,description,conceptLvl,IDContent,IDClass")] Spell spell)
+        public ActionResult Create(Spell spell)
         {
             if (ModelState.IsValid)
             {
-                db.spells.Add(spell);
+                var s = new Spell
+                {
+                    IDSpell = spell.IDSpell,
+                    name = spell.name,
+                    description = spell.description,
+                    conceptLvl = spell.conceptLvl,
+                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent,
+                    Class = db.classes.First(u => u.IDClass == spell.IDClass),
+                    IDClass = spell.IDClass
+                };
+
+                db.spells.Add(s);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -69,7 +87,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,7 +123,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Spells/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

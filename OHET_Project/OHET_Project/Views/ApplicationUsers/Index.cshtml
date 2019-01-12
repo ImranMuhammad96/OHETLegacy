@@ -1,0 +1,69 @@
+﻿@model IEnumerable<OHET_Project.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+    <table class="table">
+        @foreach (var item in Model.OrderBy(x => x.UserName))
+        {
+                if (@item.Id != ViewBag.userId)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    @if (@item.Roles.SingleOrDefault().RoleId == "1")
+                    {
+                        <td>
+                            User
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "2")
+                    {
+                        <td>
+                            Admin
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "3")
+                    {
+                        <td style="color:red;">
+                            Banned
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "4")
+                    {
+                        <td>
+                            Editor
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                </tr>
+                }
+        }
+    </table>

@@ -11,14 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Content.ApplicationUserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content.ApplicationUserId)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.name)
         </dt>
 
@@ -33,10 +25,35 @@
         <dd>
             @Html.DisplayFor(model => model.description)
         </dd>
-
     </dl>
+    @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+    {
+    <p>
+        @Html.ActionLink("Create new ability", "Create", "Abilities", new { id = Model.IDClass }, new { })
+    </p>
+    }
+    <table>
+        @foreach (var item in Model.abilities.OrderBy(x => x.conceptLvl))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.conceptLvl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+                {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Abilities", new { id = item.IDAbility }, new { }) |
+                    @Html.ActionLink("Details", "Details", "Abilities", new { id = item.IDAbility }, new { }) |
+                    @Html.ActionLink("Delete", "Delete", "Abilities", new { id = item.IDAbility }, new { })
+                </td>
+                }
+            </tr>
+        }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDClass }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

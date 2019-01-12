@@ -26,13 +26,16 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Classes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
+            */
+            Class @class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
+            ViewBag.userId = User.Identity.GetUserId();
             if (@class == null)
             {
                 return HttpNotFound();
@@ -41,7 +44,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Classes/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
@@ -53,11 +56,20 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDClass,name,description,IDContent")] Class @class)
+        public ActionResult Create(Class @class)
         {
             if (ModelState.IsValid)
             {
-                db.classes.Add(@class);
+                var c = new Class
+                {
+                    IDClass = @class.IDClass,
+                    name = @class.name,
+                    description = @class.description,
+                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
+                };
+
+                db.classes.Add(c);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +79,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Classes/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,7 +113,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Classes/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

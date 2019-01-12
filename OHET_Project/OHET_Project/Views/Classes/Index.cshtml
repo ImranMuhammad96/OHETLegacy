@@ -21,29 +21,33 @@
         <th></th>
     </tr>
     *@
-@foreach (var item in Model) {
-    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.ApplicationUserId == "")
+@foreach (var item in Model.OrderBy(x => x.name)) {
+    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
-            @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+            @if (@item.description.Split().ToArray().Length <= 20)
             {
                 <td>
-                    @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                    @item.description
                 </td>
             }
             else
             {
                 <td>
-                    @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDClass })
+                    @String.Join(" ", @item.description.Split().Take(20))
+                    @Html.ActionLink("...", "Details", new { id = item.IDClass })
                 </td>
             }
             <td>
+                @Html.DisplayFor(modelItem => item.isSpellcaster)
+            </td>
+            <td>
                 @Html.ActionLink("Details", "Details", new { id = item.IDClass })
             </td>
-            @if (!User.Identity.Name.IsEmpty())
+            @if (@item.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
             {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.IDClass }) |

@@ -1,0 +1,92 @@
+﻿@model OHET_Project.Models.ViewModel.ContentViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            My Content
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model.Contents)
+{
+    if (@item.ApplicationUser.Id == @ViewBag.UserId)
+    {
+    <tr>
+        <td>
+            @ViewBag.UserName's Content
+        </td>
+        @if (@item.isPublic == true)
+        {
+            <td>
+                @Html.ActionLink("Unpublish", "PublishOrUnpublish", new { id = item.IDContent })
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Publish", "PublishOrUnpublish", new { id = item.IDContent })
+            </td>
+        }
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.IDContent })
+        </td>
+    </tr>
+    }
+}
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Favourite Contents
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.FavCons.OrderBy(x => x.ApplicationUser.UserName))
+    {
+        if (ViewBag.userId == item.ApplicationUserId)
+        {
+        <tr>
+            <td>
+                @item.Content.ApplicationUser.UserName.Substring(0, @item.Content.ApplicationUser.UserName.IndexOf('@'))'s Content
+            </td>
+            <td>
+                @Html.ActionLink("Delete from favourite", "DeleteFav", new { id = item.IDFavCon })
+                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
+            </td>
+        </tr>
+        }
+    }
+</table>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Public Contents
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Contents.OrderBy(x => x.ApplicationUser.UserName))
+    {
+        if (ViewBag.userId != item.ApplicationUserId && @item.isPublic == true && @item.isOfficial == false)
+        {
+        <tr>
+            <td>
+                @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
+            </td>
+            <td>
+                @Html.ActionLink("Add to favourite", "AddFav", new { id = item.IDContent })
+                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
+            </td>
+        </tr>
+        }
+    }
+</table>

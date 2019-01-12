@@ -24,14 +24,13 @@
     <nav id="menu">
         @Html.Partial("_LoginPartial")
         <ul class="links">
+            <li>@Html.ActionLink("Admin Panel", "Index", "ApplicationUsers", new { area = "" }, new { @class = "navbar-brand" })</li>
             <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Articles", "Index", "Posts", new { area = "" }, new { @class = "navbar-brand" })</li>
             <li>@Html.ActionLink("My characters", "Index", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
             <li>@Html.ActionLink("Create Character", "Create", "Heroes", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Classes", "Index", "Classes", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Rules", "Index", "Rules", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Adventures", "Index", "Adventures", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Spells", "Index", "Spells", new { area = "" }, new { @class = "navbar-brand" })</li>
-            <li>@Html.ActionLink("Monsters", "Index", "Monsters", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Manage Contents", "Index", "Contents", new { area = "" }, new { @class = "navbar-brand" })</li>
+            <li>@Html.ActionLink("Content", "Content", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
         </ul>
     </nav>
 

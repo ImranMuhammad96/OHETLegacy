@@ -17,11 +17,16 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Adventures
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
 
             var adventures = db.adventures.Include(a => a.Content);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                adventures = adventures.Where(x => x.title.Contains(searchString));
+            }
+
             return View(adventures.ToList());
         }
 
@@ -41,7 +46,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Adventures/Create
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
@@ -53,11 +58,20 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDAdventure,title,description,IDContent")] Adventure adventure)
+        public ActionResult Create(Adventure adventure)
         {
             if (ModelState.IsValid)
             {
-                db.adventures.Add(adventure);
+                var a = new Adventure
+                {
+                    IDAdventure = adventure.IDAdventure,
+                    title = adventure.title,
+                    description = adventure.description,
+                    Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                    IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
+                };
+
+                db.adventures.Add(a);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +81,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Adventures/Edit/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,7 +115,7 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Adventures/Delete/5
-        [Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
