@@ -27,16 +27,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        @if (@item.Notes.Substring(0, @item.Notes.IndexOf('.')) == @item.Notes.Substring(0, @item.Notes.Length - 1))
+        @if (@item.Notes.Split().ToArray().Length <= 20)
         {
             <td>
-                @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1)
+                @item.Notes
             </td>
         }
         else
         {
             <td>
-                @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDItem })
+                @String.Join(" ", @item.Notes.Split().Take(20))
+                @Html.ActionLink("...", "Details", new { id = item.IDItem })
             </td>
         }
         <td>

@@ -13,6 +13,11 @@ namespace OHET_Project.Controllers
             return View();
         }
 
+        public ActionResult Content()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

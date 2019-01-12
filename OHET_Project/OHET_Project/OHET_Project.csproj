@@ -407,6 +407,7 @@
     <Content Include="Views\Abilities\Details.cshtml" />
     <Content Include="Views\Abilities\Edit.cshtml" />
     <Content Include="Views\Abilities\Index.cshtml" />
+    <Content Include="Views\Home\Content.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
