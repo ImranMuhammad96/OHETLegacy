@@ -9,31 +9,61 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
 
-@foreach (var item in Model) {
-    if (@item.Roles.SingleOrDefault().RoleId != "2")
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        @if (@item.Roles.SingleOrDefault().RoleId == "3")
+    <table class="table">
+        @foreach (var item in Model.OrderBy(x => x.UserName))
         {
-            <td>
-                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
-                @Html.ActionLink("Unban", "Unban", new { id = item.Id })
-            </td>
+                if (@item.Id != ViewBag.userId)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    @if (@item.Roles.SingleOrDefault().RoleId == "1")
+                    {
+                        <td>
+                            User
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "2")
+                    {
+                        <td>
+                            Admin
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "3")
+                    {
+                        <td style="color:red;">
+                            Banned
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id })
+                        </td>
+                    }
+                    else if (@item.Roles.SingleOrDefault().RoleId == "4")
+                    {
+                        <td>
+                            Editor
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
+                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
+                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
+                        </td>
+                    }
+                </tr>
+                }
         }
-        else
-        {
-            <td>
-                @Html.ActionLink("Change Role", "ChangeRole", new { id = item.Id }) |
-                @Html.ActionLink("Ban", "Ban", new { id = item.Id })
-            </td>
-        }
-    </tr>
-    }
-}
-
-</table>
+    </table>

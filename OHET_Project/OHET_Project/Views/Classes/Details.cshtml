@@ -33,7 +33,7 @@
     </p>
     }
     <table>
-        @foreach (var item in Model.abilities)
+        @foreach (var item in Model.abilities.OrderBy(x => x.conceptLvl))
         {
             <tr>
                 <td>

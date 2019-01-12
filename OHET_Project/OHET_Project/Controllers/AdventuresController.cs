@@ -17,11 +17,16 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Adventures
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
 
             var adventures = db.adventures.Include(a => a.Content);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                adventures = adventures.Where(x => x.title.Contains(searchString));
+            }
+
             return View(adventures.ToList());
         }
 

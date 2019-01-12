@@ -48,6 +48,29 @@ namespace OHET_Project.Controllers
             return View(post);
         }
 
+        [Authorize(Roles = "Admin, Editor")]
+        public ActionResult PublishOrUnpublish(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = db.posts.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                post.isPublic = !post.isPublic;
+                post.Date = DateTime.Now;
+                db.Entry(post).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(post);
+        }
+
         // GET: Posts/Create
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Create()
@@ -71,6 +94,7 @@ namespace OHET_Project.Controllers
                     Title = post.Title,
                     Description = post.Description,
                     Date = DateTime.Now,
+                    isPublic = false,
                     ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
                     ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id
                 };

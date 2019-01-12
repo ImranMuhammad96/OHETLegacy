@@ -21,6 +21,7 @@ namespace OHET_Project.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
             return View(db.Users.ToList());
         }
 
@@ -43,14 +44,13 @@ namespace OHET_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                // THIS LINE IS IMPORTANT
-                var oldUser = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
-                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
-                var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+                var u = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var uid = u.Roles.SingleOrDefault().RoleId;
+                var role = db.Roles.SingleOrDefault(r => r.Id == uid).Name;
 
-                if (oldRoleName != "Banned")
+                if (role != "Banned")
                 {
-                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, oldRoleName);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, role);
                     Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "Banned");
                 }
                 db.Entry(user).State = EntityState.Modified;
@@ -60,18 +60,17 @@ namespace OHET_Project.Controllers
             return View(user);
         }
 
-        public ActionResult Unban(ApplicationUser user)
+        public ActionResult ChangeToUser(ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
-                // THIS LINE IS IMPORTANT
-                var oldUser = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
-                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
-                var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+                var u = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var uid = u.Roles.SingleOrDefault().RoleId;
+                var role = db.Roles.SingleOrDefault(r => r.Id == uid).Name;
 
-                if (oldRoleName != "User")
+                if (role != "User")
                 {
-                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, oldRoleName);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, role);
                     Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "User");
                 }
                 db.Entry(user).State = EntityState.Modified;
@@ -81,6 +80,46 @@ namespace OHET_Project.Controllers
             return View(user);
         }
 
+        public ActionResult ChangeToEditor(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var u = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var uid = u.Roles.SingleOrDefault().RoleId;
+                var role = db.Roles.SingleOrDefault(r => r.Id == uid).Name;
+
+                if (role != "Editor")
+                {
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, role);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "Editor");
+                }
+                db.Entry(user).State = EntityState.Modified;
+
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+
+        public ActionResult ChangeToAdmin(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var u = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(user.Id);
+                var uid = u.Roles.SingleOrDefault().RoleId;
+                var role = db.Roles.SingleOrDefault(r => r.Id == uid).Name;
+
+                if (role != "Admin")
+                {
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().RemoveFromRole(user.Id, role);
+                    Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "Admin");
+                }
+                db.Entry(user).State = EntityState.Modified;
+
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+        /*
         public ActionResult ChangeRole(string id)
         {
             if (id == null)
@@ -89,6 +128,7 @@ namespace OHET_Project.Controllers
             }
             ApplicationUser applicationUser = db.Users.Find(id);
             ViewBag.Roles = new SelectList(db.Roles, "Name", "Name");
+            ViewBag.AppUser = applicationUser;
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -118,7 +158,7 @@ namespace OHET_Project.Controllers
             }
             return View(user);
         }
-
+        */
         // GET: ApplicationUsers/Create
         public ActionResult Create()
         {

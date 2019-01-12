@@ -17,11 +17,16 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Spells
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
 
             var spells = db.spells.Include(s => s.Class).Include(s => s.Content);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                spells = spells.Where(x => x.name.Contains(searchString));
+            }
+
             return View(spells.ToList());
         }
 
@@ -44,8 +49,9 @@ namespace OHET_Project.Controllers
         [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult Create()
         {
-            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
+            //ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name");
             return View();
         }
 

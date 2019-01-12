@@ -14,28 +14,56 @@
             @Html.DisplayFor(model => model.ApplicationUser.Email) |
             @Html.DisplayFor(model => model.Date)
         </dd>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
     </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+    </table>
 </div>
 
-@foreach (var item in Model.subposts)
+@if (((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin")) && Model.isPublic == false)
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-    </tr>
+    <p>
+        @Html.ActionLink("Add a subpost", "Create", "Subposts", new { id = Model.IDPost }, new { })
+    </p>
 }
+
+<table class="table">
+    @foreach (var item in Model.subposts.OrderBy(x => x.OrderNr))
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Title)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Subposts", new { id = @item.IDSubpost }, new { }) |
+                    @Html.ActionLink("Delete", "Delete", "Subposts", new { id = @item.IDSubpost }, new { })
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.IDPost }, new { })
+</p>
 
 <table class="table">
     <tr>
@@ -44,7 +72,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model.comments)
+    @foreach (var item in Model.comments.OrderBy(x => x.Date))
     {
         <tr>
             <td>
@@ -56,7 +84,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
-            @if (item.ApplicationUserId == ViewBag.userId || item.Post.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+            @if (item.ApplicationUserId == ViewBag.userId || (item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Comments", new { id = @item.IDComment }, new {}) |
@@ -65,11 +93,9 @@
             }
         </tr>
     }
-    
-    @Html.ActionLink("Create New", "Create", "Comments")
 </table>
 
-    @if (Model.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+    @if ((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
     {
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |

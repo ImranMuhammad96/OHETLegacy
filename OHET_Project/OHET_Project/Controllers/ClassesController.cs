@@ -26,16 +26,16 @@ namespace OHET_Project.Controllers
         }
 
         // GET: Classes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            var userId = User.Identity.GetUserId();
-            @class.Content = db.contents.Where(Id => Id.ApplicationUserId == userId).SingleOrDefault();
-            ViewBag.userId = userId;
+            */
+            Class @class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
+            ViewBag.userId = User.Identity.GetUserId();
             if (@class == null)
             {
                 return HttpNotFound();

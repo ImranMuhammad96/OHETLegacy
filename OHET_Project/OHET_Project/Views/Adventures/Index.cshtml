@@ -9,6 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Clear", "Index")
+    </p>
+}
+
 <table class="table">
     @*
     <tr>
@@ -21,23 +31,24 @@
         <th></th>
     </tr>
     *@
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(x => x.title)) {
     if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
     {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.title)
         </td>
-        @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+        @if (@item.description.Split().ToArray().Length <= 20)
         {
             <td>
-                @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                @item.description
             </td>
         }
         else
         {
             <td>
-                @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDAdventure })
+                @String.Join(" ", @item.description.Split().Take(20))
+                @Html.ActionLink("...", "Details", new { id = item.IDAdventure })
             </td>
         }
         <td>

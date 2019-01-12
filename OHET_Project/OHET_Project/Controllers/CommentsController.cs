@@ -43,10 +43,11 @@ namespace OHET_Project.Controllers
 
         // GET: Comments/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
-            ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
+            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
+            //ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title");
+            ViewBag.IDPost = id;
             return View();
         }
 
@@ -55,24 +56,23 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Comment comment)
+        public ActionResult Create(Comment comment, int? id)
         {
             if (ModelState.IsValid)
             {
-                int v=1;
                 var c = new Comment
                 {
                     Description = comment.Description,
                     Date = DateTime.Now,
                     ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
                     ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id,
-                    Post = db.posts.First(u => u.IDPost == v),
-                    IDPost = db.posts.First(u => u.IDPost == v).IDPost
+                    Post = db.posts.First(u => u.IDPost == id),
+                    IDPost = id
                 };
 
                 db.comments.Add(c);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Posts", new { id = v });
+                return RedirectToAction("Details", "Posts", new { id = id });
             }
 
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", comment.ApplicationUserId);
@@ -109,7 +109,7 @@ namespace OHET_Project.Controllers
             {
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = comment.IDPost });
             }
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", comment.ApplicationUserId);
             ViewBag.IDPost = new SelectList(db.posts, "IDPost", "Title", comment.IDPost);
@@ -140,7 +140,7 @@ namespace OHET_Project.Controllers
             Comment comment = db.comments.Find(id);
             db.comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Posts", new { id = id });
         }
 
         protected override void Dispose(bool disposing)
