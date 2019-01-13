@@ -1,0 +1,7 @@
+IDClass;name;description;isSpellcaster;IDContent;Discriminator
+11;Warrior;Fights in the first line or shoots at the enemy from behind the shields of his companions. He strong and not afraid to get his hands dirty (see p. 24).;1;1;Class
+12;Rogue;Easily detects traps, he has contacts among shady individuals and isn?t above backstabbing (see p. 25).;1;1;Class
+13;Barbarian;Lives to crush the enemies, see them driven before him and hear the lamentations of their women (see p. 26).;1;1;Class
+14;Mage;Knows magic, is well-educated, ambitious and searching knowledge. He is connected to local elites and belongs to a specific school of magic (see p. 27).;1;1;Class
+15;Priest;Is a servant devoted to his god, a prophet and a missionary. Wields magic, yet it stems not from his talents, but the blessings that he is given (see p. 28).;1;1;Class
+16;Bard;Funny, chatty and brave poet, able to make people laugh, inspire the party in a fight or sow discord in the enemy?s ranks. Savvy also in politics and court manners (see p. 29).;1;1;Class
