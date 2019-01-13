@@ -14,7 +14,6 @@ namespace OHET_Project.Models.models
     {
         public Class()
         {
-            //this.heroes = new HashSet<Hero>();
             this.heroes = new Collection<Hero>();
             this.abilities = new Collection<Ability>();
         }

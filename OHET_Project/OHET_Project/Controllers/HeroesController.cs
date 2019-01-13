@@ -19,7 +19,6 @@ namespace OHET_Project.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            //var heroes = db.heroes.Include(h => h.Concept).Include(h => h.Content);
             var heroes = db.heroes.Include(h => h.Content);
             return View(heroes.ToList());
         }

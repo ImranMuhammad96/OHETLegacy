@@ -4,29 +4,22 @@
     ViewBag.Title = "Details";
 }
 
+
+<!-- TYTUŁ -->
 <section id="three" class="wrapper style2">
-    <!-- TYTUŁ -->
     <div class="inner">
         <header class="align-center">
             <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
-            <h2>Karta Postaci Użytkownika Anonymous</h2>
+            <h2>Character Sheet</h2>
         </header>
     </div>
 </section>
 <!-- KARTA POSTACI -->
-<!-- uwaga! hard coded, TODO -->
 <section class="container">
     <article class="half">
         <h1>@Html.DisplayFor(m => m.name)</h1>
-        <h2 contenteditable="true">Drow Rogue  Level 3</h2>
-        <p class="detail" style="text-align:center">Medium Humanoid, Assassin, Neutral Evil</p>
-        <div class="tabs">
-            <span class="tab main active"><a href="#abilities">Abilities</a></span>
-            <span class="tab actions"><a href="#actions">Actions</a></span>
-            <span class="tab feats"><a href="#feats">Feats</a></span>
-            <span class="tab bg"><a href="#background">BG</a></span>
-            <span class="tab equip"><a href="#equipment">Equipment</a></span>
-        </div>
+        <h2 contenteditable="true">Drow Rogue Level @Html.DisplayFor(m => m.conceptLvl)</h2>
+        <p class="detail" style="text-align:center">@Html.DisplayFor(m => m.description)</p>
         <div class="content">
             <div class="main-cont cont">
                 <form action="#" method="post" enctype="multipart/form-data">
@@ -49,29 +42,29 @@
                     <div class="stats abilities">
                         <div>
                             <label for="str">STR</label>
-                            <div id="str" class="stat" contenteditable="true">8 (+0)</div>
+                            <div id="str" class="stat" contenteditable="true">@Html.DisplayFor(m => m.StrAttribute)</div>
                         </div>
                         <div>
                             <label for="dex">DEX</label>
-                            <div id="dex" class="stat" contenteditable="true">16 (+3)</div>
+                            <div id="dex" class="stat" contenteditable="true">@Html.DisplayFor(m => m.DexAttribute)</div>
                         </div>
                         <div>
                             <label for="con">CON</label>
-                            <div id="con" class="stat" contenteditable="true">10 (+0)</div>
+                            <div id="con" class="stat" contenteditable="true">@Html.DisplayFor(m => m.ConAttribute)</div>
                         </div>
                     </div>
                     <div class="stats abilities">
                         <div>
                             <label for="int">INT</label>
-                            <div id="int" class="stat" contenteditable="true">13 (+1)</div>
+                            <div id="int" class="stat" contenteditable="true">@Html.DisplayFor(m => m.IntAttribute)</div>
                         </div>
                         <div>
                             <label for="wis">WIS</label>
-                            <div id="wis" class="stat" contenteditable="true">12 (+1)</div>
+                            <div id="wis" class="stat" contenteditable="true">@Html.DisplayFor(m => m.WisAttribute)</div>
                         </div>
                         <div>
                             <label for="cha">CHA</label>
-                            <div id="cha" class="stat" contenteditable="true">16 (+3)</div>
+                            <div id="cha" class="stat" contenteditable="true">@Html.DisplayFor(m => m.ChaAttribute)</div>
                         </div>
                     </div>
                     <hr>
@@ -89,207 +82,8 @@
                             <li><span class="bold">Languages</span> <span contenteditable="true">Common, Elvish, Undercommon, thieves’ cant</span></li>
                         </ul>
                     </div>
-                    <!--
-                                                          <div class="submit-wrap">
-                                                              <input type="submit" value="Save" class="submit">
-                                                          </div>
-                    -->
                 </form>
 
-            </div>
-
-            <div class="actions-cont cont">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <div class="actions">
-                        <h3>Actions</h3>
-                        <p><span class="bold">Attack.</span> You can attack once when you take this action, using the following:</p>
-
-                        <ul>
-                            <li><span class="bold">Shortsword.</span> <span contenteditable="true">Melee Weapon Attack: +5 to hit, reach 5 ft., one target.<br>Hit: 1d6 + 3 piercing damage.</span></li>
-
-                            <li><span class="bold">Dagger.</span><span contenteditable="true"> Melee Weapon Attack: +5 to hit, reach 5 ft., one target. <br>Hit: 1d4 + 3 piercing damage.</span></li>
-
-                            <li><span class="bold">Hand Crossbow.</span> <span contenteditable="true">Ranged Weapon Attack: +5 to hit, range 80/320 ft., one target.<br>Hit: 1d6 + 3 piercing damage.</span></li>
-                            <li><span class="bold">Armor</span> <span contenteditable="true">Light Armor (studded leather)</span></li>
-
-                            <li><span class="bold">Spellcasting</span> <span contenteditable="true">Drow Magic (drow trait).</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="actions">
-                        <h3>Bonus Actions</h3>
-
-                        <ul>
-                            <li><span class="bold">Cunning Action.</span> <span contenteditable="true">Your quick thinking and agility allow you to move and act quickly. You can take a Bonus Action on each of your turns in Combat. This action can be used only to take the Dash, Disengage, or Hide action.</span></li>
-
-                            <li><span class="bold">Two-weapon Fighting.</span><span contenteditable="true">When you take the Attack action with a shortsword in one hand, you can use a bonus action to attack with a dagger in the other hand. You don’t add your ability modifier to the damage of the bonus attack.</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="actions">
-                        <h3>Options</h3>
-
-                        <ul>
-                            <li><span class="bold">Sneak Attack.</span> <span contenteditable="true">Once per turn, you can deal an extra 2d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon. You don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.</span></li>
-
-                            <li><span class="bold">Assassinate. </span><span contenteditable="true">You have advantage on attack rolls against any creature that hasn’t taken a turn in the combat yet. In addition, any hit you score against a creature that is surprised is a critical hit.</span></li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-
-            <div class="feats-cont cont">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <div class="actions">
-                        <h3>Rogue Features</h3>
-
-                        <ul>
-                            <li><span class="bold">Sneak Attack.</span> <span contenteditable="true">Once per turn, you can deal an extra 2d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon. You don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.</span></li>
-
-                            <li><span class="bold">Expertise.</span><span contenteditable="true"> Your proficiency bonus is doubled for any ability check you make using your Perception or Stealth skills.</span></li>
-
-                            <li><span class="bold">Assassinate.</span> <span contenteditable="true">You have advantage on attack rolls against any creature that hasn’t taken a turn in the combat yet. In addition, any hit you score against a creature that is surprised is a critical hit.</span></li>
-
-                        </ul>
-                    </div>
-
-                    <div class="actions">
-                        <h3>Drow Traits</h3>
-
-                        <ul>
-                            <li><span class="bold">Superior Darkvision</span> <span contenteditable="true">You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light.</span></li>
-
-                            <li><span class="bold">Sunlight Sensitivity.</span><span contenteditable="true">You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.</span></li>
-
-                            <li><span class="bold">Fey Ancestry.</span><span contenteditable="true">You have advantage on saving throws against being charmed, and magic can’t put you to sleep.</span></li>
-
-                            <li><span class="bold">Trance.</span><span contenteditable="true">Instead of sleeping, you meditate deeply, remaining semiconscious, for 4 hours a day, gaining the same benefit that a human does from 8 hours of sleep.</span></li>
-
-                            <li><span class="bold">Drow Magic.</span><span contenteditable="true">You know the <a href="https://roll20.net/compendium/dnd5e/Dancing%20Lights#h-Dancing%20Lights" target="_blank">dancing lights</a> cantrip, and you can cast the <a href="https://roll20.net/compendium/dnd5e/Faerie%20Fire#h-Faerie%20Fire" target="_blank">faerie fire</a> spell once per day (save DC 13). Charisma is your spellcasting ability for these spells.</span></li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-
-            <div class="bg-cont cont">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <div class="actions">
-                        <h3>Background <span class="detail">(Charlatan)</span></h3>
-                        <p style="font-style:italic">
-                            “I am in the business of removing
-                            obstacles.”
-                        </p>
-                        <p>
-                            Without divine or arcane magical
-                            ability, your options in the
-                            cutthroat world of drow society were
-                            limited. You either became an expert in
-                            death, or you died young.
-                            After honing your murderous arts in
-                            the Underdark, you made your escape
-                            from the city of your birth to strike out
-                            on your own. Your reputation as a nighinvisible
-                            killer strikes fear into those who
-                            would wrong you. But those who respect
-                            you earn your ready support.
-                        </p>
-
-                        <ul>
-                            <li>
-                                You know what makes people tick, you
-                                can tease out their heart’s desires after a
-                                few minutes of conversation, and with a
-                                few leading questions you can read them
-                                like they were children’s books.
-                                Your favorite scheme is putting on new
-                                identities. Your facility with disguise
-                                makes it easy to insinuate yourself
-                                into any setting, the better to get your
-                                target alone.
-                            </li>
-                            <li>
-                                <span class="bold">False Identity. </span>
-                                <span contenteditable="true">
-                                    You have created
-                                    a second identity that includes
-                                    documentation, established
-                                    acquaintances, and disguises that allow
-                                    you to assume that persona. Additionally,
-                                    you can forge documents including
-                                    official papers and personal letters, as
-                                    long as you have seen an example of the
-                                    kind of document or the handwriting you
-                                    are trying to copy.
-                                </span>
-                            </li>
-
-                            <li>
-                                <span class="bold">Faction. </span>
-                                <span contenteditable="true">
-                                    You are a member of the
-                                    Zhentarim, an organization of welltrained
-                                    mercenaries, savvy rogues, and
-                                    crafty warlocks who seek to expand their
-                                    influence and power.
-                                </span>
-                            </li>
-
-                            <li>
-                                <span class="bold">Personality Trait. </span>
-                                <span contenteditable="true">You lie about almost everything, even when there’s no good reason to.</span>
-                            </li>
-
-                            <li>
-                                <span class="bold">Ideal. </span>
-                                <span contenteditable="true">You are a free spirit—no one tells you what to do.</span>
-                            </li>
-
-                            <li>
-                                <span class="bold">Bond. </span>
-                                <span contenteditable="true">Your mentor, a master drow assassin, is in prison for a murder you committed and you're totally okay with it.</span>
-                            </li>
-
-                            <li>
-                                <span class="bold">Flaw. </span>
-                                <span contenteditable="true">You’re convinced that no one could ever fool you the way you fool others.</span>
-                            </li>
-
-                        </ul>
-                    </div>
-                </form>
-            </div>
-
-            <div class="equip-cont cont">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <div class="actions">
-                        <h3>Rogue Features</h3>
-
-                        <ul>
-                            <li><span class="bold">Sneak Attack.</span> <span contenteditable="true">Once per turn, you can deal an extra 2d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon. You don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.</span></li>
-
-                            <li><span class="bold">Expertise.</span><span contenteditable="true"> Your proficiency bonus is doubled for any ability check you make using your Perception or Stealth skills.</span></li>
-
-                            <li><span class="bold">Assassinate.</span> <span contenteditable="true">You have advantage on attack rolls against any creature that hasn’t taken a turn in the combat yet. In addition, any hit you score against a creature that is surprised is a critical hit.</span></li>
-
-                        </ul>
-                    </div>
-
-                    <div class="actions">
-                        <h3>Drow Traits</h3>
-
-                        <ul>
-                            <li><span class="bold">Superior Darkvision</span> <span contenteditable="true">You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light.</span></li>
-
-                            <li><span class="bold">Sunlight Sensitivity.</span><span contenteditable="true">You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.</span></li>
-
-                            <li><span class="bold">Fey Ancestry.</span><span contenteditable="true">You have advantage on saving throws against being charmed, and magic can’t put you to sleep.</span></li>
-
-                            <li><span class="bold">Trance.</span><span contenteditable="true">Instead of sleeping, you meditate deeply, remaining semiconscious, for 4 hours a day, gaining the same benefit that a human does from 8 hours of sleep.</span></li>
-
-                            <li><span class="bold">Drow Magic.</span><span contenteditable="true">You know the <a href="https://roll20.net/compendium/dnd5e/Dancing%20Lights#h-Dancing%20Lights" target="_blank">dancing lights</a> cantrip, and you can cast the <a href="https://roll20.net/compendium/dnd5e/Faerie%20Fire#h-Faerie%20Fire" target="_blank">faerie fire</a> spell once per day (save DC 13). Charisma is your spellcasting ability for these spells.</span></li>
-                        </ul>
-                    </div>
-                </form>
             </div>
         </div>
     </article>
