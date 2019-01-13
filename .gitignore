@@ -327,3 +327,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+#Own
+OHET_Project/OHET_Project/Web.config
