@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
+            Class
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.description)
         </th>
         <th>
@@ -43,6 +46,9 @@
                 @String.Join(" ", @item.description.Split().Take(20))
             </td>
         }
+        <td>
+            @item.classes.ElementAt(0).name
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.gold)
         </td>

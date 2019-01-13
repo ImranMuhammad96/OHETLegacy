@@ -106,16 +106,21 @@ namespace OHET_Project.Controllers
             ViewBag.WisAttribute = WisAttribute;
             ViewBag.ChaAttribute = ChaAttribute;
 
-            int heroID = SaveNewHero(heroName, description, StrAttribute, DexAttribute, 
+            int heroID = SaveNewHero(classID, heroName, description, StrAttribute, DexAttribute, 
                 ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
 
             return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
 
-        public int SaveNewHero(string _heroName, string _description, 
+        public int SaveNewHero(string _classID, string _heroName, string _description, 
             AttributeLvl _StrAttribute, AttributeLvl _DexAttribute, AttributeLvl _ConAttribute, 
             AttributeLvl _IntAttribute, AttributeLvl _WisAttribute, AttributeLvl _ChaAttribute)
         {
+
+            int idClass = Int32.Parse(_classID);
+            var x = db.classes.Where(p => p.IDClass == idClass).FirstOrDefault();
+
+
             Hero hero = new Hero
             {
                 name = _heroName,
@@ -128,7 +133,8 @@ namespace OHET_Project.Controllers
                 WisAttribute = _WisAttribute,
                 ChaAttribute = _ChaAttribute,
                 gold = 500,
-                exp = 0
+                exp = 0,
+                classes = db.classes.Where(p => p.IDClass == idClass).ToList<Class>()
             };
 
             db.heroes.Add(hero);

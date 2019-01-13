@@ -1,9 +1,24 @@
-﻿@model OHET_Project.Models.models.Hero
+﻿@model OHET_Project.Models.models.Hero 
 
 @{
     ViewBag.Title = "Details";
 }
 
+@{ 
+    var classElement = Model.classes.ElementAt(0);
+    string style = "half0";
+
+    switch (classElement.name)
+    {
+        case "Warrior": style = "half0"; break;
+        case "Rogue": style = "half1"; break;
+        case "Barbarian": style = "half2"; break;
+        case "Mage": style = "half3"; break;
+        case "Priest": style = "half4"; break;
+        case "Bard": style = "half5"; break;
+        default: style = "half6"; break;
+    }
+}
 
 <!-- TYTUŁ -->
 <section id="three" class="wrapper style2">
@@ -16,9 +31,9 @@
 </section>
 <!-- KARTA POSTACI -->
 <section class="container">
-    <article class="half">
+    <article class="@style">
         <h1>@Html.DisplayFor(m => m.name)</h1>
-        <h2 contenteditable="true">Drow Rogue Level @Html.DisplayFor(m => m.conceptLvl)</h2>
+        <h2 contenteditable="true">Drow @classElement.name Level @Html.DisplayFor(m => m.conceptLvl)</h2>
         <p class="detail" style="text-align:center">@Html.DisplayFor(m => m.description)</p>
         <div class="content">
             <div class="main-cont cont">
@@ -87,7 +102,7 @@
             </div>
         </div>
     </article>
-    <div class="half bg"></div>
+    <div class="@style bg"></div>
 </section>
 
 @Scripts_()
@@ -95,7 +110,7 @@
 
 @helper Styles_()
 {
-    <link href="@Url.Content("~/Content/character_sheet.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/character_sheet_01.css")" rel="stylesheet" type="text/css" />
 }
 
 @helper Scripts_()
