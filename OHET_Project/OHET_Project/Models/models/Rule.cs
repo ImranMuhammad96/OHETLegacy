@@ -15,9 +15,11 @@ namespace OHET_Project.Models.models
         public int IDRule { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string title { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string description { get; set; }
 
         [ForeignKey("IDContent")]

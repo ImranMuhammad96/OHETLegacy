@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201901161754552_Image.Designer.cs">
       <DependentUpon>201901161754552_Image.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901162001300_Validation.cs" />
+    <Compile Include="Migrations\201901162001300_Validation.Designer.cs">
+      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -208,14 +212,12 @@
     <Compile Include="Models\models\Comment.cs" />
     <Compile Include="Models\models\Content.cs" />
     <Compile Include="Models\models\FavCon.cs" />
-    <Compile Include="Models\models\Fistcaster.cs" />
     <Compile Include="Models\models\Hero.cs" />
     <Compile Include="Models\models\Item.cs" />
     <Compile Include="Models\models\Monster.cs" />
     <Compile Include="Models\models\Post.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
-    <Compile Include="Models\models\Spellcaster.cs" />
     <Compile Include="Models\models\Subpost.cs" />
     <Compile Include="Models\ViewModel\ContentViewModel.cs" />
     <Compile Include="Persistence\DbContext.cs" />
@@ -404,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901161754552_Image.resx">
       <DependentUpon>201901161754552_Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901162001300_Validation.resx">
+      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

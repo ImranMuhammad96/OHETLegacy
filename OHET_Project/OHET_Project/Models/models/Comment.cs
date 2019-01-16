@@ -13,6 +13,7 @@ namespace OHET_Project.Models.models
         public int IDComment { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string Description { get; set; }
 
         [Required]

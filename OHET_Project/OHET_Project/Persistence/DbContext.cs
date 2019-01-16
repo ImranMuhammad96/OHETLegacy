@@ -27,14 +27,12 @@ namespace OHET_Project.Persistence
         public DbSet<Comment> comments { get; set; }
         public DbSet<Content> contents { get; set; }
         public DbSet<FavCon> favcons { get; set; }
-        public DbSet<Fistcaster> fistcasters { get; set; }
         public DbSet<Hero> heroes { get; set; }
         public DbSet<Item> items { get; set; }
         public DbSet<Monster> monsters { get; set; }
         public DbSet<Post> posts { get; set; }
         public DbSet<Rule> rules { get; set; }
         public DbSet<Spell> spells { get; set; }
-        public DbSet<Spellcaster> spellcasters { get; set; }
         public DbSet<Subpost> subposts { get; set; }
 
 
