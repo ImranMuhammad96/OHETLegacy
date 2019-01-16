@@ -189,17 +189,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901161723308_Ini.cs" />
-    <Compile Include="Migrations\201901161723308_Ini.Designer.cs">
-      <DependentUpon>201901161723308_Ini.cs</DependentUpon>
+    <Compile Include="Migrations\201901162216571_Image.cs" />
+    <Compile Include="Migrations\201901162216571_Image.Designer.cs">
+      <DependentUpon>201901162216571_Image.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901161754552_Image.cs" />
-    <Compile Include="Migrations\201901161754552_Image.Designer.cs">
-      <DependentUpon>201901161754552_Image.cs</DependentUpon>
+    <Compile Include="Migrations\201901162253534_Image2.cs" />
+    <Compile Include="Migrations\201901162253534_Image2.Designer.cs">
+      <DependentUpon>201901162253534_Image2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901162001300_Validation.cs" />
-    <Compile Include="Migrations\201901162001300_Validation.Designer.cs">
-      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
+    <Compile Include="Migrations\201901162338545_Image3.cs" />
+    <Compile Include="Migrations\201901162338545_Image3.Designer.cs">
+      <DependentUpon>201901162338545_Image3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -401,14 +401,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901161723308_Ini.resx">
-      <DependentUpon>201901161723308_Ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901162216571_Image.resx">
+      <DependentUpon>201901162216571_Image.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901161754552_Image.resx">
-      <DependentUpon>201901161754552_Image.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901162253534_Image2.resx">
+      <DependentUpon>201901162253534_Image2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901162001300_Validation.resx">
-      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901162338545_Image3.resx">
+      <DependentUpon>201901162338545_Image3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

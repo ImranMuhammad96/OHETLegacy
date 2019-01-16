@@ -9,6 +9,7 @@
 <div>
     <h4>Post</h4>
     <hr />
+    <img src='@Url.Action("ShowPost", "Image", new { id = Model.IDPost })' />
     <dl class="dl-horizontal">
         <dd>
             @Html.DisplayFor(model => model.ApplicationUser.Email) |
@@ -37,29 +38,30 @@
     </p>
 }
 
-<table class="table">
     @foreach (var item in Model.subposts.OrderBy(x => x.OrderNr))
     {
-        <tr>
-            <th>
-                @Html.DisplayFor(modelItem => item.Title)
-            </th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            @if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
-            {
+        <img src='@Url.Action("ShowSubpost", "Image", new { id = item.IDSubpost })' />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </th>
+                <th></th>
+            </tr>
+            <tr>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Subposts", new { id = @item.IDSubpost }, new { }) |
-                    @Html.ActionLink("Delete", "Delete", "Subposts", new { id = @item.IDSubpost }, new { })
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
-            }
-        </tr>
+                @if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Subposts", new { id = @item.IDSubpost }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Subposts", new { id = @item.IDSubpost }, new { })
+                    </td>
+                }
+            </tr>
+        </table>
     }
-</table>
 
 <p>
     @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.IDPost }, new { })
