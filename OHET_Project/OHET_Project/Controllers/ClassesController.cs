@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
+using System.IO;
+using OHET_Project.BLL;
 
 namespace OHET_Project.Controllers
 {
@@ -36,6 +38,7 @@ namespace OHET_Project.Controllers
             */
             Class @class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
             ViewBag.userId = User.Identity.GetUserId();
+
             if (@class == null)
             {
                 return HttpNotFound();
@@ -56,15 +59,19 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Class @class)
+        public ActionResult Create(Class _class)
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                _class.image = file.ConvertToBytes();
+
                 var c = new Class
                 {
-                    IDClass = @class.IDClass,
-                    name = @class.name,
-                    description = @class.description,
+                    IDClass = _class.IDClass,
+                    name = _class.name,
+                    description = _class.description,
+                    image = _class.image,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
                 };
@@ -74,8 +81,8 @@ namespace OHET_Project.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
+            return View(_class);
         }
 
         // GET: Classes/Edit/5
