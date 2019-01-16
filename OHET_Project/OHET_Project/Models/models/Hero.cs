@@ -22,12 +22,15 @@ namespace OHET_Project.Models.models
         public int IDHero { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string name { get; set; }
 
         [Required]
+        [Range(7, 100)]
         public int conceptLvl { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string description { get; set; }
 
         [Required]

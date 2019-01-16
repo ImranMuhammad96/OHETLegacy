@@ -15,11 +15,14 @@ namespace OHET_Project.Models.models
         public int IDItem { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string Name { get; set; }
 
+        [Range(1, 500000)]
         public int Cost { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string Notes { get; set; }
 
         [ForeignKey("IDContent")]

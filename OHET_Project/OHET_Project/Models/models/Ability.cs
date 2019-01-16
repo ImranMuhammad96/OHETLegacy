@@ -15,9 +15,11 @@ namespace OHET_Project.Models.models
         public int IDAbility { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string description { get; set; }
 
         [Required]
+        [Range(7, 15)]
         public int conceptLvl { get; set; }
 
         [ForeignKey("IDClass")]

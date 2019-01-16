@@ -15,12 +15,15 @@ namespace OHET_Project.Models.models
         public int IDMonster { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string name { get; set; }
 
         [Required]
+        [StringLength(5000)]
         public string description { get; set; }
 
         [Required]
+        [Range(4, 23)]
         public int conceptLvl { get; set; }
 
         [ForeignKey("IDContent")]
