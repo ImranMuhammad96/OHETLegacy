@@ -40,16 +40,6 @@ namespace OHET_Project.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Hero>()
-                .HasMany<Class>(s => s.classes)
-                .WithMany(c => c.heroes)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("HeroRefId");
-                    cs.MapRightKey("ClassRefId");
-                    cs.ToTable("CH");
-                });
-
             modelBuilder.Entity<Subpost>()
             .HasRequired(p => p.Post)
             .WithMany(p => p.subposts)

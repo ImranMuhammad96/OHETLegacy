@@ -19,7 +19,7 @@ namespace OHET_Project.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            var heroes = db.heroes.Include(h => h.Content);
+            var heroes = db.heroes.Include(h => h.Content).Include(u => u.Class);
             return View(heroes.ToList());
         }
 
@@ -134,7 +134,8 @@ namespace OHET_Project.Controllers
                 ChaAttribute = _ChaAttribute,
                 gold = 500,
                 exp = 0,
-                classes = db.classes.Where(p => p.IDClass == idClass).ToList<Class>()
+                Class = db.classes.First(p => p.IDClass == idClass),
+                IDClass = idClass
             };
 
             db.heroes.Add(hero);

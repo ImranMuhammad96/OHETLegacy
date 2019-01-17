@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            Class
+            @Html.DisplayNameFor(model => model.description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            Class
         </th>
         <th>
             @Html.DisplayNameFor(model => model.gold)
@@ -47,7 +47,7 @@
             </td>
         }
         <td>
-            @item.classes.ElementAt(0).name
+            @item.Class.name
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.gold)
