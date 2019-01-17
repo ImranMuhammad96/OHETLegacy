@@ -30,7 +30,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hero hero = db.heroes.Find(id);
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
             if (hero == null)
             {
                 return HttpNotFound();
