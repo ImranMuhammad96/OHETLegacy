@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
+    [Authorize(Roles = "Admin, Editor, User")]
     public class HeroesController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
@@ -19,6 +21,7 @@ namespace OHET_Project.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
+            ViewBag.userId = User.Identity.GetUserId();
             var heroes = db.heroes.Include(h => h.Content).Include(u => u.Class);
             return View(heroes.ToList());
         }
@@ -134,6 +137,8 @@ namespace OHET_Project.Controllers
                 ChaAttribute = _ChaAttribute,
                 gold = 500,
                 exp = 0,
+                Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent,
                 Class = db.classes.First(p => p.IDClass == idClass),
                 IDClass = idClass
             };
