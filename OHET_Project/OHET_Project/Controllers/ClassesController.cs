@@ -19,11 +19,11 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Classes
-        public ActionResult Index()
+        public ActionResult Index(bool isOff)
         {
             ViewBag.userId = User.Identity.GetUserId();
 
-            var classes = db.classes.Include(c => c.Content);
+            var classes = db.classes.Where(x => x.Content.isOfficial == isOff).Include(c => c.Content);
             return View(classes.ToList());
         }
 

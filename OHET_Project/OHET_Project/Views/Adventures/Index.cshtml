@@ -15,7 +15,7 @@
     <p>
         Find by name: @Html.TextBox("SearchString")
         <input type="submit" value="Search" class="btn btn-default" />
-        @Html.ActionLink("Clear", "Index")
+        @Html.ActionLink("Clear", "Index", new { isOff = ViewBag.isOff })
     </p>
 }
 
