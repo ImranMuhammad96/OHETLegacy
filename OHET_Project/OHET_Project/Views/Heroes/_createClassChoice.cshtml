@@ -5,6 +5,8 @@
         <div class="grid-style">
             @foreach (var item in Model)
             {
+                if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial)
+                {
                 <div>
                     <div class="box">
                         <div class="image fit">
@@ -22,6 +24,7 @@
                         </div>
                     </div>
                 </div>
+                }
             }
         </div>
     </div>

@@ -52,7 +52,8 @@ namespace OHET_Project.Controllers
         // GET:
         public ActionResult _createClassChoice()
         {
-            List<Class> classes = db.classes.ToList();
+            ViewBag.userId = User.Identity.GetUserId();
+            List<Class> classes = db.classes.Include(c => c.Content).ToList();
 
             return PartialView("_createClassChoice", classes);
         }
@@ -174,6 +175,8 @@ namespace OHET_Project.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hero hero = db.heroes.Find(id);
+            ViewBag.className = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().name;
+            ViewBag.classAbilities = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().abilities;
             if (hero == null)
             {
                 return HttpNotFound();

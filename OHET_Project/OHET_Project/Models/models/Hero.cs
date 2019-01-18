@@ -53,10 +53,10 @@ namespace OHET_Project.Models.models
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
-        public int? IDContent { get; set; }
+        public int IDContent { get; set; }
 
         [ForeignKey("IDClass")]
         public Class Class { get; set; }
-        public int? IDClass { get; set; }
+        public int IDClass { get; set; }
     }
 }
