@@ -38,19 +38,21 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 
         // GET: Rules/Create
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -89,12 +91,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", rule.IDContent);
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 
@@ -123,11 +126,12 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 

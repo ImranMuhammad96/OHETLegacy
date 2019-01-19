@@ -9,7 +9,7 @@
 <h2>Spells</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { isOff = ViewBag.isOff })
 </p>
 
 @using (Html.BeginForm())

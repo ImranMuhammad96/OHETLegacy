@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { isOff = ViewBag.isOff })
 </p>
 <table class="table">
 @foreach (var item in Model.OrderBy(x => x.name)) {

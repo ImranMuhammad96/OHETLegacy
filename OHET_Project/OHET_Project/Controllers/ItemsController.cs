@@ -38,19 +38,21 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 
         // GET: Items/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -90,12 +92,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", item.IDContent);
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 
@@ -124,11 +127,12 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 

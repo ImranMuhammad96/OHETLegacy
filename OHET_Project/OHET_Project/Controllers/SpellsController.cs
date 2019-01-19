@@ -38,21 +38,23 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 
         // GET: Spells/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
             //ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
             ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -95,13 +97,14 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 
@@ -131,11 +134,12 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 

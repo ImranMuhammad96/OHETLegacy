@@ -22,6 +22,7 @@ namespace OHET_Project.Controllers
         public ActionResult Index(bool isOff)
         {
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = isOff;
 
             var classes = db.classes.Where(x => x.Content.isOfficial == isOff).Include(c => c.Content);
             return View(classes.ToList());
@@ -36,21 +37,23 @@ namespace OHET_Project.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             */
-            Class @class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
+            Class _class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = _class.Content.isOfficial;
 
-            if (@class == null)
+            if (_class == null)
             {
                 return HttpNotFound();
             }
-            return View(@class);
+            return View(_class);
         }
 
         // GET: Classes/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -93,13 +96,14 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            if (@class == null)
+            Class _class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
+            if (_class == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
+            ViewBag.isOff = _class.Content.isOfficial;
+            return View(_class);
         }
 
         // POST: Classes/Edit/5
@@ -107,16 +111,16 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDClass,name,description,IDContent")] Class @class)
+        public ActionResult Edit([Bind(Include = "IDClass,name,description,IDContent")] Class _class)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@class).State = EntityState.Modified;
+                db.Entry(_class).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", @class.IDContent);
-            return View(@class);
+            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
+            return View(_class);
         }
 
         // GET: Classes/Delete/5
@@ -127,12 +131,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class @class = db.classes.Find(id);
-            if (@class == null)
+            Class _class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
+            if (_class == null)
             {
                 return HttpNotFound();
             }
-            return View(@class);
+            ViewBag.isOff = _class.Content.isOfficial;
+            return View(_class);
         }
 
         // POST: Classes/Delete/5
@@ -140,8 +145,8 @@ namespace OHET_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Class @class = db.classes.Find(id);
-            db.classes.Remove(@class);
+            Class _class = db.classes.Find(id);
+            db.classes.Remove(_class);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -38,19 +38,21 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 
         // GET: Monsters/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -90,12 +92,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", monster.IDContent);
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 
@@ -124,11 +127,12 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 

@@ -38,19 +38,21 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Adventure adventure = db.adventures.Find(id);
+            Adventure adventure = db.adventures.Include(c => c.Content).Where(x => x.IDAdventure == id).SingleOrDefault();
             if (adventure == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
 
         // GET: Adventures/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -89,12 +91,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Adventure adventure = db.adventures.Find(id);
+            Adventure adventure = db.adventures.Include(c => c.Content).Where(x => x.IDAdventure == id).SingleOrDefault();
             if (adventure == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);
+            ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
 
@@ -123,11 +126,12 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Adventure adventure = db.adventures.Find(id);
+            Adventure adventure = db.adventures.Include(c => c.Content).Where(x => x.IDAdventure == id).SingleOrDefault();
             if (adventure == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
 
