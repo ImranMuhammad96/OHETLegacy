@@ -43,6 +43,7 @@ namespace OHET_Project.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
@@ -97,6 +98,7 @@ namespace OHET_Project.Controllers
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
@@ -131,6 +133,7 @@ namespace OHET_Project.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }

@@ -50,7 +50,14 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+            @if (Model.Content.ApplicationUserId == ViewBag.userId)
+            {
+                @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
+            }
         </div>
     }
 </div>

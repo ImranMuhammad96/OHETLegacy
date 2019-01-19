@@ -5,74 +5,36 @@
 }
 
 <h2>Details</h2>
-@*
-<div>
-    <h4>Content</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isOfficial)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isOfficial)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isPublic)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isPublic)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDContent }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-*@
 
 <h2>Classes</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Classes", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 <table class="table">
-    @foreach (var item in Model.classes)
+    @foreach (var item in Model.classes.OrderBy(x => x.name))
     {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
-                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                @if (@item.description.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                        @item.description
                     </td>
                 }
                 else
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDClass })
+                        @String.Join(" ", @item.description.Split().Take(20))
+                        @Html.ActionLink("...", "Details", "Classes", new { id = item.IDClass }, new { })
                     </td>
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.IDClass })
+                    @Html.ActionLink("Details", "Details", "Classes", new { id = item.IDClass }, new { })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDClass }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDClass })
+                        @Html.ActionLink("Edit", "Edit", "Classes", new { id = item.IDClass }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Classes", new { id = item.IDClass }, new { })
                     </td>
                 }
             </tr>
@@ -80,9 +42,6 @@
 </table>
 
 <h2>Rules</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Rules", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 <table class="table">
     @foreach (var item in Model.rules)
     {
@@ -90,26 +49,27 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.title)
                 </td>
-                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                @if (@item.description.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                        @item.description
                     </td>
                 }
                 else
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDRule })
+                        @String.Join(" ", @item.description.Split().Take(20))
+                        @Html.ActionLink("...", "Details", "Rules", new { id = item.IDRule }, new { })
                     </td>
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.IDRule })
+                    @Html.ActionLink("Details", "Details", "Rules", new { id = item.IDRule }, new { })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDRule }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDRule })
+                        @Html.ActionLink("Edit", "Edit", "Rules", new { id = item.IDRule }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Rules", new { id = item.IDRule }, new { })
                     </td>
                 }
             </tr>
@@ -118,9 +78,6 @@
 </table>
 
 <h2>Adventures</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Adventures", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 <table class="table">
     @foreach (var item in Model.adventures)
     {
@@ -128,26 +85,27 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.title)
                 </td>
-                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                @if (@item.description.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                        @item.description
                     </td>
                 }
                 else
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDAdventure })
+                        @String.Join(" ", @item.description.Split().Take(20))
+                        @Html.ActionLink("...", "Details", "Adventures", new { id = item.IDAdventure }, new { })
                     </td>
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.IDAdventure })
+                    @Html.ActionLink("Details", "Details", "Adventures", new { id = item.IDAdventure }, new { })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDAdventure }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDAdventure })
+                        @Html.ActionLink("Edit", "Edit", "Adventures", new { id = item.IDAdventure }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Adventures", new { id = item.IDAdventure }, new { })
                     </td>
                 }
             </tr>
@@ -155,9 +113,6 @@
 </table>
 
 <h2>Items</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Items", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 <table class="table">
     @foreach (var item in Model.items)
     {
@@ -165,29 +120,30 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                @if (@item.Notes.Substring(0, @item.Notes.IndexOf('.')) == @item.Notes.Substring(0, @item.Notes.Length - 1))
+                @if (@item.Notes.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1)
+                        @item.Notes
                     </td>
                 }
                 else
                 {
                     <td>
-                        @item.Notes.Substring(0, @item.Notes.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDItem })
+                        @String.Join(" ", @item.Notes.Split().Take(20))
+                        @Html.ActionLink("...", "Details", "Items", new { id = item.IDItem }, new { })
                     </td>
                 }
                 <td>
                     @Html.DisplayFor(modelItem => item.Cost)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.IDItem })
+                    @Html.ActionLink("Details", "Details", "Items", new { id = item.IDItem }, new { })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDItem }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDItem })
+                        @Html.ActionLink("Edit", "Edit", "Items", new { id = item.IDItem }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Items", new { id = item.IDItem }, new { })
                     </td>
                 }
             </tr>
@@ -195,9 +151,6 @@
 </table>
 
 <h2>Spells</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Spells", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 @foreach (var i in Model.spells.Select(c => c.Class.IDClass).Distinct().ToArray())
 {
     <h2>@Html.DisplayName(Model.spells.Where(a => a.Class.IDClass == i).Select(aa => aa.Class.name).FirstOrDefault())</h2>
@@ -214,27 +167,28 @@
                             @Html.DisplayFor(modelItem => item.name)
                         </td>
 
-                        @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                        @if (@item.description.Split().ToArray().Length <= 20)
                         {
                             <td>
-                                @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                                @item.description
                             </td>
                         }
                         else
                         {
                             <td>
-                                @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDSpell })
+                                @String.Join(" ", @item.description.Split().Take(20))
+                                @Html.ActionLink("...", "Details", "Spells", new { id = item.IDSpell }, new { })
                             </td>
                         }
 
                         <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.IDSpell })
+                            @Html.ActionLink("Details", "Details", "Spells", new { id = item.IDSpell }, new { })
                         </td>
-                        @if (!User.Identity.Name.IsEmpty())
+                        @if (User.IsInRole("Admin"))
                         {
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.IDSpell }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.IDSpell })
+                                @Html.ActionLink("Edit", "Edit", "Spells", new { id = item.IDSpell }, new { }) |
+                                @Html.ActionLink("Delete", "Delete", "Spells", new { id = item.IDSpell }, new { })
                             </td>
                         }
                     </tr>
@@ -244,9 +198,6 @@
 }
 
 <h2>Monsters</h2>
-<p>
-    @Html.ActionLink("Create New", "Create", "Monsters", new { area = "" }, new { @class = "navbar-brand" })
-</p>
 <table class="table">
     @foreach (var item in Model.monsters)
     {
@@ -257,26 +208,27 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
-                @if (@item.description.Substring(0, @item.description.IndexOf('.')) == @item.description.Substring(0, @item.description.Length - 1))
+                @if (@item.description.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1)
+                        @item.description
                     </td>
                 }
                 else
                 {
                     <td>
-                        @item.description.Substring(0, @item.description.IndexOf('.') + 1) @Html.ActionLink("...", "Details", new { id = item.IDMonster })
+                        @String.Join(" ", @item.description.Split().Take(20))
+                        @Html.ActionLink("...", "Details", "Monsters", new { id = item.IDMonster }, new { })
                     </td>
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.IDMonster })
+                    @Html.ActionLink("Details", "Details", "Monsters", new { id = item.IDMonster }, new { })
                 </td>
-                @if (!User.Identity.Name.IsEmpty())
+                @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDMonster }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDMonster })
+                        @Html.ActionLink("Edit", "Edit", "Monsters", new { id = item.IDMonster }, new { }) |
+                        @Html.ActionLink("Delete", "Delete", "Monsters", new { id = item.IDMonster }, new { })
                     </td>
                 }
             </tr>

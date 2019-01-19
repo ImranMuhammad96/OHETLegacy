@@ -38,13 +38,12 @@ namespace OHET_Project.Controllers
             }
             */
             Class _class = db.classes.Include(c => c.Content).Where(x => x.IDClass == id).SingleOrDefault();
-            ViewBag.userId = User.Identity.GetUserId();
-            ViewBag.isOff = _class.Content.isOfficial;
-
             if (_class == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = _class.Content.isOfficial;
             return View(_class);
         }
 
@@ -102,6 +101,7 @@ namespace OHET_Project.Controllers
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = _class.Content.isOfficial;
             return View(_class);
         }
@@ -136,6 +136,7 @@ namespace OHET_Project.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = _class.Content.isOfficial;
             return View(_class);
         }

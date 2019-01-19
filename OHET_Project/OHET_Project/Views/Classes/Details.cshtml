@@ -55,6 +55,15 @@
         }
     </table>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff})
-</p>
+@if (Model.Content.ApplicationUserId == ViewBag.userId)
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
+    </p>
+}
