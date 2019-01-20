@@ -79,7 +79,7 @@ namespace OHET_Project.Controllers
 
                 db.items.Add(i);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = i.Content.isOfficial });
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", item.IDContent);

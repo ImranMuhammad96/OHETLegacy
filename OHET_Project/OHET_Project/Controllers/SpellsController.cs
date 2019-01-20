@@ -87,7 +87,7 @@ namespace OHET_Project.Controllers
 
                 db.spells.Add(s);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = s.Content.isOfficial });
             }
 
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);

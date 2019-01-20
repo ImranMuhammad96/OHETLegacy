@@ -77,7 +77,7 @@ namespace OHET_Project.Controllers
 
                 db.adventures.Add(a);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = a.Content.isOfficial });
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);

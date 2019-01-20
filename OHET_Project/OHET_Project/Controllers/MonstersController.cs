@@ -78,7 +78,7 @@ namespace OHET_Project.Controllers
 
                 db.monsters.Add(m);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = m.Content.isOfficial });
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", monster.IDContent);
