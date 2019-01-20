@@ -25,7 +25,7 @@ namespace OHET_Project.Controllers
             var items = db.items.Where(x => x.Content.isOfficial == isOff).Include(i => i.Content);
             if (!String.IsNullOrEmpty(searchString))
             {
-                items = items.Where(x => x.Name.Contains(searchString));
+                items = items.Where(x => x.name.Contains(searchString));
             }
 
             return View(items.ToList());
@@ -69,9 +69,10 @@ namespace OHET_Project.Controllers
                 var i = new Item
                 {
                     IDItem = item.IDItem,
-                    Name = item.Name,
-                    Cost = item.Cost,
-                    Notes = item.Notes,
+                    name = item.name,
+                    conceptLvl = CountWords(item.description),
+                    description = item.description,
+                    cost = item.cost,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
                 };
@@ -148,6 +149,25 @@ namespace OHET_Project.Controllers
             db.items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private int CountWords(string str)
+        {
+            var text = str.Trim();
+            int wordCount = 0, index = 0;
+
+            while (index < text.Length)
+            {
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+
+                wordCount++;
+
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+
+            return wordCount;
         }
 
         protected override void Dispose(bool disposing)

@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201901181837315_HeroClassNotNull.Designer.cs">
       <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.cs" />
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.Designer.cs">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -395,6 +399,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901181837315_HeroClassNotNull.resx">
       <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901201325485_ItemConceptFix.resx">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

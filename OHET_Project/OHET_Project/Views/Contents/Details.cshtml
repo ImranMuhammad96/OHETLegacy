@@ -118,23 +118,23 @@
     {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.name)
                 </td>
-                @if (@item.Notes.Split().ToArray().Length <= 20)
+                @if (@item.description.Split().ToArray().Length <= 20)
                 {
                     <td>
-                        @item.Notes
+                        @item.description
                     </td>
                 }
                 else
                 {
                     <td>
-                        @String.Join(" ", @item.Notes.Split().Take(20))
+                        @String.Join(" ", @item.description.Split().Take(20))
                         @Html.ActionLink("...", "Details", "Items", new { id = item.IDItem }, new { })
                     </td>
                 }
                 <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
+                    @Html.DisplayFor(modelItem => item.cost)
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", "Items", new { id = item.IDItem }, new { })
