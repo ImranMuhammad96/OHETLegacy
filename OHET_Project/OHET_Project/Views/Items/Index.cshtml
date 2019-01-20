@@ -7,7 +7,14 @@
 <section id="three" class="wrapper style2">
     <div class="inner">
         <header class="align-center">
-            <h2>Items</h2>
+            @if (ViewBag.isOff)
+            {
+                <h2>Official Items</h2>
+            }
+            else
+            {
+                <h2>Homebrew Items</h2>
+            }
         </header>
         @using (Html.BeginForm())
         {
