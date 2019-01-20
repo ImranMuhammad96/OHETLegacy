@@ -17,11 +17,12 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Monsters
-        public ActionResult Index(string searchString)
+        public ActionResult Index(bool isOff, string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = isOff;
 
-            var monsters = db.monsters.Include(m => m.Content);
+            var monsters = db.monsters.Where(x => x.Content.isOfficial == isOff).Include(m => m.Content);
             if (!String.IsNullOrEmpty(searchString))
             {
                 monsters = monsters.Where(x => x.name.Contains(searchString));
@@ -37,19 +38,22 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 
         // GET: Monsters/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -89,12 +93,14 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", monster.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 
@@ -123,11 +129,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Monster monster = db.monsters.Find(id);
+            Monster monster = db.monsters.Include(c => c.Content).Where(x => x.IDMonster == id).SingleOrDefault();
             if (monster == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = monster.Content.isOfficial;
             return View(monster);
         }
 

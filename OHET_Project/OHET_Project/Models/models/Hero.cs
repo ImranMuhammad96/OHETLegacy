@@ -12,11 +12,6 @@ namespace OHET_Project.Models.models
     [DebuggerStepThrough]
     public class Hero
     {
-        public Hero()
-        {
-            //this.classes = new HashSet<Class>();
-            this.classes = new Collection<Class>();
-        }
         
         [Key]
         public int IDHero { get; set; }
@@ -26,7 +21,6 @@ namespace OHET_Project.Models.models
         public string name { get; set; }
 
         [Required]
-        [Range(7, 100)]
         public int conceptLvl { get; set; }
 
         [Required]
@@ -59,8 +53,10 @@ namespace OHET_Project.Models.models
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
-        public int? IDContent { get; set; }
+        public int IDContent { get; set; }
 
-        public virtual ICollection<Class> classes { get; set; }
+        [ForeignKey("IDClass")]
+        public Class Class { get; set; }
+        public int IDClass { get; set; }
     }
 }

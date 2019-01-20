@@ -16,14 +16,17 @@ namespace OHET_Project.Models.models
 
         [Required]
         [StringLength(500)]
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        [Range(1, 500000)]
-        public int Cost { get; set; }
+        [Required]
+        public int conceptLvl { get; set; }
 
         [Required]
         [StringLength(5000)]
-        public string Notes { get; set; }
+        public string description { get; set; }
+
+        [Range(1, 500000)]
+        public int cost { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }

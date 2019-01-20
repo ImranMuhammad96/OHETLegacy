@@ -4,70 +4,72 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@using (Html.BeginForm())
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" class="btn btn-default" />
-        @Html.ActionLink("Clear", "Index")
-    </p>
-}
-
-<table class="table">
-    @*
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.conceptLvl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th></th>
-    </tr>
-    *@
-@foreach (var item in Model.OrderBy(x => x.name).OrderBy(y => y.conceptLvl)) {
-    if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.conceptLvl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        @if (@item.description.Split().ToArray().Length <= 20)
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            @if (ViewBag.isOff)
+            {
+                <h2>Official Monsters</h2>
+            }
+            else
+            {
+                <h2>Homebrew Monsters</h2>
+            }
+        </header>
+        @using (Html.BeginForm())
         {
-            <td>
-                @item.description
-            </td>
+            <p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" class="btn btn-default" />
+                <a href="@Url.Action("Index", "Monsters", new { isOff = ViewBag.isOff })" class="button alt">Clear</a>
+            </p>
         }
-        else
-        {
-            <td>
-                @String.Join(" ", @item.description.Split().Take(20))
-                @Html.ActionLink("...", "Details", new { id = item.IDMonster })
-            </td>
-        }
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.IDMonster })
-        </td>
-        @if (@item.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
-        {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDMonster }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDMonster })
-            </td>
-        }
-    </tr>
-    }
-}
-</table>
+        <footer class="align-center">
+            @if (User.IsInRole("User") || User.IsInRole("Editor") || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Create", "Monsters", new { isOff = ViewBag.isOff })" class="button alt">Create Monster</a>
+            }
+        </footer>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.OrderBy(x => x.name).OrderBy(y => y.conceptLvl))
+            {
+                if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial == true)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p>Concept: @item.conceptLvl</p>
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Monsters", new { id = item.IDMonster })" class="button alt">Details</a>
+                                    @if (@item.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Monsters", new { id = item.IDMonster })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Monsters", new { id = item.IDMonster })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

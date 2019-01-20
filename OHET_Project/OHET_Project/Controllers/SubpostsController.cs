@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
+using OHET_Project.BLL;
 
 namespace OHET_Project.Controllers
 {
@@ -63,11 +64,14 @@ namespace OHET_Project.Controllers
                 {
                     v = db.subposts.OrderByDescending(u => u.OrderNr).FirstOrDefault().OrderNr + 1;
                 }
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                subpost.image = file.ConvertToBytes();
                 var s = new Subpost
                 {
                     Title = subpost.Title,
                     Description = subpost.Description,
                     OrderNr = v,
+                    image = subpost.image,
                     Post = db.posts.First(u => u.IDPost == id),
                     IDPost = id
                 };

@@ -33,6 +33,8 @@ namespace OHET_Project.Models.models
         [Required]
         public bool isPublic { get; set; }
 
+        public byte[] image { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual string ApplicationUserId { get; set; }
 

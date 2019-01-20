@@ -17,14 +17,15 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Items
-        public ActionResult Index(string searchString)
+        public ActionResult Index(bool isOff, string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = isOff;
 
-            var items = db.items.Include(i => i.Content);
+            var items = db.items.Where(x => x.Content.isOfficial == isOff).Include(i => i.Content);
             if (!String.IsNullOrEmpty(searchString))
             {
-                items = items.Where(x => x.Name.Contains(searchString));
+                items = items.Where(x => x.name.Contains(searchString));
             }
 
             return View(items.ToList());
@@ -37,19 +38,22 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 
         // GET: Items/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -65,9 +69,10 @@ namespace OHET_Project.Controllers
                 var i = new Item
                 {
                     IDItem = item.IDItem,
-                    Name = item.Name,
-                    Cost = item.Cost,
-                    Notes = item.Notes,
+                    name = item.name,
+                    conceptLvl = CountWords(item.description),
+                    description = item.description,
+                    cost = item.cost,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
                 };
@@ -89,12 +94,14 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", item.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 
@@ -123,11 +130,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item item = db.items.Find(id);
+            Item item = db.items.Include(c => c.Content).Where(x => x.IDItem == id).SingleOrDefault();
             if (item == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = item.Content.isOfficial;
             return View(item);
         }
 
@@ -140,6 +149,25 @@ namespace OHET_Project.Controllers
             db.items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private int CountWords(string str)
+        {
+            var text = str.Trim();
+            int wordCount = 0, index = 0;
+
+            while (index < text.Length)
+            {
+                while (index < text.Length && !char.IsWhiteSpace(text[index]))
+                    index++;
+
+                wordCount++;
+
+                while (index < text.Length && char.IsWhiteSpace(text[index]))
+                    index++;
+            }
+
+            return wordCount;
         }
 
         protected override void Dispose(bool disposing)

@@ -189,17 +189,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901161723308_Ini.cs" />
-    <Compile Include="Migrations\201901161723308_Ini.Designer.cs">
-      <DependentUpon>201901161723308_Ini.cs</DependentUpon>
+    <Compile Include="Migrations\201901181837315_HeroClassNotNull.cs" />
+    <Compile Include="Migrations\201901181837315_HeroClassNotNull.Designer.cs">
+      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901161754552_Image.cs" />
-    <Compile Include="Migrations\201901161754552_Image.Designer.cs">
-      <DependentUpon>201901161754552_Image.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901162001300_Validation.cs" />
-    <Compile Include="Migrations\201901162001300_Validation.Designer.cs">
-      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.cs" />
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.Designer.cs">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -401,14 +397,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901161723308_Ini.resx">
-      <DependentUpon>201901161723308_Ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901181837315_HeroClassNotNull.resx">
+      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901161754552_Image.resx">
-      <DependentUpon>201901161754552_Image.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901162001300_Validation.resx">
-      <DependentUpon>201901162001300_Validation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901201325485_ItemConceptFix.resx">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
