@@ -12,7 +12,7 @@
         <footer class="align-center">
             @if (User.IsInRole("User") || User.IsInRole("Editor") || User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Create", "Classes")" class="button alt">Create Class</a>
+                <a href="@Url.Action("Create", "Classes", new { isOff = ViewBag.isOff })" class="button alt">Create Class</a>
             }
         </footer>
     </div>
