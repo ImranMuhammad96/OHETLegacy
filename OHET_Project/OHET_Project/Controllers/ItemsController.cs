@@ -146,9 +146,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Item item = db.items.Find(id);
+            var isOff = db.items.Where(x => x.IDItem == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.items.Remove(item);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         private int CountWords(string str)

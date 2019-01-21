@@ -145,9 +145,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Monster monster = db.monsters.Find(id);
+            var isOff = db.monsters.Where(x => x.IDMonster == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.monsters.Remove(monster);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

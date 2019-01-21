@@ -144,9 +144,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Adventure adventure = db.adventures.Find(id);
+            var isOff = db.adventures.Where(x => x.IDAdventure == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.adventures.Remove(adventure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

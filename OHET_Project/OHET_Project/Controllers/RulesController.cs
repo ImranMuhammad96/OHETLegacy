@@ -144,9 +144,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Models.models.Rule rule = db.rules.Find(id);
+            var isOff = db.rules.Where(x => x.IDRule == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.rules.Remove(rule);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

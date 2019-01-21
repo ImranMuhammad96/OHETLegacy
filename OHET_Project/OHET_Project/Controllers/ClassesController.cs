@@ -147,9 +147,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Class _class = db.classes.Find(id);
+            var isOff = db.classes.Where(x => x.IDClass == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.classes.Remove(_class);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

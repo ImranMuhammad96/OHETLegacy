@@ -9,7 +9,7 @@
         <div class="inner">
             <header class="align-center">
                 <p class="special"></p>
-                <h2>Item Creation</h2>
+                <h2>Create Item</h2>
             </header>
         </div>
         @using (Html.BeginForm())
@@ -21,13 +21,13 @@
             </div>
             <br />
             <div class="12u$">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control", placeholder = "Cost", type = "text" } })
+                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
             </div>
             <br />
             <div class="12u$">
-                @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control", placeholder = "Cost", type = "text" } })
-                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
 
             <br />
