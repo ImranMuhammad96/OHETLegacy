@@ -4,66 +4,87 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <div class="inner">
+            <header class="align-center">
+                <p class="special"></p>
+                <h2>Class Details</h2>
+            </header>
+        </div>
+        <div class="12u$">
+            Name
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+        </div>
+        <br />
+        <div class="12u$">
+            Description
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control", disabled = "disabled", @rows = 12 })
+        </div>
 
-<div>
-    <h4>Class</h4>
-    <hr />
-    <img src='@Url.Action("ShowClass", "Image", new { id = Model.IDClass })' />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+        <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+        <footer class="align-center">
+            @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Edit", "Classes", new { id = Model.IDClass })" class="button alt">Edit</a>
+                <a href="@Url.Action("Delete", "Classes", new { id = Model.IDClass })" class="button alt">Delete</a>
+            }
+        </footer>
+        <div class="align-center">
+            @if (Model.Content.ApplicationUserId == ViewBag.userId)
+            {
+                @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
+            }
+        </div>
+    </div>
+</section>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Abilities</h2>
+        </header>
+        <footer class="align-center">
+            @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Create", "Abilities", new { id = Model.IDClass })" class="button alt">Create Ability</a>
+            }
+        </footer>
+    </div>
+</section>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-    </dl>
-    @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
-    {
-    <p>
-        @Html.ActionLink("Create new ability", "Create", "Abilities", new { id = Model.IDClass }, new { })
-    </p>
-    }
-    <table>
-        @foreach (var item in Model.abilities.OrderBy(x => x.conceptLvl))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.conceptLvl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
-                {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Abilities", new { id = item.IDAbility }, new { }) |
-                    @Html.ActionLink("Details", "Details", "Abilities", new { id = item.IDAbility }, new { }) |
-                    @Html.ActionLink("Delete", "Delete", "Abilities", new { id = item.IDAbility }, new { })
-                </td>
-                }
-            </tr>
-        }
-    </table>
-</div>
-@if (Model.Content.ApplicationUserId == ViewBag.userId)
-{
-    <p>
-        @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
-    </p>
-}
-else
-{
-    <p>
-        @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
-    </p>
-}
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.abilities.OrderBy(x => x.conceptLvl))
+            {
+                <div>
+                    <div class="box">
+                        <div class="content">
+                            <header class="align-center">
+                                <p>Required Concept Level</p>
+                                <h2>@item.conceptLvl</h2>
+                            </header>
+                            <p class="align-center">
+                                @item.description
+                            </p>
+                            <footer class="align-center">
+                                @if (@item.Class.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("Edit", "Abilities", new { id = item.IDAbility })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Abilities", new { id = item.IDAbility })" class="button alt">Delete</a>
+                                }
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

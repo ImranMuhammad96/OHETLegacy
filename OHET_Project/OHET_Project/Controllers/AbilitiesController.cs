@@ -129,9 +129,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Ability ability = db.abilities.Find(id);
+            var v = db.abilities.Include(c => c.Class).Where(x => x.IDAbility == id).SingleOrDefault().Class.IDClass;
             db.abilities.Remove(ability);
             db.SaveChanges();
-            return RedirectToAction("Details", "Classes", new { id = id });
+            return RedirectToAction("Details", "Classes", new { id = v });
         }
 
         protected override void Dispose(bool disposing)
