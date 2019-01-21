@@ -1,7 +1,9 @@
 ﻿@model OHET_Project.Models.models.Hero
 @using OHET_Project.Models.models
 
-@using (Html.BeginForm("_createAttributesDataResult", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName, description = ViewBag.description }))
+@using (Html.BeginForm("_createAttributesDataResult", "Heroes", new { classID = ViewBag.classID,
+    heroName = ViewBag.heroName, description = ViewBag.description,
+    background = ViewBag.background, appearance = ViewBag.appearance, character = ViewBag.character }))
 {
 
 <div class="12u$">

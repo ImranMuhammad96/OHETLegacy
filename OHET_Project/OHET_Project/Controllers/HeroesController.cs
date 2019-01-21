@@ -75,33 +75,44 @@ namespace OHET_Project.Controllers
         }
 
         // ?POST:
-        public ActionResult _createPersonalDataResult(string classID, string heroName, string description)
+        public ActionResult _createPersonalDataResult(string classID, string heroName, string description, string background, string appearance, string character)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             return View("Create");
         }
 
         // GET
-        public ActionResult _createAttributesData(string classID, string heroName, string description)
+        public ActionResult _createAttributesData(string classID, string heroName, string description, string background, string appearance, string character)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             return PartialView();
         }
 
         // ?POST:
         public ActionResult _createAttributesDataResult(string classID, string heroName, string description,
+            string background, string appearance, string character,
             AttributeLvl StrAttribute, AttributeLvl DexAttribute, AttributeLvl ConAttribute, AttributeLvl IntAttribute, 
             AttributeLvl WisAttribute, AttributeLvl ChaAttribute)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             ViewBag.StrAttribute = StrAttribute;
             ViewBag.DexAttribute = DexAttribute;
@@ -110,13 +121,14 @@ namespace OHET_Project.Controllers
             ViewBag.WisAttribute = WisAttribute;
             ViewBag.ChaAttribute = ChaAttribute;
 
-            int heroID = SaveNewHero(classID, heroName, description, StrAttribute, DexAttribute, 
-                ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
+            int heroID = SaveNewHero(classID, heroName, description, background, appearance, character,
+                StrAttribute, DexAttribute, ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
 
             return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
 
-        public int SaveNewHero(string _classID, string _heroName, string _description, 
+        public int SaveNewHero(string _classID, string _heroName, string _description,
+            string _background, string _appearance, string _character,
             AttributeLvl _StrAttribute, AttributeLvl _DexAttribute, AttributeLvl _ConAttribute, 
             AttributeLvl _IntAttribute, AttributeLvl _WisAttribute, AttributeLvl _ChaAttribute)
         {
@@ -130,6 +142,9 @@ namespace OHET_Project.Controllers
                 name = _heroName,
                 conceptLvl = CountWords(_description),
                 description = _description,
+                background = _background,
+                appearance = _appearance,
+                character = _character,
                 StrAttribute = _StrAttribute,
                 DexAttribute = _DexAttribute,
                 ConAttribute = _ConAttribute,
