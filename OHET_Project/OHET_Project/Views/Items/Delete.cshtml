@@ -12,29 +12,28 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cost)
+            @Html.DisplayNameFor(model => model.description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cost)
+            @Html.DisplayFor(model => model.description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Notes)
+            @Html.DisplayNameFor(model => model.cost)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Notes)
+            @Html.DisplayFor(model => model.cost)
         </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
@@ -42,7 +41,14 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @if (Model.Content.ApplicationUserId == ViewBag.userId)
+            {
+                @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
+            }
         </div>
     }
 </div>

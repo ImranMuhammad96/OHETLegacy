@@ -10,6 +10,7 @@ using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity;
 using System.Web.SessionState;
+using OHET_Project.BLL;
 
 namespace OHET_Project.Controllers
 {
@@ -88,6 +89,9 @@ namespace OHET_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                post.image = file.ConvertToBytes();
+
                 var p = new Post
                 {
                     IDPost = post.IDPost,
@@ -95,6 +99,7 @@ namespace OHET_Project.Controllers
                     Description = post.Description,
                     Date = DateTime.Now,
                     isPublic = false,
+                    image = post.image,
                     ApplicationUser = db.Users.First(u => u.UserName == User.Identity.Name),
                     ApplicationUserId = db.Users.First(u => u.UserName == User.Identity.Name).Id
                 };

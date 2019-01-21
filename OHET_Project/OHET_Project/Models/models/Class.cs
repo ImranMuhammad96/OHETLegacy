@@ -22,11 +22,15 @@ namespace OHET_Project.Models.models
         public int IDClass { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string name { get; set; }
 
+        [StringLength(5000)]
         public string description { get; set; }
 
         public bool isSpellcaster { get; set; }
+
+        public byte[] image { get; set; }
 
         [ForeignKey("IDContent")]
         public Content Content { get; set; }

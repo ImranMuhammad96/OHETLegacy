@@ -4,83 +4,72 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            Comments
-        </th>
-        <th>
-            Read time
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model.OrderByDescending(x => x.Date)) {
-    if (item.ApplicationUserId == ViewBag.userId || item.isPublic)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @item.comments.Count
-        </td>
-        <td>
-            @{ 
-                int t = @item.Description.Split(' ').Count();
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Articles</h2>
+        </header>
+        <footer class="align-center">
+            @if(User.IsInRole("Editor") || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Create", "Posts")" class="button alt">Create Article</a>
             }
-                @foreach (var i in item.subposts) {
-                    t = t + i.Description.Split(' ').Count();
+        </footer>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.OrderByDescending(x => x.Date))
+            {
+                if (item.ApplicationUserId == ViewBag.userId || item.isPublic)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="image fit">
+                                <img src='@Url.Action("ShowPost", "Image", new { id = item.IDPost })' alt='' />
+                            </div>
+                            <div class="content">
+                                <header class="align-center">
+                                    <p>@item.Date.ToString("dd/MM/yyyy") by @item.ApplicationUser.Email.Split('@')[0]</p>
+                                    <h2>@item.Title</h2>
+                                </header>
+                                <p class="align-center">
+                                    @item.comments.Count comments | 
+                                    @{
+                                        int t = @item.Description.Split(' ').Count();
+                                    }
+                                    @foreach (var i in item.subposts)
+                                    {
+                                        t = t + i.Description.Split(' ').Count();
+                                    }
+                                    @{
+                                        t = t / 200;
+                                    }
+                                    @t min
+                                </p>
+                                <footer class="align-center">
+                                    @if (@item.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+                                    {
+                                        if (@item.isPublic == true)
+                                        {
+                                            <a href="@Url.Action("PublishOrUnpublish", "Posts", new { id = item.IDPost })" class="button alt">Unpublish</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("PublishOrUnpublish", "Posts", new { id = item.IDPost })" class="button alt">Publish</a>
+                                        }
+                                        <a href="@Url.Action("Edit", "Posts", new { id = item.IDPost })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Posts", new { id = item.IDPost })" class="button alt">Delete</a>
+                                    }
+                                    <a href="@Url.Action("Details", "Posts", new { id = item.IDPost })" class="button alt">Details</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
                 }
-            @{ 
-                t = t / 200;
             }
-            @t min
-        </td>
-        @if (@item.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
-        {
-            if (@item.isPublic == true)
-            {
-                <td>
-                    @Html.ActionLink("Unpublish", "PublishOrUnpublish", new { id = item.IDPost })
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.ActionLink("Publish", "PublishOrUnpublish", new { id = item.IDPost })
-                </td>
-            }
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDPost }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDPost })
-            </td>
-        }
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.IDPost })
-        </td>
-    </tr>
-    }
-}
-
-</table>
+        </div>
+    </div>
+</section>

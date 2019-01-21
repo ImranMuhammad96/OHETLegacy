@@ -168,6 +168,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\ByteFile.cs" />
     <Compile Include="Controllers\AbilitiesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdventuresController.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Controllers\ContentsController.cs" />
     <Compile Include="Controllers\HeroesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonstersController.cs" />
@@ -187,41 +189,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811261703209_Init.cs" />
-    <Compile Include="Migrations\201811261703209_Init.Designer.cs">
-      <DependentUpon>201811261703209_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201901181837315_HeroClassNotNull.cs" />
+    <Compile Include="Migrations\201901181837315_HeroClassNotNull.Designer.cs">
+      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811262037215_Init2.cs" />
-    <Compile Include="Migrations\201811262037215_Init2.Designer.cs">
-      <DependentUpon>201811262037215_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811281734172_FavCon.cs" />
-    <Compile Include="Migrations\201811281734172_FavCon.Designer.cs">
-      <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811301709288_FavCon2.cs" />
-    <Compile Include="Migrations\201811301709288_FavCon2.Designer.cs">
-      <DependentUpon>201811301709288_FavCon2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812011306591_Item.cs" />
-    <Compile Include="Migrations\201812011306591_Item.Designer.cs">
-      <DependentUpon>201812011306591_Item.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812031443322_Item2.cs" />
-    <Compile Include="Migrations\201812031443322_Item2.Designer.cs">
-      <DependentUpon>201812031443322_Item2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812261441567_ClassFix.cs" />
-    <Compile Include="Migrations\201812261441567_ClassFix.Designer.cs">
-      <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812291412026_PostFix.cs" />
-    <Compile Include="Migrations\201812291412026_PostFix.Designer.cs">
-      <DependentUpon>201812291412026_PostFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812311319087_CascadeOnDelete.cs" />
-    <Compile Include="Migrations\201812311319087_CascadeOnDelete.Designer.cs">
-      <DependentUpon>201812311319087_CascadeOnDelete.cs</DependentUpon>
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.cs" />
+    <Compile Include="Migrations\201901201325485_ItemConceptFix.Designer.cs">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -234,14 +208,12 @@
     <Compile Include="Models\models\Comment.cs" />
     <Compile Include="Models\models\Content.cs" />
     <Compile Include="Models\models\FavCon.cs" />
-    <Compile Include="Models\models\Fistcaster.cs" />
     <Compile Include="Models\models\Hero.cs" />
     <Compile Include="Models\models\Item.cs" />
     <Compile Include="Models\models\Monster.cs" />
     <Compile Include="Models\models\Post.cs" />
     <Compile Include="Models\models\Rule.cs" />
     <Compile Include="Models\models\Spell.cs" />
-    <Compile Include="Models\models\Spellcaster.cs" />
     <Compile Include="Models\models\Subpost.cs" />
     <Compile Include="Models\ViewModel\ContentViewModel.cs" />
     <Compile Include="Persistence\DbContext.cs" />
@@ -255,6 +227,7 @@
     <Content Include="Content\HieloTemplate\font-awesome.min.css" />
     <Content Include="Content\HieloTemplate\main.css" />
     <Content Include="Content\table.css" />
+    <Content Include="Db_Changes\SqlClearTables.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\HieloFonts\fontawesome-webfont.svg" />
@@ -282,6 +255,8 @@
     <Content Include="fonts\HieloFonts\fontawesome-webfont.woff" />
     <Content Include="fonts\HieloFonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\HieloFonts\FontAwesome.otf" />
+    <Content Include="Db_Changes\InsertInto_Classes.csv" />
+    <Content Include="Archives\Archives_Heroes_Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\character-sheet-scripts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -411,6 +386,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -421,32 +397,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811261703209_Init.resx">
-      <DependentUpon>201811261703209_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901181837315_HeroClassNotNull.resx">
+      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811262037215_Init2.resx">
-      <DependentUpon>201811262037215_Init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811281734172_FavCon.resx">
-      <DependentUpon>201811281734172_FavCon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811301709288_FavCon2.resx">
-      <DependentUpon>201811301709288_FavCon2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812011306591_Item.resx">
-      <DependentUpon>201812011306591_Item.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812031443322_Item2.resx">
-      <DependentUpon>201812031443322_Item2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812261441567_ClassFix.resx">
-      <DependentUpon>201812261441567_ClassFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812291412026_PostFix.resx">
-      <DependentUpon>201812291412026_PostFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812311319087_CascadeOnDelete.resx">
-      <DependentUpon>201812311319087_CascadeOnDelete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901201325485_ItemConceptFix.resx">
+      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -21,8 +21,10 @@ namespace OHET_Project.Models.models
         public int IDPost { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string Title { get; set; }
 
+        [StringLength(5000)]
         public string Description { get; set; }
 
         [Required]
@@ -30,6 +32,8 @@ namespace OHET_Project.Models.models
 
         [Required]
         public bool isPublic { get; set; }
+
+        public byte[] image { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual string ApplicationUserId { get; set; }

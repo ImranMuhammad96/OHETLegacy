@@ -17,11 +17,12 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Rules
-        public ActionResult Index(string searchString)
+        public ActionResult Index(bool isOff, string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = isOff;
 
-            var rules = db.rules.Include(r => r.Content);
+            var rules = db.rules.Where(x => x.Content.isOfficial == isOff).Include(r => r.Content);
             if (!String.IsNullOrEmpty(searchString))
             {
                 rules = rules.Where(x => x.title.Contains(searchString));
@@ -37,19 +38,22 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 
         // GET: Rules/Create
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -88,12 +92,14 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", rule.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 
@@ -122,11 +128,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.models.Rule rule = db.rules.Find(id);
+            Models.models.Rule rule = db.rules.Include(c => c.Content).Where(x => x.IDRule == id).SingleOrDefault();
             if (rule == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = rule.Content.isOfficial;
             return View(rule);
         }
 

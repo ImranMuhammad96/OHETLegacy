@@ -4,11 +4,26 @@
     ViewBag.Title = "Delete";
 }
 
+@{
+    string style = "half0";
+
+    switch (Model.Class.name)
+    {
+        case "Warrior": style = "half0"; break;
+        case "Rogue": style = "half1"; break;
+        case "Barbarian": style = "half2"; break;
+        case "Mage": style = "half3"; break;
+        case "Priest": style = "half4"; break;
+        case "Bard": style = "half5"; break;
+        default: style = "half6"; break;
+    }
+}
+
 <section id="three" class="wrapper style2">
     <!-- TYTUŁ -->
     <div class="inner">
         <header class="align-center">
-            <p class="special">Are you sure you want to this amazing piece of imagination?</p>
+            <p class="special">Are you sure you want to delete this amazing piece of imagination?</p>
             <h2>Delete Character Sheet - @Html.DisplayFor(m => m.name)</h2>
         </header>
     </div>
@@ -16,26 +31,25 @@
 
 <div>
     <section class="container">
-        <article class="half">
+        <article class="@style">
             <h1>@Html.DisplayFor(m => m.name)</h1>
-            <h2 contenteditable="true">Drow Rogue Level @Html.DisplayFor(m => m.conceptLvl)</h2>
+            <h2 contenteditable="true">Class: @ViewBag.className | HC: @Model.conceptLvl</h2>
             <p class="detail" style="text-align:center">@Html.DisplayFor(m => m.description)</p>
             <div class="content">
                 <div class="main-cont cont">
                     <form action="#" method="post" enctype="multipart/form-data">
-
                         <div class="stats">
                             <div>
-                                <label for="hitpoints">Hitpoints</label>
-                                <input type="number" id="hitpoints" class="inpt number" value="18">
+                                <label for="armor">DR Armor</label>
+                                <input type="number" id="armor" class="inpt number" value="0">
                             </div>
                             <div>
-                                <label for="armor">Armor Class</label>
-                                <input type="number" name="armor" id="armor" class="inpt number" required="required" placeholder="0" value="15">
+                                <label for="coins">Coins</label>
+                                <input type="number" name="coins" id="coins" class="inpt number" required="required" placeholder="0" value=@Model.gold>
                             </div>
                             <div>
-                                <label for="speed">Speed</label>
-                                <input type="number" name="speed" id="speed" class="inpt number" required="required" placeholder="0" value="30">
+                                <label for="exp">Experience points</label>
+                                <input type="number" name="exp" id="exp" class="inpt number" required="required" placeholder="0" value=@Model.exp>
                             </div>
                         </div>
                         <hr>
@@ -68,26 +82,46 @@
                             </div>
                         </div>
                         <hr>
-
                         <div class="profs">
-                            <h3>Proficiencies <span class="detail">(+2 Proficiency Bonus)</span></h3>
-
+                            <h3>Special Abilities</h3>
                             <ul>
-                                <li><span class="bold">Saving Throws</span> <span contenteditable="true">Dex +5, Int +3</span></li>
-                                <li><span class="bold">Skills</span><span contenteditable="true"> Deception +5, Insight +3, Investigation +3, Perception +5*, Persuasion +5, Sleight of Hand +5, Stealth +7*</span></li>
-                                <li><span class="bold">Tools</span> <span contenteditable="true">disguise kit, poisoner’s kit, thieves’ tools</span></li>
-                                <li><span class="bold">Armor</span> <span contenteditable="true">Light Armor (studded leather)</span></li>
-                                <li><span class="bold">Weapons</span> <span contenteditable="true">simple weapons, hand crossbows, longswords, rapiers, shortswords</span></li>
-                                <li><span class="bold">Senses</span> <span contenteditable="true">passive (Perception) 15</span></li>
-                                <li><span class="bold">Languages</span> <span contenteditable="true">Common, Elvish, Undercommon, thieves’ cant</span></li>
+                                @foreach (var item in ViewBag.classAbilities)
+                                {
+                                    if (Model.conceptLvl >= @item.conceptLvl)
+                                    {
+                                        <li><span class="bold">HC @item.conceptLvl</span> - <span contenteditable="true">@item.description</span></li>
+                                    }
+                                }
                             </ul>
                         </div>
-                    </form>
+                        @*
+                            <div class="profs">
+                                <h3>Proficiencies <span class="detail">(+2 Proficiency Bonus)</span></h3>
+                                <ul>
+                                    <li><span class="bold">Saving Throws</span> <span contenteditable="true">Dex +5, Int +3</span></li>
+                                    <li><span class="bold">Skills</span><span contenteditable="true"> Deception +5, Insight +3, Investigation +3, Perception +5*, Persuasion +5, Sleight of Hand +5, Stealth +7*</span></li>
+                                    <li><span class="bold">Tools</span> <span contenteditable="true">disguise kit, poisoner’s kit, thieves’ tools</span></li>
+                                    <li><span class="bold">Armor</span> <span contenteditable="true">Light Armor (studded leather)</span></li>
+                                    <li><span class="bold">Weapons</span> <span contenteditable="true">simple weapons, hand crossbows, longswords, rapiers, shortswords</span></li>
+                                    <li><span class="bold">Senses</span> <span contenteditable="true">passive (Perception) 15</span></li>
+                                    <li><span class="bold">Languages</span> <span contenteditable="true">Common, Elvish, Undercommon, thieves’ cant</span></li>
+                                </ul>
+                            </div>
+                        *@
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        }
+                    </form>
                 </div>
             </div>
         </article>
-        <div class="half bg"></div>
+        <div class="@style bg"></div>
     </section>
 
     @Scripts_()
@@ -95,21 +129,11 @@
 
     @helper Styles_()
     {
-        <link href="@Url.Content("~/Content/character_sheet.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/character_sheet_01.css")" rel="stylesheet" type="text/css" />
     }
 
     @helper Scripts_()
     {
         <script src="@Url.Content("~/Scripts/character-sheet-scripts.js")"></script>
-    }
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
     }
 </div>

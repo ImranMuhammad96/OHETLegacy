@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            Class
+            @Html.DisplayNameFor(model => model.description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.Class)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.gold)
@@ -30,6 +30,8 @@
     </tr>
 
 @foreach (var item in Model) {
+    if (@item.Content.ApplicationUserId == ViewBag.userId)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.name)
@@ -44,10 +46,11 @@
         {
             <td>
                 @String.Join(" ", @item.description.Split().Take(20))
+                @Html.ActionLink("...", "Details", new { id = item.IDHero })
             </td>
         }
         <td>
-            @item.classes.ElementAt(0).name
+            @item.Class.name
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.gold)
@@ -61,6 +64,7 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.IDHero })
         </td>
     </tr>
+    }
 }
 
 </table>

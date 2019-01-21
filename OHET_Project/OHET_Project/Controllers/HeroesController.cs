@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace OHET_Project.Controllers
 {
+    [Authorize(Roles = "Admin, Editor, User")]
     public class HeroesController : Controller
     {
         private Persistence.DbContext db = new Persistence.DbContext();
@@ -19,7 +21,8 @@ namespace OHET_Project.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            var heroes = db.heroes.Include(h => h.Content);
+            ViewBag.userId = User.Identity.GetUserId();
+            var heroes = db.heroes.Include(h => h.Content).Include(u => u.Class);
             return View(heroes.ToList());
         }
 
@@ -30,7 +33,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hero hero = db.heroes.Find(id);
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
             if (hero == null)
             {
                 return HttpNotFound();
@@ -49,7 +52,8 @@ namespace OHET_Project.Controllers
         // GET:
         public ActionResult _createClassChoice()
         {
-            List<Class> classes = db.classes.ToList();
+            ViewBag.userId = User.Identity.GetUserId();
+            List<Class> classes = db.classes.Include(c => c.Content).ToList();
 
             return PartialView("_createClassChoice", classes);
         }
@@ -134,7 +138,10 @@ namespace OHET_Project.Controllers
                 ChaAttribute = _ChaAttribute,
                 gold = 500,
                 exp = 0,
-                classes = db.classes.Where(p => p.IDClass == idClass).ToList<Class>()
+                Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
+                IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent,
+                Class = db.classes.First(p => p.IDClass == idClass),
+                IDClass = idClass
             };
 
             db.heroes.Add(hero);
@@ -168,6 +175,8 @@ namespace OHET_Project.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Hero hero = db.heroes.Find(id);
+            ViewBag.className = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().name;
+            ViewBag.classAbilities = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().abilities;
             if (hero == null)
             {
                 return HttpNotFound();

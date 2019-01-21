@@ -17,14 +17,20 @@ namespace OHET_Project.Controllers
         private Persistence.DbContext db = new Persistence.DbContext();
 
         // GET: Spells
-        public ActionResult Index(string searchString)
+        public ActionResult Index(bool isOff, int? classID, string searchString)
         {
             ViewBag.userId = User.Identity.GetUserId();
-
-            var spells = db.spells.Include(s => s.Class).Include(s => s.Content);
+            ViewBag.isOff = isOff;
+            var spells = db.spells.Where(x => x.Content.isOfficial == isOff).Include(s => s.Class).Include(s => s.Content);
+            if (classID != null)
+            {
+                spells = spells.Where(x => x.Class.IDClass == classID);
+                ViewBag.classID = classID;
+            }
             if (!String.IsNullOrEmpty(searchString))
             {
                 spells = spells.Where(x => x.name.Contains(searchString));
+                ViewBag.search = searchString;
             }
 
             return View(spells.ToList());
@@ -37,21 +43,24 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 
         // GET: Spells/Create
         [Authorize(Roles = "Admin, Editor, User")]
-        public ActionResult Create()
+        public ActionResult Create(bool isOff)
         {
             //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name");
             //ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
             ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name");
+            ViewBag.isOff = isOff;
             return View();
         }
 
@@ -94,13 +103,15 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 
@@ -130,11 +141,13 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Find(id);
+            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 
