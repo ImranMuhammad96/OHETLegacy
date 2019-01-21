@@ -81,7 +81,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ability ability = db.abilities.Find(id);
+            Ability ability = db.abilities.Include(c => c.Class).Where(x => x.IDAbility == id).SingleOrDefault();
             if (ability == null)
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDAbility,description,conceptLvl,IDClass")] Ability ability)
+        public ActionResult Edit(Ability ability)
         {
             if (ModelState.IsValid)
             {

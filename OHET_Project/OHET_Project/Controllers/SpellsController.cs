@@ -120,13 +120,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDSpell,name,description,conceptLvl,IDContent,IDClass")] Spell spell)
+        public ActionResult Edit(Spell spell)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(spell).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == spell.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);

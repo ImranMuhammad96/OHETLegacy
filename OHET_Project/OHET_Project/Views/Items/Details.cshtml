@@ -37,8 +37,8 @@
         <footer class="align-center">
             @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Edit", "Items", new { id = Model.IDItem }) class="button alt">Edit</a>
-                    <a href="@Url.Action("Delete", "Items", new { id = Model.IDItem }) class="button alt">Delete</a>
+                <a href="@Url.Action("Edit", "Items", new { id = Model.IDItem })" class="button alt">Edit</a>
+                <a href="@Url.Action("Delete", "Items", new { id = Model.IDItem })" class="button alt">Delete</a>
             }
         </footer>
         <div class="align-center">

@@ -108,13 +108,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDRule,title,description,IDContent")] Models.models.Rule rule)
+        public ActionResult Edit(Models.models.Rule rule)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(rule).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == rule.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", rule.IDContent);
             return View(rule);

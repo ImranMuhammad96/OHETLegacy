@@ -12,7 +12,7 @@
                 <h2>Create Ability</h2>
             </header>
         </div>
-        @using (Html.BeginForm("Create", "Abilities", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             <div class="12u$">
@@ -33,7 +33,7 @@
         }
     </div>
     <div class="align-center">
-        @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+        @Html.ActionLink("Back to Class", "Details", "Classes", new { id = ViewBag.IDClass }, new { })
     </div>
 </section>
 
