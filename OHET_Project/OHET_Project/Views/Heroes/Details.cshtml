@@ -98,8 +98,23 @@
             </div>
         </div>
         <div class="profs">
-            <h3>Background Story</h3>
-            <blockquote>@Model.background</blockquote>
+            @if (!string.IsNullOrEmpty(Model.background))
+            {
+                <h3>Background Story</h3>
+                <blockquote>@Model.background</blockquote>
+                <br />
+            }
+            @if (!string.IsNullOrEmpty(Model.appearance))
+            {
+                <h3>Appearance</h3>
+                <blockquote>@Model.appearance</blockquote>
+                <br />
+            }
+            @if (!string.IsNullOrEmpty(Model.character))
+            {
+                <h3>Charcter</h3>
+                <blockquote>@Model.character</blockquote>
+            }
         </div>
     </article>
     <div class="@style bg"></div>
