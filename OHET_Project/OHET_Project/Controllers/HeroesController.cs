@@ -189,9 +189,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hero hero = db.heroes.Find(id);
-            ViewBag.className = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().name;
-            ViewBag.classAbilities = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().abilities;
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
             if (hero == null)
             {
                 return HttpNotFound();

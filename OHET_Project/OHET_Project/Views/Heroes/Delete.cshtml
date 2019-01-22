@@ -33,7 +33,7 @@
     <section class="container">
         <article class="@style">
             <h1>@Html.DisplayFor(m => m.name)</h1>
-            <h2 contenteditable="true">Class: @ViewBag.className | HC: @Model.conceptLvl</h2>
+            <h2 contenteditable="true">Class: @Model.Class.name | HC: @Model.conceptLvl</h2>
             <p class="detail" style="text-align:center">@Html.DisplayFor(m => m.description)</p>
             <div class="content">
                 <div class="main-cont cont">
@@ -85,7 +85,7 @@
                         <div class="profs">
                             <h3>Special Abilities</h3>
                             <ul>
-                                @foreach (var item in ViewBag.classAbilities)
+                                @foreach (var item in Model.Class.abilities)
                                 {
                                     if (Model.conceptLvl >= @item.conceptLvl)
                                     {
@@ -94,22 +94,21 @@
                                 }
                             </ul>
                         </div>
-
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-actions no-color">
-                                <input type="submit" value="Delete" class="btn btn-default" /> |
-                                @Html.ActionLink("Back to List", "Index")
-                            </div>
-                        }
                     </form>
                 </div>
             </div>
         </article>
         <div class="@style bg"></div>
     </section>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <center><input type="submit" value="Delete" class="btn btn-default" /></center>
+        </div>
+    }
 
     @Scripts_()
     @Styles_()
