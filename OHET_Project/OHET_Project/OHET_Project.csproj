@@ -197,6 +197,14 @@
     <Compile Include="Migrations\201901201325485_ItemConceptFix.Designer.cs">
       <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901231300494_ClassCascadeOnDelete.cs" />
+    <Compile Include="Migrations\201901231300494_ClassCascadeOnDelete.Designer.cs">
+      <DependentUpon>201901231300494_ClassCascadeOnDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901231434102_OneClassManySpells.cs" />
+    <Compile Include="Migrations\201901231434102_OneClassManySpells.Designer.cs">
+      <DependentUpon>201901231434102_OneClassManySpells.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -402,6 +410,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901201325485_ItemConceptFix.resx">
       <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231300494_ClassCascadeOnDelete.resx">
+      <DependentUpon>201901231300494_ClassCascadeOnDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231434102_OneClassManySpells.resx">
+      <DependentUpon>201901231434102_OneClassManySpells.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

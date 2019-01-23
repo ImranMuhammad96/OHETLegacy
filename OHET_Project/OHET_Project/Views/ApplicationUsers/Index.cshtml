@@ -4,66 +4,94 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-    <table class="table">
-        @foreach (var item in Model.OrderBy(x => x.UserName))
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Admin Panel</h2>
+        </header>
+        @*
+        <p>
+            Find by role:
+            <br />
+            <a href="@Url.Action("Index", "ApplicationUsers", new { searchString = ViewBag.search })" class="button alt">All roles</a>
+            @foreach (var i in Model.OrderBy(o => o.Roles).Select(c => c.Roles).Distinct().ToArray())
+            {
+                <a href="@Url.Action("Index", "Spells", new { role = i, searchString = ViewBag.search})" class="button alt">@Model.Where(x => x.Roles == i).FirstOrDefault().Roles</a>
+            }
+        </p>
+        @using (Html.BeginForm())
         {
+            <p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" class="btn btn-default" />
+                <a href="@Url.Action("Index", "ApplicationUsers", new { role = ViewBag.role })" class="button alt">Clear</a>
+            </p>
+        }
+        *@
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="align-center">
+            @foreach (var item in Model.OrderBy(x => x.UserName))
+            {
                 if (@item.Id != ViewBag.userId)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    @if (@item.Roles.SingleOrDefault().RoleId == "1")
-                    {
-                        <td>
-                            User
-                        </td>
-                        <td>
-                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
-                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
-                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
-                        </td>
-                    }
-                    else if (@item.Roles.SingleOrDefault().RoleId == "2")
-                    {
-                        <td>
-                            Admin
-                        </td>
-                        <td>
-                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
-                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) ||
-                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
-                        </td>
-                    }
-                    else if (@item.Roles.SingleOrDefault().RoleId == "3")
-                    {
-                        <td style="color:red;">
-                            Banned
-                        </td>
-                        <td>
-                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
-                            @Html.ActionLink("Change to Editor", "ChangeToEditor", new { id = item.Id }) |
-                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id })
-                        </td>
-                    }
-                    else if (@item.Roles.SingleOrDefault().RoleId == "4")
-                    {
-                        <td>
-                            Editor
-                        </td>
-                        <td>
-                            @Html.ActionLink("Change to User", "ChangeToUser", new { id = item.Id }) |
-                            @Html.ActionLink("Change to Admin", "ChangeToAdmin", new { id = item.Id }) ||
-                            @Html.ActionLink("Ban", "Ban", new { id = item.Id })
-                        </td>
-                    }
-                </tr>
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    @if (@item.Roles.SingleOrDefault().RoleId == "1")
+                                    {
+                                        <p class="special">User</p>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "2")
+                                    {
+                                        <p class="special">Admin</p>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "3")
+                                    {
+                                        <p class="special">Banned</p>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "4")
+                                    {
+                                        <p class="special">Editor</p>
+                                    }
+                                    <h2>@item.UserName</h2>
+                                </header>
+                                <footer class="align-center">
+                                    @if (@item.Roles.SingleOrDefault().RoleId == "1")
+                                    {
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("ChangeToEditor", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Editor</a>
+                                            <a href="@Url.Action("ChangeToAdmin", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Admin</a>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "2")
+                                    {
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("ChangeToUser", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to User</a>
+                                            <a href="@Url.Action("ChangeToEditor", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Editor</a>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "3")
+                                    {
+                                            <a href="@Url.Action("ChangeToUser", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to User</a>
+                                            <a href="@Url.Action("ChangeToEditor", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Editor</a>
+                                            <a href="@Url.Action("ChangeToAdmin", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Admin</a>
+                                    }
+                                    else if (@item.Roles.SingleOrDefault().RoleId == "4")
+                                    {
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("ChangeToUser", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to User</a>
+                                            <a href="@Url.Action("ChangeToAdmin", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Admin</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
                 }
-        }
-    </table>
+            }
+        </div>
+    </div>
+</section>

@@ -38,5 +38,6 @@ namespace OHET_Project.Models.models
 
         public virtual ICollection<Hero> heroes { get; set; }
         public virtual ICollection<Ability> abilities { get; set; }
+        public virtual ICollection<Spell> spells { get; set; }
     }
 }

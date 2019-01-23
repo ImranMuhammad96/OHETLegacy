@@ -7,6 +7,7 @@
 <section id="three" class="wrapper style2">
     <div class="inner">
         <header class="align-center">
+            <p class="special"></p>
             @if (ViewBag.isOff)
             {
                 <h2>Official Adventures</h2>
@@ -25,10 +26,13 @@
             </p>
         }
         <footer class="align-center">
-            @if (User.IsInRole("User") || User.IsInRole("Editor") || User.IsInRole("Admin"))
+            @if ((User.IsInRole("User") || User.IsInRole("Editor") || User.IsInRole("Admin")) && !ViewBag.isOff)
             {
                 <a href="@Url.Action("Create", "Adventures", new { isOff = ViewBag.isOff })" class="button alt">Create Adventure</a>
             }
+            <br />
+            <br />
+            @Html.ActionLink("Back to Content", "Content", "Home")
         </footer>
     </div>
 </section>
@@ -70,6 +74,9 @@
                     </div>
                 }
             }
+        </div>
+        <div class="align-center">
+            @Html.ActionLink("Back to Content", "Content", "Home")
         </div>
     </div>
 </section>

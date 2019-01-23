@@ -70,13 +70,17 @@ namespace OHET_Project.Controllers
                     IDClass = _class.IDClass,
                     name = _class.name,
                     description = _class.description,
+
+                    isSpellcaster = _class.isSpellcaster,
+                    image = _class.image,
+					
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
                 };
 
                 db.classes.Add(c);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = c.Content.isOfficial});
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
@@ -107,13 +111,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDClass,name,description,IDContent")] Class _class)
+        public ActionResult Edit(Class _class)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(_class).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == _class.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", _class.IDContent);
             return View(_class);
@@ -143,9 +147,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Class _class = db.classes.Find(id);
+            var isOff = db.classes.Where(x => x.IDClass == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.classes.Remove(_class);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

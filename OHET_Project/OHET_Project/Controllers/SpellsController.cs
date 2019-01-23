@@ -43,7 +43,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
+            Spell spell = db.spells.Include(c => c.Content).Include(cc => cc.Class).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
@@ -87,7 +87,7 @@ namespace OHET_Project.Controllers
 
                 db.spells.Add(s);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = s.Content.isOfficial });
             }
 
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
@@ -120,13 +120,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDSpell,name,description,conceptLvl,IDContent,IDClass")] Spell spell)
+        public ActionResult Edit(Spell spell)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(spell).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == spell.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);
@@ -141,7 +141,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
+            Spell spell = db.spells.Include(c => c.Content).Include(cc => cc.Class).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();
@@ -157,9 +157,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Spell spell = db.spells.Find(id);
+            var isOff = db.spells.Where(x => x.IDSpell == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.spells.Remove(spell);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

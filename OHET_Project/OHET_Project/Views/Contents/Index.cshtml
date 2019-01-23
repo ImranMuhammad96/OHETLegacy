@@ -4,89 +4,121 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="align-center">
+            @foreach (var item in Model.Contents)
+            {
+                if (@item.ApplicationUser.Id == @ViewBag.UserId)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    @if (item.isOfficial)
+                                    {
+                                        <p class="special">Official Content</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="special">Homebrew Content</p>
+                                    }
+                                    <h2>My Content</h2>
+                                </header>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Contents", new { id = item.IDContent })" class="button alt">Details</a>
+                                    @if (@item.isPublic == true)
+                                    {
+                                        <a href="@Url.Action("PublishOrUnpublish", "Contents", new { id = item.IDContent })" class="button alt">Unpublish</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("PublishOrUnpublish", "Contents", new { id = item.IDContent })" class="button alt">Publish</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
 
-<table class="table">
-    <tr>
-        <th>
-            My Content
-        </th>
-        <th></th>
-    </tr>
-@foreach (var item in Model.Contents)
+@if (Model.FavCons.Where(x => x.ApplicationUser.Id == @ViewBag.UserId).Any())
 {
-    if (@item.ApplicationUser.Id == @ViewBag.UserId)
-    {
-    <tr>
-        <td>
-            @ViewBag.UserName's Content
-        </td>
-        @if (@item.isPublic == true)
-        {
-            <td>
-                @Html.ActionLink("Unpublish", "PublishOrUnpublish", new { id = item.IDContent })
-            </td>
-        }
-        else
-        {
-            <td>
-                @Html.ActionLink("Publish", "PublishOrUnpublish", new { id = item.IDContent })
-            </td>
-        }
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.IDContent })
-        </td>
-    </tr>
-    }
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Favourite Content</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="align-center">
+            @foreach (var item in Model.FavCons.OrderBy(x => x.ApplicationUser.UserName))
+            {
+                if (@item.ApplicationUser.Id == @ViewBag.UserId)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special">Favourite Content</p>
+                                    <h2>@item.Content.ApplicationUser.Email.Split('@')[0]'s Content</h2>
+                                </header>
+                                <footer class="align-center">
+                                        <a href="@Url.Action("DeleteFav", "Contents", new { id = item.IDFavCon })" class="button alt">Delete from favourite</a>
+                                        <a href="@Url.Action("Details", "Contents", new { id = item.IDContent })" class="button alt">Details</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
 }
-</table>
 
-<table class="table">
-    <tr>
-        <th>
-            Favourite Contents
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.FavCons.OrderBy(x => x.ApplicationUser.UserName))
-    {
-        if (ViewBag.userId == item.ApplicationUserId)
-        {
-        <tr>
-            <td>
-                @item.Content.ApplicationUser.UserName.Substring(0, @item.Content.ApplicationUser.UserName.IndexOf('@'))'s Content
-            </td>
-            <td>
-                @Html.ActionLink("Delete from favourite", "DeleteFav", new { id = item.IDFavCon })
-                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
-            </td>
-        </tr>
-        }
-    }
-</table>
+@if (Model.Contents.Where(x => x.ApplicationUser.Id == @ViewBag.userId & x.isOfficial == false & x.isPublic == true).Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Public Content</h2>
+        </header>
+    </div>
+</section>
 
-
-
-<table class="table">
-    <tr>
-        <th>
-            Public Contents
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.Contents.OrderBy(x => x.ApplicationUser.UserName))
-    {
-        if (ViewBag.userId != item.ApplicationUserId && @item.isPublic == true && @item.isOfficial == false)
-        {
-        <tr>
-            <td>
-                @item.ApplicationUser.UserName.Substring(0, @item.ApplicationUser.UserName.IndexOf('@'))'s Content
-            </td>
-            <td>
-                @Html.ActionLink("Add to favourite", "AddFav", new { id = item.IDContent })
-                @Html.ActionLink("Details", "Details", new { id = item.IDContent })
-            </td>
-        </tr>
-        }
-    }
-</table>
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="align-center">
+            @foreach (var item in Model.Contents.OrderBy(x => x.ApplicationUser.UserName))
+            {
+                if (ViewBag.userId != item.ApplicationUserId && @item.isPublic == true && @item.isOfficial == false)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special">Public Content</p>
+                                    <h2>@item.ApplicationUser.Email.Split('@')[0]'s Content</h2>
+                                </header>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("AddFav", "Contents", new { id = item.IDContent })" class="button alt">Add to favourite</a>
+                                    <a href="@Url.Action("Details", "Contents", new { id = item.IDContent })" class="button alt">Details</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+}

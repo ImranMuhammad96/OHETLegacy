@@ -103,7 +103,7 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDComment,Description,Date,ApplicationUserId,IDPost")] Comment comment)
+        public ActionResult Edit(Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -137,10 +137,11 @@ namespace OHET_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            int? x = db.comments.Find(id).IDPost;
             Comment comment = db.comments.Find(id);
             db.comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Details", "Posts", new { id = id });
+            return RedirectToAction("Details", "Posts", new { id = x });
         }
 
         protected override void Dispose(bool disposing)

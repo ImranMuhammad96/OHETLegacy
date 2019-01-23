@@ -77,7 +77,7 @@ namespace OHET_Project.Controllers
 
                 db.adventures.Add(a);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = a.Content.isOfficial });
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);
@@ -108,13 +108,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDAdventure,title,description,IDContent")] Adventure adventure)
+        public ActionResult Edit(Adventure adventure)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(adventure).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == adventure.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);
             return View(adventure);
@@ -144,9 +144,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Adventure adventure = db.adventures.Find(id);
+            var isOff = db.adventures.Where(x => x.IDAdventure == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.adventures.Remove(adventure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)

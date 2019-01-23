@@ -4,55 +4,47 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <div class="inner">
+            <header class="align-center">
+                <p class="special"></p>
+                <h2>Monster Details</h2>
+            </header>
+        </div>
+        <div class="12u$">
+            Name
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+        </div>
+        <br />
+        <div class="12u$">
+            Concept Level
+            <input type="text" value="@Model.conceptLvl" disabled="disabled" />
+        </div>
+        <br />
+        <div class="12u$">
+            Description
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control", disabled = "disabled", @rows = 12 })
+        </div>
 
-<div>
-    <h4>Monster</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content.ApplicationUserId)
-        </dt>
+        <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Content.ApplicationUserId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.conceptLvl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.conceptLvl)
-        </dd>
-
-    </dl>
-</div>
-@if (Model.Content.ApplicationUserId == ViewBag.userId)
-{
-    <p>
-        @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
-    </p>
-}
-else
-{
-    <p>
-        @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
-    </p>
-}
+        <footer class="align-center">
+            @if (Model.Content.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Edit", "Monsters", new { id = Model.IDMonster })" class="button alt">Edit</a>
+                    <a href="@Url.Action("Delete", "Monsters", new { id = Model.IDMonster })" class="button alt">Delete</a>
+            }
+        </footer>
+        <div class="align-center">
+            @if (Model.Content.ApplicationUserId == ViewBag.userId || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
+            }
+        </div>
+    </div>
+</section>

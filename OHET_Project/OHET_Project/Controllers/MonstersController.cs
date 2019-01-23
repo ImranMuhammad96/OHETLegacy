@@ -78,7 +78,7 @@ namespace OHET_Project.Controllers
 
                 db.monsters.Add(m);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = m.Content.isOfficial });
             }
 
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", monster.IDContent);
@@ -109,13 +109,13 @@ namespace OHET_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDMonster,name,description,conceptLvl,IDContent")] Monster monster)
+        public ActionResult Edit(Monster monster)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(monster).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == monster.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", monster.IDContent);
             return View(monster);
@@ -145,9 +145,10 @@ namespace OHET_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Monster monster = db.monsters.Find(id);
+            var isOff = db.monsters.Where(x => x.IDMonster == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.monsters.Remove(monster);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { isOff = isOff });
         }
 
         protected override void Dispose(bool disposing)
