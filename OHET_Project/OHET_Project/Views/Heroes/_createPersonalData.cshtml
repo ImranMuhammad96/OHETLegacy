@@ -5,10 +5,12 @@
 {
     <div class="6u 12u$(xsmall)">
         <input type="text" name="heroName" id="heroName" value="" placeholder="Name" />
+        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
     </div>
     <br />
     <div class="6u 12u$(xsmall)">
-        <input type="text" name="description" id="description", value="" placeholder="Koncepcja" />
+        <input type="text" name="description" id="description" , value="" placeholder="Koncepcja" />
+        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
     </div>
     <br />
     <div class="12u$">
