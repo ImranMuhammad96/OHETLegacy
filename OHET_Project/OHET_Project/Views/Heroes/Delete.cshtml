@@ -40,16 +40,12 @@
                     <form action="#" method="post" enctype="multipart/form-data">
                         <div class="stats">
                             <div>
-                                <label for="armor">DR Armor</label>
-                                <input type="number" id="armor" class="inpt number" value="0">
-                            </div>
-                            <div>
                                 <label for="coins">Coins</label>
-                                <input type="number" name="coins" id="coins" class="inpt number" required="required" placeholder="0" value=@Model.gold>
+                                <center>@Model.gold</center>
                             </div>
                             <div>
                                 <label for="exp">Experience points</label>
-                                <input type="number" name="exp" id="exp" class="inpt number" required="required" placeholder="0" value=@Model.exp>
+                                <center>@Model.exp</center>
                             </div>
                         </div>
                         <hr>

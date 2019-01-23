@@ -236,15 +236,11 @@ namespace OHET_Project.Controllers
         public ActionResult Edit([
             Bind(Include = "IDHero,name,description,background,appearance,character,gold,exp,StrAttribute,DexAttribute,ConAttribute,IntAttribute,WisAttribute,ChaAttribute,IDContent,IDClass,Content,Class")] Hero hero)
         {
-            //Hero oldHero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == _IDHero).FirstOrDefault();
-            //hero.IDContent = oldHero.IDContent;
-            //hero.Class = oldHero.Class;
-            //hero.Content = db.contents.Where(h => h.IDContent == hero.IDContent).FirstOrDefault();
-
+            hero.conceptLvl = CountWords(hero.description);
             db.Entry(hero).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
 
+            return RedirectToAction("Index");
         }
 
         [DebuggerStepThrough]
