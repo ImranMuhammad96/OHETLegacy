@@ -50,6 +50,7 @@
 <section id="three" class="wrapper style2">
     <div class="inner">
         <header class="align-center">
+            <p class="special"></p>
             <h2>Favourite Content</h2>
         </header>
     </div>
@@ -66,8 +67,8 @@
                         <div class="box">
                             <div class="content">
                                 <header class="align-center">
-                                    <p>Favourite Content</p>
-                                    <h2>@item.ApplicationUser.Email.Split('@')[0]'s Content</h2>
+                                    <p class="special">Favourite Content</p>
+                                    <h2>@item.Content.ApplicationUser.Email.Split('@')[0]'s Content</h2>
                                 </header>
                                 <footer class="align-center">
                                         <a href="@Url.Action("DeleteFav", "Contents", new { id = item.IDFavCon })" class="button alt">Delete from favourite</a>
@@ -88,6 +89,7 @@
 <section id="three" class="wrapper style2">
     <div class="inner">
         <header class="align-center">
+            <p class="special"></p>
             <h2>Public Content</h2>
         </header>
     </div>
@@ -104,7 +106,7 @@
                         <div class="box">
                             <div class="content">
                                 <header class="align-center">
-                                    <p>Public Content</p>
+                                    <p class="special">Public Content</p>
                                     <h2>@item.ApplicationUser.Email.Split('@')[0]'s Content</h2>
                                 </header>
                                 <footer class="align-center">

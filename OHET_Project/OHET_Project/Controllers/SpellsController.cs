@@ -43,7 +43,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spell spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == id).SingleOrDefault();
+            Spell spell = db.spells.Include(c => c.Content).Include(cc => cc.Class).Where(x => x.IDSpell == id).SingleOrDefault();
             if (spell == null)
             {
                 return HttpNotFound();

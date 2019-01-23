@@ -16,13 +16,8 @@
         {
             @Html.AntiForgeryToken()
             <div class="12u$">
-                Title
-                @Html.EditorFor(model => model.Post.Title, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-            </div>
-            <br />
-            <div class="12u$">
                 Description
-                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", disabled = "disabled", @rows = 24 })
+                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", disabled = "disabled", @rows = 4 })
             </div>
             <br />
             <div class="12u$">
@@ -37,7 +32,7 @@
             </footer>
         }
         <div class="align-center">
-            @Html.ActionLink("Back to Article", "Details", "Posts", new { id = ViewBag.IDPost }, new { })
+            @Html.ActionLink("Back to Article", "Details", "Posts", new { id = Model.IDPost }, new { })
         </div>
     </div>
 </section>

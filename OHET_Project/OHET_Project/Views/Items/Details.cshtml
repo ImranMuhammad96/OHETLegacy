@@ -19,7 +19,7 @@
         <br />
         <div class="12u$">
             Cost
-            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @type="text"} })
         </div>
         <br />
         <div class="12u$">
@@ -42,7 +42,7 @@
             }
         </footer>
         <div class="align-center">
-            @if (Model.Content.ApplicationUserId == ViewBag.userId)
+            @if (Model.Content.ApplicationUserId == ViewBag.userId || !User.Identity.IsAuthenticated)
             {
                 @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
             }
@@ -53,47 +53,3 @@
         </div>
     </div>
 </section>
-
-
-
-<div>
-    <h4>Item</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cost)
-        </dd>
-    </dl>
-</div>
-@if (Model.Content.ApplicationUserId == ViewBag.userId)
-{
-    <p>
-        @Html.ActionLink("Back to List", "Index", new { isOff = ViewBag.isOff })
-    </p>
-}
-else
-{
-    <p>
-        @Html.ActionLink("Back to List", "Details", "Contents", new { id = Model.IDContent }, new { })
-    </p>
-}

@@ -11,6 +11,9 @@
                 <p class="special">@Model.Date.ToString("dd/MM/yyyy") by @Model.ApplicationUser.Email.Split('@')[0]</p>
                 <h2>@Model.Title</h2>
             </header>
+            <div class="align-center">
+                @Html.ActionLink("Back to List", "Index")
+            </div>
         </div>
         @if (((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin")) && Model.isPublic == false)
         {

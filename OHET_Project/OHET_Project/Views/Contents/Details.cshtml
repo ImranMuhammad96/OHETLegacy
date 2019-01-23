@@ -4,6 +4,22 @@
     ViewBag.Title = "Details";
 }
 
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            @if (Model.ApplicationUserId == ViewBag.userId)
+            {
+                <h2>My Content</h2>
+            }
+            else
+            {
+                <h2>@Model.ApplicationUser.Email.Split('@')[0]'s Content</h2>
+            }
+            @Html.ActionLink("Back to Content Management", "Index")
+        </header>
+    </div>
+</section>
+
 @if(Model.classes.Any())
 {
 <section id="three" class="wrapper style2">
@@ -298,6 +314,14 @@
                         </div>
                     </div>
             }
+        </div>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="align-center">
+            @Html.ActionLink("Back to Content Management", "Index")
         </div>
     </div>
 </section>

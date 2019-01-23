@@ -24,6 +24,17 @@
                 Description
                 @Html.TextAreaFor(model => model.description, new { @class = "form-control", disabled = "disabled", @rows = 12 })
             </div>
+            <br />
+            <div class="12u$">
+                @if (@Model.isSpellcaster)
+                {
+                    <p>Spellcasting: Yes</p>
+                }
+                else
+                {
+                    <p>Spellcasting: No</p>
+                }
+            </div>
 
             <br />
 

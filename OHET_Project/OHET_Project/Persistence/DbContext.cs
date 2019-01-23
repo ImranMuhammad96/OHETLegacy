@@ -49,6 +49,16 @@ namespace OHET_Project.Persistence
             .HasRequired(p => p.Post)
             .WithMany(p => p.comments)
             .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Ability>()
+            .HasRequired(p => p.Class)
+            .WithMany(p => p.abilities)
+            .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Spell>()
+            .HasRequired(p => p.Class)
+            .WithMany(p => p.spells)
+            .WillCascadeOnDelete(true);
         }
     }
 }

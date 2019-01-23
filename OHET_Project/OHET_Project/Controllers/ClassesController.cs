@@ -73,6 +73,7 @@ namespace OHET_Project.Controllers
                     IDClass = _class.IDClass,
                     name = _class.name,
                     description = _class.description,
+                    isSpellcaster = _class.isSpellcaster,
                     image = _class.image,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
