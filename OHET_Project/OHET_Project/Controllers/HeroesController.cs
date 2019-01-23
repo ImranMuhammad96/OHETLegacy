@@ -46,6 +46,7 @@ namespace OHET_Project.Controllers
         {
             //ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description");
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+
             return View();
         }
 
@@ -75,33 +76,44 @@ namespace OHET_Project.Controllers
         }
 
         // ?POST:
-        public ActionResult _createPersonalDataResult(string classID, string heroName, string description)
+        public ActionResult _createPersonalDataResult(string classID, string heroName, string description, string background, string appearance, string character)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             return View("Create");
         }
 
         // GET
-        public ActionResult _createAttributesData(string classID, string heroName, string description)
+        public ActionResult _createAttributesData(string classID, string heroName, string description, string background, string appearance, string character)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             return PartialView();
         }
 
         // ?POST:
         public ActionResult _createAttributesDataResult(string classID, string heroName, string description,
+            string background, string appearance, string character,
             AttributeLvl StrAttribute, AttributeLvl DexAttribute, AttributeLvl ConAttribute, AttributeLvl IntAttribute, 
             AttributeLvl WisAttribute, AttributeLvl ChaAttribute)
         {
             ViewBag.classID = classID;
             ViewBag.heroName = heroName;
             ViewBag.description = description;
+
+            ViewBag.background = background;
+            ViewBag.appearance = appearance;
+            ViewBag.character = character;
 
             ViewBag.StrAttribute = StrAttribute;
             ViewBag.DexAttribute = DexAttribute;
@@ -110,13 +122,14 @@ namespace OHET_Project.Controllers
             ViewBag.WisAttribute = WisAttribute;
             ViewBag.ChaAttribute = ChaAttribute;
 
-            int heroID = SaveNewHero(classID, heroName, description, StrAttribute, DexAttribute, 
-                ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
+            int heroID = SaveNewHero(classID, heroName, description, background, appearance, character,
+                StrAttribute, DexAttribute, ConAttribute, IntAttribute, WisAttribute, ChaAttribute);
 
             return RedirectToAction("Details", "Heroes", new { id = heroID });
         }
 
-        public int SaveNewHero(string _classID, string _heroName, string _description, 
+        public int SaveNewHero(string _classID, string _heroName, string _description,
+            string _background, string _appearance, string _character,
             AttributeLvl _StrAttribute, AttributeLvl _DexAttribute, AttributeLvl _ConAttribute, 
             AttributeLvl _IntAttribute, AttributeLvl _WisAttribute, AttributeLvl _ChaAttribute)
         {
@@ -130,6 +143,9 @@ namespace OHET_Project.Controllers
                 name = _heroName,
                 conceptLvl = CountWords(_description),
                 description = _description,
+                background = _background,
+                appearance = _appearance,
+                character = _character,
                 StrAttribute = _StrAttribute,
                 DexAttribute = _DexAttribute,
                 ConAttribute = _ConAttribute,
@@ -174,9 +190,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hero hero = db.heroes.Find(id);
-            ViewBag.className = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().name;
-            ViewBag.classAbilities = db.classes.Where(x => x.IDClass == hero.IDClass).SingleOrDefault().abilities;
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
             if (hero == null)
             {
                 return HttpNotFound();
@@ -192,6 +206,40 @@ namespace OHET_Project.Controllers
             Hero hero = db.heroes.Find(id);
             db.heroes.Remove(hero);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: Heroes/Edit/5
+        [Authorize(Roles = "Admin, Editor, User")]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
+
+            if (hero == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", hero.IDContent);
+
+            return View(hero);
+        }
+
+        // POST: Heroes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([
+            Bind(Include = "IDHero,name,description,background,appearance,character,gold,exp,StrAttribute,DexAttribute,ConAttribute,IntAttribute,WisAttribute,ChaAttribute,IDContent,IDClass,Content,Class")] Hero hero)
+        {
+            hero.conceptLvl = CountWords(hero.description);
+            db.Entry(hero).State = EntityState.Modified;
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

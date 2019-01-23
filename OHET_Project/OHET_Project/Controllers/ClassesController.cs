@@ -65,15 +65,11 @@ namespace OHET_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpPostedFileBase file = Request.Files["ImageData"];
-                _class.image = file.ConvertToBytes();
-
                 var c = new Class
                 {
                     IDClass = _class.IDClass,
                     name = _class.name,
                     description = _class.description,
-                    image = _class.image,
                     Content = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name),
                     IDContent = db.contents.First(u => u.ApplicationUser.UserName == User.Identity.Name).IDContent
                 };

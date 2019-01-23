@@ -27,6 +27,15 @@ namespace OHET_Project.Models.models
         [StringLength(5000)]
         public string description { get; set; }
 
+        [StringLength(5000)]
+        public string background { get; set; }
+
+        [StringLength(3000)]
+        public string character { get; set; }
+
+        [StringLength(3000)]
+        public string appearance { get; set; }
+
         [Required]
         public AttributeLvl StrAttribute { get; set; }
 

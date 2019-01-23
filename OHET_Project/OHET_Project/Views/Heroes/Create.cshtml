@@ -5,10 +5,10 @@
 }
 
 <section id="three" class="wrapper style2">
-    <!-- KLASA -->
+    <!-- CLASS -->
     @if (ViewBag.classID == null)
     {
-        <!-- TYTUŁ -->
+        <!-- TITLE -->
         <div class="inner">
             <header class="align-center">
                 <p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
@@ -18,7 +18,7 @@
         <!-- BODY -->
         Html.RenderAction("_createClassChoice", "Heroes");
     }
-    <!-- IMIĘ, KONCEPCJA I OPIS  -->
+    <!-- NAME, CONCEPT I DESCRIPTION  -->
     @if (ViewBag.classID != null)
     {
         if (ViewBag.heroName == null)
@@ -38,7 +38,7 @@
             </div>
         }
     }
-    <!-- ATRYBUTY -->
+    <!-- ATTRIBUTE -->
     @if (ViewBag.classID != null)
     {
         if (ViewBag.heroName != null)
@@ -55,7 +55,7 @@
                 <!-- BODY -->
                 <div class="inner">
                     @{
-                        Html.RenderAction("_createAttributesData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName, description = ViewBag.description });
+                        Html.RenderAction("_createAttributesData", "Heroes", new { classID = ViewBag.classID, heroName = ViewBag.heroName, description = ViewBag.description, background = ViewBag.background, appearance = ViewBag.appearance, character = ViewBag.character });
                     }
                 </div>
             }

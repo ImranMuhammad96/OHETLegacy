@@ -33,23 +33,19 @@
     <section class="container">
         <article class="@style">
             <h1>@Html.DisplayFor(m => m.name)</h1>
-            <h2 contenteditable="true">Class: @ViewBag.className | HC: @Model.conceptLvl</h2>
+            <h2 contenteditable="true">Class: @Model.Class.name | HC: @Model.conceptLvl</h2>
             <p class="detail" style="text-align:center">@Html.DisplayFor(m => m.description)</p>
             <div class="content">
                 <div class="main-cont cont">
                     <form action="#" method="post" enctype="multipart/form-data">
                         <div class="stats">
                             <div>
-                                <label for="armor">DR Armor</label>
-                                <input type="number" id="armor" class="inpt number" value="0">
-                            </div>
-                            <div>
                                 <label for="coins">Coins</label>
-                                <input type="number" name="coins" id="coins" class="inpt number" required="required" placeholder="0" value=@Model.gold>
+                                <center>@Model.gold</center>
                             </div>
                             <div>
                                 <label for="exp">Experience points</label>
-                                <input type="number" name="exp" id="exp" class="inpt number" required="required" placeholder="0" value=@Model.exp>
+                                <center>@Model.exp</center>
                             </div>
                         </div>
                         <hr>
@@ -85,7 +81,7 @@
                         <div class="profs">
                             <h3>Special Abilities</h3>
                             <ul>
-                                @foreach (var item in ViewBag.classAbilities)
+                                @foreach (var item in Model.Class.abilities)
                                 {
                                     if (Model.conceptLvl >= @item.conceptLvl)
                                     {
@@ -94,35 +90,21 @@
                                 }
                             </ul>
                         </div>
-                        @*
-                            <div class="profs">
-                                <h3>Proficiencies <span class="detail">(+2 Proficiency Bonus)</span></h3>
-                                <ul>
-                                    <li><span class="bold">Saving Throws</span> <span contenteditable="true">Dex +5, Int +3</span></li>
-                                    <li><span class="bold">Skills</span><span contenteditable="true"> Deception +5, Insight +3, Investigation +3, Perception +5*, Persuasion +5, Sleight of Hand +5, Stealth +7*</span></li>
-                                    <li><span class="bold">Tools</span> <span contenteditable="true">disguise kit, poisoner’s kit, thieves’ tools</span></li>
-                                    <li><span class="bold">Armor</span> <span contenteditable="true">Light Armor (studded leather)</span></li>
-                                    <li><span class="bold">Weapons</span> <span contenteditable="true">simple weapons, hand crossbows, longswords, rapiers, shortswords</span></li>
-                                    <li><span class="bold">Senses</span> <span contenteditable="true">passive (Perception) 15</span></li>
-                                    <li><span class="bold">Languages</span> <span contenteditable="true">Common, Elvish, Undercommon, thieves’ cant</span></li>
-                                </ul>
-                            </div>
-                        *@
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-actions no-color">
-                                <input type="submit" value="Delete" class="btn btn-default" /> |
-                                @Html.ActionLink("Back to List", "Index")
-                            </div>
-                        }
                     </form>
                 </div>
             </div>
         </article>
         <div class="@style bg"></div>
     </section>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <center><input type="submit" value="Delete" class="btn btn-default" /></center>
+        </div>
+    }
 
     @Scripts_()
     @Styles_()

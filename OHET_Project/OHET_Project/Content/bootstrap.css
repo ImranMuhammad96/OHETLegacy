@@ -250,6 +250,7 @@ table {
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
+    overflow: scroll;
   }
   thead {
     display: table-header-group;
