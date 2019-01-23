@@ -1,137 +1,209 @@
 ﻿@model OHET_Project.Models.models.Hero
+@using OHET_Project.Models.models
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Details";
 }
 
-<h2>Edit</h2>
+@{
+    string style = "half0";
 
+    switch (Model.Class.name)
+    {
+        case "Warrior": style = "half0"; break;
+        case "Rogue": style = "half1"; break;
+        case "Barbarian": style = "half2"; break;
+        case "Mage": style = "half3"; break;
+        case "Priest": style = "half4"; break;
+        case "Bard": style = "half5"; break;
+        default: style = "half6"; break;
+    }
+
+
+    var _background = "";
+    var _appearance = "";
+    var _character = "";
+    if (!string.IsNullOrEmpty(Model.background))
+    {
+        _background = Model.background;
+    }
+    if (!string.IsNullOrEmpty(Model.appearance))
+    {
+        _appearance = Model.appearance;
+    }
+    if (!string.IsNullOrEmpty(Model.character))
+    {
+        _character = Model.character;
+    }
+
+}
+
+
+<!-- TYTUŁ -->
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special">Let's change your destiny!</p>
+            <h2>Edit Character Sheet</h2>
+        </header>
+    </div>
+</section>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Hero</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IDHero)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.conceptLvl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.conceptLvl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.conceptLvl, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(model => model.IDHero)
+    @Html.HiddenFor(model => model.IDContent)
+    @Html.HiddenFor(model => model.IDClass)
+    @Html.HiddenFor(model => model.Content)
+    @Html.HiddenFor(model => model.Class)
+    <!-- KARTA POSTACI -->
+    <section class="container">
+        <article class="@style">
+            <h1>@Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })</h1>
+            <h2 contenteditable="true">Class: @Model.Class.name | HC: @Model.conceptLvl</h2>
+            <p class="detail" style="text-align:center">@Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })</p>
+            <div class="content">
+                <div class="main-cont cont">
+                    <div class="stats">
+                        <div>
+                            <label for="coins">Coins</label>
+                            <input type="number" name="gold" id="gold" class="inpt number" required="required" placeholder="0" value=@Model.gold>
+                        </div>
+                        <div>
+                            <label for="exp">Experience points</label>
+                            <input type="number" name="exp" id="exp" class="inpt number" required="required" placeholder="0" value=@Model.exp>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="stats abilities">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                        <div>
+                            <label for="StrAttribute">STR</label>
+                            <div id="StrAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.StrAttribute)</div>
+                        </div>
+                        <div>
+                            <label for="DexAttribute">DEX</label>
+                            <div id="DexAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.DexAttribute)</div>
+                        </div>
+                        <div>
+                            <label for="ConAttribute">CON</label>
+                            <div id="ConAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.ConAttribute)</div>
+                        </div>
+                    </div>
+                    <div class="stats abilities">
+                        <div>
+                            <label for="IntAttribute">INT</label>
+                            <div id="IntAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.IntAttribute)</div>
+                        </div>
+                        <div>
+                            <label for="WisAttribute">WIS</label>
+                            <div id="WisAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.WisAttribute)</div>
+                        </div>
+                        <div>
+                            <label for="ChaAttribute">CHA</label>
+                            <div id="ChaAttribute" class="stat" contenteditable="true">@Html.DisplayFor(m => m.ChaAttribute)</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="select-wrapper">
+                        <select name="StrAttribute" id="StrAttribute">
+                            <option value="@AttributeLvl.Low">-- Strenght -- </option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <div class="select-wrapper">
+                        <select name="DexAttribute" id="DexAttribute">
+                            <option value="@AttributeLvl.Low">-- Dexterity --</option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <div class="select-wrapper">
+                        <select name="ConAttribute" id="ConAttribute">
+                            <option value="@AttributeLvl.Low">-- Constitution --</option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <div class="select-wrapper">
+                        <select name="IntAttribute" id="IntAttribute">
+                            <option value="@AttributeLvl.Low">-- Intelligence --</option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <div class="select-wrapper">
+                        <select name="WisAttribute" id="WisAttribute">
+                            <option value="@AttributeLvl.Low">-- Wisdom --</option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <div class="select-wrapper">
+                        <select name="ChaAttribute" id="ChaAttribute">
+                            <option value="@AttributeLvl.Low">-- Charisma --</option>
+                            <option value="@AttributeLvl.Low">Low</option>
+                            <option value="@AttributeLvl.Average">Avarage</option>
+                            <option value="@AttributeLvl.High">High</option>
+                        </select>
+                    </div><br />
+                    <hr>
+                    <div class="profs">
+                        <h3>Special Abilities</h3>
+                        <ul>
+                            @foreach (var item in Model.Class.abilities)
+                            {
+                                if (Model.conceptLvl >= @item.conceptLvl)
+                                {
+                                    <li><span class="bold">HC @item.conceptLvl</span> - <span contenteditable="true">@item.description</span></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="profs">
+                <h3>Background Story</h3>
+                <textarea name="background" id="backhround" rows="12">@Model.background</textarea>
+                <br /><h3>Appearance</h3>
+                <textarea name="appearance" id="appearance" rows="6">@Model.appearance</textarea>
+                <br /><h3>Character</h3>
+                <textarea name="character" id="character" rows="6">@Model.character</textarea>
+            </div>
+        </article>
+        <div class="@style bg"></div>
+    </section>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StrAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.StrAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StrAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DexAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.DexAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DexAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.ConAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ConAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IntAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.IntAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IntAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WisAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.WisAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WisAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ChaAttribute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.ChaAttribute, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ChaAttribute, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.gold, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.gold, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.gold, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.exp, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.exp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.exp, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IDContent, "IDContent", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IDContent", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IDContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IDClass, "IDClass", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IDClass", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IDClass, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+@Scripts_()
+@Styles_()
+
+@helper Styles_()
+{
+    <link href="@Url.Content("~/Content/character-sheet-08.css")" rel="stylesheet" type="text/css" />
+}
+
+@helper Scripts_()
+{
+    <script src="@Url.Content("~/Scripts/character-sheet-scripts.js")"></script>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

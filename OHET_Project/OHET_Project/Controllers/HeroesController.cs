@@ -46,6 +46,7 @@ namespace OHET_Project.Controllers
         {
             //ViewBag.IDConcept = new SelectList(db.concepts, "IDConcept", "description");
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId");
+
             return View();
         }
 
@@ -206,6 +207,44 @@ namespace OHET_Project.Controllers
             db.heroes.Remove(hero);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Heroes/Edit/5
+        [Authorize(Roles = "Admin, Editor, User")]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Hero hero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == id).FirstOrDefault();
+
+            if (hero == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", hero.IDContent);
+
+            return View(hero);
+        }
+
+        // POST: Heroes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([
+            Bind(Include = "IDHero,name,description,background,appearance,character,gold,exp,StrAttribute,DexAttribute,ConAttribute,IntAttribute,WisAttribute,ChaAttribute,IDContent,IDClass,Content,Class")] Hero hero)
+        {
+            //Hero oldHero = db.heroes.Include(h => h.Class).Where(h => h.IDHero == _IDHero).FirstOrDefault();
+            //hero.IDContent = oldHero.IDContent;
+            //hero.Class = oldHero.Class;
+            //hero.Content = db.contents.Where(h => h.IDContent == hero.IDContent).FirstOrDefault();
+
+            db.Entry(hero).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
         [DebuggerStepThrough]
