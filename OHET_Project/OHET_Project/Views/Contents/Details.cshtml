@@ -4,233 +4,301 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<h2>Classes</h2>
-<table class="table">
-    @foreach (var item in Model.classes.OrderBy(x => x.name))
-    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                @if (@item.description.Split().ToArray().Length <= 20)
-                {
-                    <td>
-                        @item.description
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @String.Join(" ", @item.description.Split().Take(20))
-                        @Html.ActionLink("...", "Details", "Classes", new { id = item.IDClass }, new { })
-                    </td>
-                }
-                <td>
-                    @Html.ActionLink("Details", "Details", "Classes", new { id = item.IDClass }, new { })
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Classes", new { id = item.IDClass }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Classes", new { id = item.IDClass }, new { })
-                    </td>
-                }
-            </tr>
-    }
-</table>
-
-<h2>Rules</h2>
-<table class="table">
-    @foreach (var item in Model.rules)
-    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                @if (@item.description.Split().ToArray().Length <= 20)
-                {
-                    <td>
-                        @item.description
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @String.Join(" ", @item.description.Split().Take(20))
-                        @Html.ActionLink("...", "Details", "Rules", new { id = item.IDRule }, new { })
-                    </td>
-                }
-                <td>
-                    @Html.ActionLink("Details", "Details", "Rules", new { id = item.IDRule }, new { })
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Rules", new { id = item.IDRule }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Rules", new { id = item.IDRule }, new { })
-                    </td>
-                }
-            </tr>
-    }
-
-</table>
-
-<h2>Adventures</h2>
-<table class="table">
-    @foreach (var item in Model.adventures)
-    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                @if (@item.description.Split().ToArray().Length <= 20)
-                {
-                    <td>
-                        @item.description
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @String.Join(" ", @item.description.Split().Take(20))
-                        @Html.ActionLink("...", "Details", "Adventures", new { id = item.IDAdventure }, new { })
-                    </td>
-                }
-                <td>
-                    @Html.ActionLink("Details", "Details", "Adventures", new { id = item.IDAdventure }, new { })
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Adventures", new { id = item.IDAdventure }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Adventures", new { id = item.IDAdventure }, new { })
-                    </td>
-                }
-            </tr>
-    }
-</table>
-
-<h2>Items</h2>
-<table class="table">
-    @foreach (var item in Model.items)
-    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                @if (@item.description.Split().ToArray().Length <= 20)
-                {
-                    <td>
-                        @item.description
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @String.Join(" ", @item.description.Split().Take(20))
-                        @Html.ActionLink("...", "Details", "Items", new { id = item.IDItem }, new { })
-                    </td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.cost)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", "Items", new { id = item.IDItem }, new { })
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Items", new { id = item.IDItem }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Items", new { id = item.IDItem }, new { })
-                    </td>
-                }
-            </tr>
-    }
-</table>
-
-<h2>Spells</h2>
-@foreach (var i in Model.spells.Select(c => c.Class.IDClass).Distinct().ToArray())
+@if(Model.classes.Any())
 {
-    <h2>@Html.DisplayName(Model.spells.Where(a => a.Class.IDClass == i).Select(aa => aa.Class.name).FirstOrDefault())</h2>
-    <table class="table">
-        @foreach (var item in Model.spells)
-        {
-            if (item.IDClass == i)
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Classes</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.classes.OrderBy(x => x.name))
             {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.conceptLvl)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-
-                        @if (@item.description.Split().ToArray().Length <= 20)
-                        {
-                            <td>
-                                @item.description
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @String.Join(" ", @item.description.Split().Take(20))
-                                @Html.ActionLink("...", "Details", "Spells", new { id = item.IDSpell }, new { })
-                            </td>
-                        }
-
-                        <td>
-                            @Html.ActionLink("Details", "Details", "Spells", new { id = item.IDSpell }, new { })
-                        </td>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", "Spells", new { id = item.IDSpell }, new { }) |
-                                @Html.ActionLink("Delete", "Delete", "Spells", new { id = item.IDSpell }, new { })
-                            </td>
-                        }
-                    </tr>
+                    <div>
+                        <div class="box">
+                            <div class="image fit">
+                                <img src='@Url.Action("ShowClass", "Image", new { id = item.IDClass })' alt='' />
+                            </div>
+                            <div class="content">
+                                <header class="align-center">
+                                    @if (item.isSpellcaster)
+                                    {
+                                        <p class="special">Spellcaster</p>
+                                    }
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Classes", new { id = item.IDClass })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Classes", new { id = item.IDClass })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Classes", new { id = item.IDClass })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
             }
-        }
-    </table>
+        </div>
+    </div>
+</section>
 }
 
-<h2>Monsters</h2>
-<table class="table">
-    @foreach (var item in Model.monsters)
-    {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.conceptLvl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                @if (@item.description.Split().ToArray().Length <= 20)
-                {
-                    <td>
-                        @item.description
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @String.Join(" ", @item.description.Split().Take(20))
-                        @Html.ActionLink("...", "Details", "Monsters", new { id = item.IDMonster }, new { })
-                    </td>
-                }
-                <td>
-                    @Html.ActionLink("Details", "Details", "Monsters", new { id = item.IDMonster }, new { })
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Monsters", new { id = item.IDMonster }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Monsters", new { id = item.IDMonster }, new { })
-                    </td>
-                }
-            </tr>
-    }
-</table>
+@if (Model.rules.Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Rules</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.rules.OrderBy(x => x.title))
+            {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special"></p>
+                                    <h2>@item.title</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Rules", new { id = item.IDRule })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Rules", new { id = item.IDRule })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Rules", new { id = item.IDRule })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>
+}
+
+@if (Model.adventures.Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Adventures</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.adventures.OrderBy(x => x.title))
+            {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special"></p>
+                                    <h2>@item.title</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Adventures", new { id = item.IDAdventure })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Adventures", new { id = item.IDAdventure })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Adventures", new { id = item.IDAdventure })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>
+}
+
+@if (Model.items.Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Items</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.items.OrderBy(x => x.name))
+            {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special">Cost: @item.cost | Concept: @item.conceptLvl</p>
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @item.description
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Items", new { id = item.IDItem })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Items", new { id = item.IDItem })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Items", new { id = item.IDItem })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>
+}
+
+@if (Model.spells.Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Spells</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.spells.OrderBy(x => x.name).OrderBy(y => y.conceptLvl))
+            {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special">Class: @item.Class.name |  Concept: @item.conceptLvl</p>
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Spells", new { id = item.IDSpell })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Spells", new { id = item.IDSpell })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Spells", new { id = item.IDSpell })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>
+}
+
+@if (Model.monsters.Any())
+{
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <p class="special"></p>
+            <h2>Monsters</h2>
+        </header>
+    </div>
+</section>
+
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.monsters.OrderBy(x => x.name).OrderBy(y => y.conceptLvl))
+            {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p class="special">Concept: @item.conceptLvl</p>
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @if (@item.description.Split().ToArray().Length <= 20)
+                                    {
+                                        @item.description
+                                    }
+                                    else
+                                    {
+                                        @(String.Join(" ", @item.description.Split().Take(20)) + "...")
+                                    }
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Monsters", new { id = item.IDMonster })" class="button alt">Details</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Monsters", new { id = item.IDMonster })" class="button alt">Edit</a>
+                                        <a href="@Url.Action("Delete", "Monsters", new { id = item.IDMonster })" class="button alt">Delete</a>
+                                    }
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>
+}

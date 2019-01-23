@@ -4,67 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <header class="align-center">
+            <h2>My Characters</h2>
+        </header>
+        <footer class="align-center">
+            <a href="@Url.Action("Create", "Heroes")" class="button alt">Create Character</a>
+        </footer>
+    </div>
+</section>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Class)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.exp)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    if (@item.Content.ApplicationUserId == ViewBag.userId)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        @if (@item.description.Split().ToArray().Length <= 20)
-        {
-            <td>
-                @item.description
-            </td>
-        }
-        else
-        {
-            <td>
-                @String.Join(" ", @item.description.Split().Take(20))
-                @Html.ActionLink("...", "Details", new { id = item.IDHero })
-            </td>
-        }
-        <td>
-            @item.Class.name
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.exp)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IDHero }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IDHero }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IDHero })
-        </td>
-    </tr>
-    }
-}
-
-</table>
+<section id="one" class="wrapper style2">
+    <div class="inner">
+        <div class="grid-style">
+            @foreach (var item in Model.OrderBy(x => x.name))
+            {
+                if (@item.Content.ApplicationUserId == ViewBag.userId)
+                {
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <header class="align-center">
+                                    <p>Class: @item.Class.name | HC: @item.conceptLvl</p>
+                                    <h2>@item.name</h2>
+                                </header>
+                                <p class="align-center">
+                                    @item.description
+                                </p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("Details", "Heroes", new { id = item.IDHero })" class="button alt">Details</a>
+                                    <a href="@Url.Action("Edit", "Heroes", new { id = item.IDHero })" class="button alt">Edit</a>
+                                    <a href="@Url.Action("Delete", "Heroes", new { id = item.IDHero })" class="button alt">Delete</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

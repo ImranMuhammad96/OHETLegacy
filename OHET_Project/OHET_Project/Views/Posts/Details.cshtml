@@ -4,106 +4,81 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Post</h4>
-    <hr />
-    <img src='@Url.Action("ShowPost", "Image", new { id = Model.IDPost })' />
-    <dl class="dl-horizontal">
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Email) |
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-    </dl>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayFor(model => model.Title)
-            </th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.Description)
-            </td>
-        </tr>
-    </table>
-</div>
-
-@if (((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin")) && Model.isPublic == false)
-{
-    <p>
-        @Html.ActionLink("Add a subpost", "Create", "Subposts", new { id = Model.IDPost }, new { })
-    </p>
-}
-
-    @foreach (var item in Model.subposts.OrderBy(x => x.OrderNr))
-    {
-        <img src='@Url.Action("ShowSubpost", "Image", new { id = item.IDSubpost })' />
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                @if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Subposts", new { id = @item.IDSubpost }, new { }) |
-                        @Html.ActionLink("Delete", "Delete", "Subposts", new { id = @item.IDSubpost }, new { })
-                    </td>
-                }
-            </tr>
-        </table>
-    }
-
-<p>
-    @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.IDPost }, new { })
-</p>
-
-<table class="table">
-    <tr>
-        <th>
-            Comments
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.comments.OrderBy(x => x.Date))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            @if (item.ApplicationUserId == ViewBag.userId || (item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+<section id="three" class="wrapper style2">
+    <div class="inner">
+        <div class="inner">
+            <header class="align-center">
+                <p class="special">@Model.Date.ToString("dd/MM/yyyy") by @Model.ApplicationUser.Email.Split('@')[0]</p>
+                <h2>@Model.Title</h2>
+            </header>
+        </div>
+        @if (((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin")) && Model.isPublic == false)
+        {
+            <div class="align-center">
+                <a href="@Url.Action("Create", "Subposts", new { id = Model.IDPost })" class="button alt">Create subarticle</a>
+            </div>
+        }
+        <br />
+        <div class="12u$">
+            @Model.Description
+        </div>
+        <br />
+        <footer class="align-center">
+            @if ((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Comments", new { id = @item.IDComment }, new {}) |
-                    @Html.ActionLink("Delete", "Delete", "Comments", new { id = @item.IDComment }, new {})
-                </td>
+                <a href="@Url.Action("Edit", "Posts", new { id = Model.IDPost })" class="button alt">Edit</a>
+                <a href="@Url.Action("Delete", "Posts", new { id = Model.IDPost })" class="button alt">Delete</a>
             }
-        </tr>
-    }
-</table>
-
-    @if ((Model.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
-    {
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.IDPost }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.IDPost })
-        </td>
-    }
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        </footer>
+        <br />
+        @foreach (var item in Model.subposts.OrderBy(x => x.OrderNr))
+        {
+            <div class="inner">
+                <header class="align-center">
+                    <p class="special"></p>
+                    <h3>@item.Title</h3>
+                </header>
+            </div>
+            <div class="12u$">
+                @item.Description
+            </div>
+            <br />
+            if ((item.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+            {
+                <div class="align-center">
+                    <a href="@Url.Action("Edit", "Subposts", new { id = @item.IDSubpost })" class="button alt">Edit</a>
+                    <a href="@Url.Action("Delete", "Subposts", new { id = @item.IDSubpost })" class="button alt">Delete</a>
+                </div>
+            }
+            <br />
+        }
+        <br />
+        <div class="inner">
+            <header>
+                <p class="special"></p>
+                <br />
+                <h3>Comments</h3>
+            </header>
+        </div>
+        <a href="@Url.Action("Create", "Comments", new { id = Model.IDPost })" class="button alt">Comment</a>
+        <br />
+        <br />
+        @foreach (var item2 in Model.comments.OrderBy(x => x.Date))
+        {
+            <div class="12u$">
+                @item2.ApplicationUser.Email.Split('@')[0] | @item2.Date.ToString("dd/MM/yyyy hh:mm")
+                @Html.TextAreaFor(model => item2.Description, new { @class = "form-control", disabled = "disabled", @rows = 4 })
+            </div>
+            if (item2.ApplicationUserId == ViewBag.userId || (item2.Post.ApplicationUserId == ViewBag.userId && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Edit", "Comments", new { id = @item2.IDComment })" class="button alt">Edit</a>
+                <a href="@Url.Action("Delete", "Comments", new { id = @item2.IDComment })" class="button alt">Delete</a>
+                <br />
+            }
+            <br />
+        }
+        <div class="align-center">
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</section>
