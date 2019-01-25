@@ -11,7 +11,7 @@
             <h2>Articles</h2>
         </header>
         <footer class="align-center">
-            @if(User.IsInRole("Editor") || User.IsInRole("Admin"))
+            @if (User.IsInRole("Editor") || User.IsInRole("Admin"))
             {
                 <a href="@Url.Action("Create", "Posts")" class="button alt">Create Article</a>
             }

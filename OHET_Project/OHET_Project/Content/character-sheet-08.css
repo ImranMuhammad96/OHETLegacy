@@ -139,6 +139,24 @@ body {
                 background-position-y: 10%;
             }
 
+        body .container .half6 {
+            float: left;
+            width: 55%;
+            height: 100%;
+            padding: 58px 0px 10px 30px;
+            background-color: transparent;
+        }
+
+            body .container .half6.bg {
+                background-image: url("https://imgur.com/IozcErI");
+                background-size: 440px;
+                width: 45%;
+                min-height: 900px;
+                background-repeat: no-repeat;
+                background-position-x: 90%;
+                background-position-y: 10%;
+            }
+
         body .container h1 {
             font-size: 18px;
             font-weight: 700;
