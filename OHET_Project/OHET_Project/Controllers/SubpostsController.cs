@@ -64,14 +64,11 @@ namespace OHET_Project.Controllers
                 {
                     v = db.subposts.OrderByDescending(u => u.OrderNr).FirstOrDefault().OrderNr + 1;
                 }
-                HttpPostedFileBase file = Request.Files["ImageData"];
-                subpost.image = file.ConvertToBytes();
                 var s = new Subpost
                 {
                     Title = subpost.Title,
                     Description = subpost.Description,
                     OrderNr = v,
-                    image = subpost.image,
                     Post = db.posts.First(u => u.IDPost == id),
                     IDPost = id
                 };

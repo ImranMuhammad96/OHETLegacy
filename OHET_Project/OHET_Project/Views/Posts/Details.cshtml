@@ -6,10 +6,13 @@
 
 <section id="three" class="wrapper style2">
     <div class="inner">
+        @if (Model.image != null)
+        {
         <center>
-            <span class="image fit"><img src='@Url.Action("ShowPost", "Image", new { id = Model.IDPost})' style="width:1100px;height:550px;" />
+            <span class="image fit"><img src='@Url.Action("ShowPost", "Image", new { id = Model.IDPost })' style="width:1100px;height:550px;" />
             </span>
         </center>
+        }
         <div class="inner">
             <header class="align-center">
                 <p class="special">@Model.Date.ToString("dd/MM/yyyy") by @Model.ApplicationUser.Email.Split('@')[0]</p>

@@ -108,7 +108,8 @@ namespace OHET_Project.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
+            ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name", spell.IDClass);
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);
             ViewBag.userId = User.Identity.GetUserId();
             ViewBag.isOff = spell.Content.isOfficial;
