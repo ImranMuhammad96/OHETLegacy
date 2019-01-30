@@ -23,7 +23,6 @@ namespace OHET_Project.Models.models
         public string description { get; set; }
 
         [Required]
-        [Range(4, 23)]
         public int conceptLvl { get; set; }
 
         [ForeignKey("IDContent")]

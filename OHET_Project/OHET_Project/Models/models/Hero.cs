@@ -54,8 +54,6 @@ namespace OHET_Project.Models.models
         [Required]
         public AttributeLvl ChaAttribute { get; set; }
 
-        public List<String> equipment { get; set; }
-
         public int gold { get; set; }
 
         public int exp { get; set; }

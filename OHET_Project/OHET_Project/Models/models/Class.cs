@@ -30,8 +30,6 @@ namespace OHET_Project.Models.models
 
         public bool isSpellcaster { get; set; }
 
-        public byte[] image { get; set; }
-
         [ForeignKey("IDContent")]
         public Content Content { get; set; }
         public int? IDContent { get; set; }
