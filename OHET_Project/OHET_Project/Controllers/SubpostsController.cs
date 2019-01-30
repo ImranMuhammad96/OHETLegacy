@@ -124,7 +124,7 @@ namespace OHET_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subpost subpost = db.subposts.Find(id);
+            Subpost subpost = db.subposts.Where(x => x.IDSubpost == id).Include(i => i.Post).SingleOrDefault();
             if (subpost == null)
             {
                 return HttpNotFound();
