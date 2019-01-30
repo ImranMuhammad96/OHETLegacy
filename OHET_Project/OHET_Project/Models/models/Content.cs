@@ -44,6 +44,5 @@ namespace OHET_Project.Models.models
         public ICollection<Adventure> adventures { get; set; }
         public ICollection<Item> items { get; set; }
         public ICollection<FavCon> favcons { get; set; }
-        //public ICollection<ApplicationUser> applicationUsers { get; set; }
     }
 }
