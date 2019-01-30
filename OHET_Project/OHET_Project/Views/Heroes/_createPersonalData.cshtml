@@ -4,31 +4,42 @@
 @using (Html.BeginForm("_createPersonalDataResult", "Heroes", new { classID = ViewBag.classID }))
 {
     <div class="6u 12u$(xsmall)">
-        <input type="text" name="heroName" id="heroName" value="" placeholder="Name" />
+        <input type="text" name="heroName" id="heroName" onkeyup="success()" value="" placeholder="Name" />
         @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
     </div>
     <br />
     <div class="6u 12u$(xsmall)">
-        <input type="text" name="description" id="description" , value="" placeholder="Koncepcja" />
+        <input type="text" name="description" id="description" onkeyup="success()" value="" placeholder="Conception" />
         @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
     </div>
     <br />
     <div class="12u$">
-        <textarea name="background" id="backhround" placeholder="Opowiedz nam swoją historię" rows="12"></textarea>
+        <textarea name="background" id="backhround" placeholder="Tell us your story" rows="12"></textarea>
     </div>
     <br />
     <div class="12u$">
-        <textarea name="appearance" id="appearance" placeholder="Jak wyglądasz, bohaterze?" rows="6"></textarea>
+        <textarea name="appearance" id="appearance" placeholder="How fancy do you look?" rows="6"></textarea>
     </div>
     <br />
     <div class="12u$">
-        <textarea name="character" id="character" placeholder="Opisz jaki jesteś - swój charakter" rows="6"></textarea>
+        <textarea name="character" id="character" placeholder="Tell us about yourself" rows="6"></textarea>
     </div>
 
     <br />
 
     <footer class="align-center">
-        <button type="submit" class="button alt">Dalej!</button>
+        <button id="button1" type="submit" class="button alt" disabled>Next!</button>
     </footer>
+
+
+    <script>
+        function success() {
+            if (document.getElementById("heroName").value === "" || document.getElementById("description").value === "") {
+                document.getElementById('button1').disabled = true;
+            } else {
+                document.getElementById('button1').disabled = false;
+            }
+        }
+    </script>
 }
 

@@ -7,23 +7,25 @@
             {
                 if (@item.Content.ApplicationUserId == ViewBag.userId || @item.Content.isOfficial)
                 {
-                <div>
-                    <div class="box">
-                        <div class="image fit">
-                            <img src="images/pic02.jpg" alt="" />
-                        </div>
-                        <div class="content">
-                            <header class="align-center">
-                                <p>maecenas sapien feugiat ex purus</p>
-                                <h2>@Html.DisplayFor(modelItem => item.name)</h2>
-                            </header>
-                            <p>@Html.DisplayFor(modelItem => item.description)</p>
-                            <footer class="align-center">
-                                <a href="@Url.Action("_createClassChoiceResult", "Heroes", new { classID = item.IDClass })" class="button alt">Wybierz</a>
-                            </footer>
+                    var isSpellUser = item.isSpellcaster ? "Spellcaster" : "Not Spellcaster";
+
+                    <div>
+                        <div class="box">
+                            <div class="image fit">
+                                <img src="images/pic02.jpg" alt="" />
+                            </div>
+                            <div class="content">
+                                <header class="align-center">
+                                    <p>@isSpellUser</p>
+                                    <h2>@Html.DisplayFor(modelItem => item.name)</h2>
+                                </header>
+                                <p>@Html.DisplayFor(modelItem => item.description)</p>
+                                <footer class="align-center">
+                                    <a href="@Url.Action("_createClassChoiceResult", "Heroes", new { classID = item.IDClass })" class="button alt">Choose</a>
+                                </footer>
+                            </div>
                         </div>
                     </div>
-                </div>
                 }
             }
         </div>
