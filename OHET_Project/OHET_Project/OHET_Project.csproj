@@ -189,21 +189,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901181837315_HeroClassNotNull.cs" />
-    <Compile Include="Migrations\201901181837315_HeroClassNotNull.Designer.cs">
-      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901201325485_ItemConceptFix.cs" />
-    <Compile Include="Migrations\201901201325485_ItemConceptFix.Designer.cs">
-      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901231300494_ClassCascadeOnDelete.cs" />
-    <Compile Include="Migrations\201901231300494_ClassCascadeOnDelete.Designer.cs">
-      <DependentUpon>201901231300494_ClassCascadeOnDelete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901231434102_OneClassManySpells.cs" />
-    <Compile Include="Migrations\201901231434102_OneClassManySpells.Designer.cs">
-      <DependentUpon>201901231434102_OneClassManySpells.cs</DependentUpon>
+    <Compile Include="Migrations\201901251500135_Ini.cs" />
+    <Compile Include="Migrations\201901251500135_Ini.Designer.cs">
+      <DependentUpon>201901251500135_Ini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -231,11 +219,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\character-sheet-08.css" />
+    <Content Include="Content\character-sheet-10.css" />
     <Content Include="Content\character_sheet.css" />
     <Content Include="Content\HieloTemplate\font-awesome.min.css" />
     <Content Include="Content\HieloTemplate\main.css" />
     <Content Include="Content\table.css" />
     <Content Include="Db_Changes\SqlClearTables.txt" />
+    <Content Include="Documentation\elements.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\HieloFonts\fontawesome-webfont.svg" />
@@ -265,6 +256,8 @@
     <Content Include="fonts\HieloFonts\FontAwesome.otf" />
     <Content Include="Db_Changes\InsertInto_Classes.csv" />
     <Content Include="Archives\Archives_Heroes_Index.cshtml" />
+    <None Include="Properties\PublishProfiles\ohetlegacy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ohetlegacy - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\character-sheet-scripts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -405,17 +398,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901181837315_HeroClassNotNull.resx">
-      <DependentUpon>201901181837315_HeroClassNotNull.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901201325485_ItemConceptFix.resx">
-      <DependentUpon>201901201325485_ItemConceptFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901231300494_ClassCascadeOnDelete.resx">
-      <DependentUpon>201901231300494_ClassCascadeOnDelete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901231434102_OneClassManySpells.resx">
-      <DependentUpon>201901231434102_OneClassManySpells.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901251500135_Ini.resx">
+      <DependentUpon>201901251500135_Ini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
