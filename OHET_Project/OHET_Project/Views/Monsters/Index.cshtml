@@ -26,7 +26,7 @@
             </p>
         }
         <footer class="align-center">
-            @if ((User.IsInRole("User") || User.IsInRole("Editor") || User.IsInRole("Admin")) && !ViewBag.isOff)
+            @if ((((User.IsInRole("User") || User.IsInRole("Editor")) && !ViewBag.isOff) || ((User.IsInRole("Admin")) && ViewBag.isOff)))
             {
                 <a href="@Url.Action("Create", "Monsters", new { isOff = ViewBag.isOff })" class="button alt">Create Monster</a>
             }

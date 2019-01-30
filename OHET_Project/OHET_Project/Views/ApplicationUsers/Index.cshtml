@@ -15,9 +15,9 @@
             Find by role:
             <br />
             <a href="@Url.Action("Index", "ApplicationUsers", new { searchString = ViewBag.search })" class="button alt">All roles</a>
-            @foreach (var i in Model.OrderBy(o => o.Roles).Select(c => c.Roles).Distinct().ToArray())
+            @foreach (var i in Model.OrderBy(o => o.Roles.SingleOrDefault().RoleId).Select(r => r.Roles.SingleOrDefault().RoleId).Distinct().ToArray())
             {
-                <a href="@Url.Action("Index", "Spells", new { role = i, searchString = ViewBag.search})" class="button alt">@Model.Where(x => x.Roles == i).FirstOrDefault().Roles</a>
+                <a href="@Url.Action("Index", "ApplicationUsers", new { role = i, searchString = ViewBag.search})" class="button alt">@Model.Where(x => x.Roles.SingleOrDefault().RoleId == i).FirstOrDefault().Roles</a>
             }
         </p>
         @using (Html.BeginForm())

@@ -22,8 +22,6 @@ namespace OHET_Project.Models.models
         [Required]
         public int OrderNr { get; set; }
 
-        public byte[] image { get; set; }
-
         [ForeignKey("IDPost")]
         public Post Post { get; set; }
         public int? IDPost { get; set; }

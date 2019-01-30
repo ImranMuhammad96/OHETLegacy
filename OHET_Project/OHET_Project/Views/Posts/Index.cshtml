@@ -24,7 +24,7 @@
         <div class="grid-style">
             @foreach (var item in Model.OrderByDescending(x => x.Date))
             {
-                if (item.ApplicationUserId == ViewBag.userId || item.isPublic)
+                if (item.ApplicationUserId == ViewBag.userId || User.IsInRole("Admin") || item.isPublic)
                 {
                     <div>
                         <div class="box">
