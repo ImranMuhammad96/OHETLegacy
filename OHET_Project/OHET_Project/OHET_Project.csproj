@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\ByteFile.cs" />
+    <Compile Include="BLL\MailManager.cs" />
     <Compile Include="Controllers\AbilitiesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdventuresController.cs" />
@@ -192,6 +193,10 @@
     <Compile Include="Migrations\201901251500135_Ini.cs" />
     <Compile Include="Migrations\201901251500135_Ini.Designer.cs">
       <DependentUpon>201901251500135_Ini.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901301823329_DeletedImages.cs" />
+    <Compile Include="Migrations\201901301823329_DeletedImages.Designer.cs">
+      <DependentUpon>201901301823329_DeletedImages.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -387,7 +392,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +405,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901251500135_Ini.resx">
       <DependentUpon>201901251500135_Ini.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901301823329_DeletedImages.resx">
+      <DependentUpon>201901301823329_DeletedImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OHET_Project.BLL;
 using OHET_Project.Models.models;
 using OHET_Project.Persistence;
 
@@ -116,10 +117,12 @@ namespace OHET_Project.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Ability ability = db.abilities.Find(id);
+
             if (ability == null)
             {
                 return HttpNotFound();
             }
+
             return View(ability);
         }
 
@@ -132,6 +135,7 @@ namespace OHET_Project.Controllers
             var v = db.abilities.Include(c => c.Class).Where(x => x.IDAbility == id).SingleOrDefault().Class.IDClass;
             db.abilities.Remove(ability);
             db.SaveChanges();
+
             return RedirectToAction("Details", "Classes", new { id = v });
         }
 

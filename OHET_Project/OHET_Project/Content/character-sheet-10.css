@@ -30,7 +30,7 @@ body {
         -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
     }
-
+        /* warrior */
         body .container .half0 {
             float: left;
             width: 55%;
@@ -40,7 +40,7 @@ body {
         }
 
             body .container .half0.bg {
-                background-image: url("https://i.imgur.com/aI1hC8a.png");
+                background-image: url("https://i.imgur.com/EHM26jC.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -49,6 +49,7 @@ body {
                 background-position-y: 10%;
             }
 
+        /*rogue*/
         body .container .half1 {
             float: left;
             width: 55%;
@@ -58,7 +59,7 @@ body {
         }
 
             body .container .half1.bg {
-                background-image: url("https://s-media-cache-ak0.pinimg.com/736x/fe/41/d8/fe41d8ac345a409b0d662726149d4a3a.jpg");
+                background-image: url("https://i.imgur.com/xSyY8fs.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -67,6 +68,7 @@ body {
                 background-position-y: 10%;
             }
 
+        /*barbarian*/
         body .container .half2 {
             float: left;
             width: 55%;
@@ -76,7 +78,7 @@ body {
         }
 
             body .container .half2.bg {
-                background-image: url("https://i.imgur.com/flp0NDB.png");
+                background-image: url("https://i.imgur.com/ExSlOBX.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -85,6 +87,7 @@ body {
                 background-position-y: 10%;
             }
 
+        /* mage */
         body .container .half3 {
             float: left;
             width: 55%;
@@ -94,7 +97,7 @@ body {
         }
 
             body .container .half3.bg {
-                background-image: url("https://i.imgur.com/SL7UmKX.png");
+                background-image: url("https://i.imgur.com/IRMFZlX.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -103,6 +106,7 @@ body {
                 background-position-y: 10%;
             }
 
+        /* priest */
         body .container .half4 {
             float: left;
             width: 55%;
@@ -112,7 +116,7 @@ body {
         }
 
             body .container .half4.bg {
-                background-image: url("https://i.imgur.com/jshqRtZ.png");
+                background-image: url("https://i.imgur.com/bmj2djW.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -121,6 +125,7 @@ body {
                 background-position-y: 10%;
             }
 
+        /* bard */
         body .container .half5 {
             float: left;
             width: 55%;
@@ -130,7 +135,7 @@ body {
         }
 
             body .container .half5.bg {
-                background-image: url("https://i.imgur.com/p58gM8K.png");
+                background-image: url("https://i.imgur.com/6Wi84Cb.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;
@@ -148,7 +153,7 @@ body {
         }
 
             body .container .half6.bg {
-                background-image: url("https://i.imgur.com/IozcErI.png");
+                background-image: url("https://i.imgur.com/FPJrDkl.png");
                 background-size: 440px;
                 width: 45%;
                 min-height: 900px;

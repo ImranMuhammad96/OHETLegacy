@@ -64,13 +64,13 @@
                                 <footer class="align-center">
                                     @if (@item.Roles.SingleOrDefault().RoleId == "1")
                                     {
-                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id, Email = item.Email })" class="button alt">Ban</a>
                                             <a href="@Url.Action("ChangeToEditor", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Editor</a>
                                             <a href="@Url.Action("ChangeToAdmin", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Admin</a>
                                     }
                                     else if (@item.Roles.SingleOrDefault().RoleId == "2")
                                     {
-                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id, Email = item.Email })" class="button alt">Ban</a>
                                             <a href="@Url.Action("ChangeToUser", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to User</a>
                                             <a href="@Url.Action("ChangeToEditor", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Editor</a>
                                     }
@@ -82,7 +82,7 @@
                                     }
                                     else if (@item.Roles.SingleOrDefault().RoleId == "4")
                                     {
-                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id })" class="button alt">Ban</a>
+                                            <a href="@Url.Action("Ban", "ApplicationUsers", new { id = item.Id, Email = item.Email })" class="button alt">Ban</a>
                                             <a href="@Url.Action("ChangeToUser", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to User</a>
                                             <a href="@Url.Action("ChangeToAdmin", "ApplicationUsers", new { id = item.Id })" class="button alt">Change to Admin</a>
                                     }

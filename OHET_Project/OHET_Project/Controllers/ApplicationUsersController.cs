@@ -10,6 +10,7 @@ using OHET_Project.Models;
 using OHET_Project.Persistence;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using OHET_Project.BLL;
 
 namespace OHET_Project.Controllers
 {
@@ -54,6 +55,9 @@ namespace OHET_Project.Controllers
                     Request.GetOwinContext().GetUserManager<ApplicationUserManager>().AddToRole(user.Id, "Banned");
                 }
                 db.Entry(user).State = EntityState.Modified;
+
+                MailManager mail = new MailManager(user.Email);
+                mail.SendBanMessage(user.Email);
 
                 return RedirectToAction("Index");
             }
@@ -236,6 +240,7 @@ namespace OHET_Project.Controllers
             ApplicationUser applicationUser = db.Users.Find(id);
             db.Users.Remove(applicationUser);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

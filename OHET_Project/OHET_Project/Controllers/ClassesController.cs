@@ -146,7 +146,8 @@ namespace OHET_Project.Controllers
             Class _class = db.classes.Find(id);
             var isOff = db.classes.Where(x => x.IDClass == id).Include(a => a.Content).SingleOrDefault().Content.isOfficial;
             db.classes.Remove(_class);
-            db.SaveChanges();
+            db.SaveChanges();           
+
             return RedirectToAction("Index", new { isOff = isOff });
         }
 
