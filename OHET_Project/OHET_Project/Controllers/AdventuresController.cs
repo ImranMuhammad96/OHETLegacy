@@ -117,6 +117,9 @@ namespace OHET_Project.Controllers
                 return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == adventure.IDContent).SingleOrDefault().isOfficial });
             }
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", adventure.IDContent);
+            adventure = db.adventures.Include(c => c.Content).Where(x => x.IDAdventure == adventure.IDAdventure).SingleOrDefault();
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = adventure.Content.isOfficial;
             return View(adventure);
         }
 

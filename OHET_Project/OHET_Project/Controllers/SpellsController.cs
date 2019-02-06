@@ -129,8 +129,12 @@ namespace OHET_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", new { isOff = db.contents.Where(id => id.IDContent == spell.IDContent).SingleOrDefault().isOfficial });
             }
-            ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
+            ViewBag.IDClass = new SelectList(db.classes.Where(s => s.isSpellcaster == true), "IDClass", "name", spell.IDClass);
+            //ViewBag.IDClass = new SelectList(db.classes, "IDClass", "name", spell.IDClass);
             ViewBag.IDContent = new SelectList(db.contents, "IDContent", "ApplicationUserId", spell.IDContent);
+            spell = db.spells.Include(c => c.Content).Where(x => x.IDSpell == spell.IDSpell).SingleOrDefault();
+            ViewBag.userId = User.Identity.GetUserId();
+            ViewBag.isOff = spell.Content.isOfficial;
             return View(spell);
         }
 

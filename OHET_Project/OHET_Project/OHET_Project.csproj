@@ -190,15 +190,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901251500135_Ini.cs" />
-    <Compile Include="Migrations\201901251500135_Ini.Designer.cs">
-      <DependentUpon>201901251500135_Ini.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901301823329_DeletedImages.cs" />
-    <Compile Include="Migrations\201901301823329_DeletedImages.Designer.cs">
-      <DependentUpon>201901301823329_DeletedImages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -392,6 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
@@ -401,14 +393,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901251500135_Ini.resx">
-      <DependentUpon>201901251500135_Ini.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901301823329_DeletedImages.resx">
-      <DependentUpon>201901301823329_DeletedImages.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
