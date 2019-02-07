@@ -110,7 +110,18 @@
                     <hr>
                     <div class="select-wrapper">
                         <select name="StrAttribute" id="StrAttribute">
-                            <option value="@AttributeLvl.Low">-- Strenght -- </option>
+                            @if ((int)Model.StrAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Str] @Model.StrAttribute</option>
+                            }
+                            else if ((int)Model.StrAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Str] @Model.StrAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Str] @Model.StrAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
                             <option value="@AttributeLvl.High">High</option>
@@ -118,7 +129,18 @@
                     </div><br />
                     <div class="select-wrapper">
                         <select name="DexAttribute" id="DexAttribute">
-                            <option value="@AttributeLvl.Low">-- Dexterity --</option>
+                            @if ((int)Model.DexAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Dex] @Model.DexAttribute</option>
+                            }
+                            else if ((int)Model.DexAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Dex] @Model.DexAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Dex] @Model.DexAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
                             <option value="@AttributeLvl.High">High</option>
@@ -126,6 +148,18 @@
                     </div><br />
                     <div class="select-wrapper">
                         <select name="ConAttribute" id="ConAttribute">
+                            @if ((int)Model.ConAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Con] @Model.ConAttribute</option>
+                            }
+                            else if ((int)Model.ConAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Con] @Model.ConAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Con] @Model.ConAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">-- Constitution --</option>
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
@@ -134,7 +168,18 @@
                     </div><br />
                     <div class="select-wrapper">
                         <select name="IntAttribute" id="IntAttribute">
-                            <option value="@AttributeLvl.Low">-- Intelligence --</option>
+                            @if ((int)Model.IntAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Int] @Model.IntAttribute</option>
+                            }
+                            else if ((int)Model.IntAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Int] @Model.IntAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Int] @Model.IntAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
                             <option value="@AttributeLvl.High">High</option>
@@ -142,7 +187,18 @@
                     </div><br />
                     <div class="select-wrapper">
                         <select name="WisAttribute" id="WisAttribute">
-                            <option value="@AttributeLvl.Low">-- Wisdom --</option>
+                            @if ((int)Model.WisAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Wis] @Model.WisAttribute</option>
+                            }
+                            else if ((int)Model.WisAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Wis] @Model.WisAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Wis] @Model.WisAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
                             <option value="@AttributeLvl.High">High</option>
@@ -150,7 +206,18 @@
                     </div><br />
                     <div class="select-wrapper">
                         <select name="ChaAttribute" id="ChaAttribute">
-                            <option value="@AttributeLvl.Low">-- Charisma --</option>
+                            @if ((int)Model.ChaAttribute == 1)
+                            {
+                                <option value="@AttributeLvl.Low">[Cha] @Model.ChaAttribute</option>
+                            }
+                            else if ((int)Model.ChaAttribute == 2)
+                            {
+                                <option value="@AttributeLvl.Average">[Cha] @Model.ChaAttribute</option>
+                            }
+                            else
+                            {
+                                <option value="@AttributeLvl.High">[Cha] @Model.ChaAttribute</option>
+                            }
                             <option value="@AttributeLvl.Low">Low</option>
                             <option value="@AttributeLvl.Average">Avarage</option>
                             <option value="@AttributeLvl.High">High</option>
